@@ -1,0 +1,6 @@
+{
+  "name": "Tech Fest 2025 - Vice Tech Noir",
+  "description": "A GTA-themed college tech event application with competitions, mission timeline, dynamic prize pool, FAQs, team management, and live admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

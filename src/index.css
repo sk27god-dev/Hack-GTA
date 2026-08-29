@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-headline: 'Bebas Neue', sans-serif;
+    --font-marker: 'Permanent Marker', cursive;
+    --font-display: 'Oswald', 'Bebas Neue', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: #FFF5F0;
+    color: #141c29;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom GTA & Comic Theme Utility Classes */
+.font-headline {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.font-marker {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.font-display-custom {
+  font-family: 'Oswald', 'Bebas Neue', sans-serif;
+}
+
+.font-body-custom {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Hard Shadows and Comic Borders */
+.comic-border {
+  border: 4px solid #000000;
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+.comic-border-sm {
+  border: 3px solid #000000;
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+.comic-border-lg {
+  border: 5px solid #000000;
+  box-shadow: 8px 8px 0px 0px #000000;
+}
+
+.comic-border-xl {
+  border: 6px solid #000000;
+  box-shadow: 12px 12px 0px 0px #000000;
+}
+
+.comic-interactive {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.comic-interactive:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px 0px #000000;
+}
+
+.comic-interactive:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #000000;
+}
+
+/* Text Outlines and Shadows */
+.comic-text-outline {
+  color: #FFFFFF;
+  text-shadow: 
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     5px  5px 0 #FF6FB5;
+}
+
+.comic-text-outline-cyan {
+  color: #FFFFFF;
+  text-shadow: 
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     5px  5px 0 #00E5FF;
+}
+
+.comic-text-outline-yellow {
+  color: #FFFFFF;
+  text-shadow: 
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     5px  5px 0 #FFD54F;
+}
+
+.gta-shadow-black {
+  text-shadow: 4px 4px 0px #000000;
+}
+
+.gta-shadow-white {
+  text-shadow: 2px 2px 0px #FFFFFF;
+}
+
+.title-stroke {
+  -webkit-text-stroke: 3px #FF6FB5;
+}
+
+.title-stroke-cyan {
+  -webkit-text-stroke: 3px #00E5FF;
+}
+
+.text-cyan-outline {
+  color: #000000;
+  -webkit-text-stroke: 2.5px #00E5FF;
+  text-shadow: 5px 5px 0px rgba(0,0,0,1);
+}
+
+/* Background Patterns */
+.halftone-bg {
+  background-image: radial-gradient(circle at center, #d2daed 2px, transparent 2px);
+  background-size: 18px 18px;
+}
+
+.grid-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Film Grain Overlay */
+.film-grain {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Polaroids */
+.polaroid {
+  background: #FFFFFF;
+  padding: 0.875rem 0.875rem 2.25rem 0.875rem;
+  border: 4px solid #000000;
+  box-shadow: 6px 6px 0px 0px #000000;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.03) !important;
+  z-index: 20;
+  box-shadow: 10px 10px 0px 0px #000000;
+}
+
+/* Bullet Hole Effect */
+.bullet-hole {
+  width: 22px;
+  height: 22px;
+  background: radial-gradient(circle, #222 15%, #000 45%, rgba(0,0,0,0.4) 65%, transparent 75%);
+  border-radius: 50%;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Stamps */
+.stamp-passed {
+  border: 4px solid #0B6B5A;
+  color: #0B6B5A;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.05em;
+  transform: rotate(-10deg);
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.stamp-progress {
+  border: 4px solid #B33A3A;
+  color: #B33A3A;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.05em;
+  transform: rotate(8deg);
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.stamp-upcoming {
+  border: 4px solid #006875;
+  color: #006875;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.05em;
+  transform: rotate(-4deg);
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f0f3ff;
+  border-left: 2px solid #000;
+}
+::-webkit-scrollbar-thumb {
+  background: #FF6FB5;
+  border: 2px solid #000;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00E5FF;
+}
+
+/* GTA Radar & City Map CSS Animations */
+@keyframes radar-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes radar-pulse-ring {
+  0% {
+    r: 10px;
+    opacity: 0.9;
+    stroke-width: 3px;
+  }
+  100% {
+    r: 45px;
+    opacity: 0;
+    stroke-width: 1px;
+  }
+}
+
+@keyframes blip-beacon {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  50% {
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 12px currentColor);
+  }
+}
+
+@keyframes gps-line-flow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+@keyframes waypoint-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes scanline-anim {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+  transform-origin: center;
+}
+
+.animate-gps-flow {
+  stroke-dasharray: 8 6;
+  animation: gps-line-flow 1.2s linear infinite;
+}
+
+.animate-waypoint-bounce {
+  animation: waypoint-bounce 1.5s ease-in-out infinite;
+}
+
+.animate-blip-beacon {
+  animation: blip-beacon 2s ease-in-out infinite;
+}
