@@ -1,18 +1,14 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Press+Start+2P&family=VT323&display=swap');
 
-@theme {
-  --color-synth-bg: #07040e;
-  --color-synth-panel: #110925;
-  --color-synth-pink: #ff007f;
-  --color-synth-cyan: #00f5ff;
-  --color-synth-purple: #7000ff;
-  --color-synth-yellow: #ffe600;
-  --color-synth-orange: #ff5e00;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&display=swap');
+.font-headline {
+  font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  font-weight: 700;
+}
 
-  --font-orbitron: 'Orbitron', sans-serif;
-  --font-press-start: 'Press Start 2P', cursive;
-  --font-vt323: 'VT323', monospace;
+.font-marker {
+  font-family: 'Permanent Marker', cursive;
+
 }
 
 @layer base {
@@ -360,4 +356,249 @@
 
 .animate-blip-beacon {
   animation: blip-beacon 2s ease-in-out infinite;
+}
+/* =========================================================
+   GTA CINEMATIC AMBIENT FX
+   ========================================================= */
+
+.gta-cursor-light {
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+
+  background: radial-gradient(
+    circle,
+    rgba(0, 229, 255, 0.09) 0%,
+    rgba(255, 111, 181, 0.045) 35%,
+    transparent 70%
+  );
+
+  filter: blur(8px);
+
+  transition:
+    left 0.18s ease-out,
+    top 0.18s ease-out;
+}
+
+
+/* =========================================================
+   CINEMATIC SCANLINES
+   ========================================================= */
+
+.gta-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 97;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+
+
+/* =========================================================
+   MOVING NEON GRID
+   ========================================================= */
+
+.gta-neon-grid {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45vh;
+
+  pointer-events: none;
+  z-index: 1;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 229, 255, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 111, 181, 0.055) 1px,
+      transparent 1px
+    );
+
+  background-size: 60px 60px;
+
+  transform: perspective(500px) rotateX(58deg) scale(1.4);
+  transform-origin: bottom center;
+
+  opacity: 0.35;
+
+  animation: gta-grid-move 8s linear infinite;
+}
+
+@keyframes gta-grid-move {
+  from {
+    background-position:
+      0 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      0 60px,
+      60px 0;
+  }
+}
+
+
+/* =========================================================
+   FLOATING PARTICLES
+   ========================================================= */
+
+.gta-particle-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.gta-particle {
+  position: absolute;
+  display: block;
+
+  background: #00e5ff;
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 6px #00e5ff,
+    0 0 14px rgba(0, 229, 255, 0.65);
+
+  will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   CINEMATIC VIGNETTE
+   ========================================================= */
+
+.gta-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 96;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 45%,
+      rgba(0, 0, 0, 0.12) 75%,
+      rgba(0, 0, 0, 0.42) 100%
+    );
+}
+
+
+/* =========================================================
+   SCREEN FLICKER
+   ========================================================= */
+
+.gta-screen-flicker {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 98;
+
+  background: #ffffff;
+  mix-blend-mode: screen;
+}
+
+
+/* =========================================================
+   GTA NEON PULSE
+   ========================================================= */
+
+.gta-neon-pulse {
+  animation: gta-neon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gta-neon-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 rgba(0, 229, 255, 0),
+      0 0 0 rgba(255, 111, 181, 0);
+  }
+
+  50% {
+    box-shadow:
+      0 0 18px rgba(0, 229, 255, 0.35),
+      0 0 35px rgba(255, 111, 181, 0.15);
+  }
+}
+
+
+/* =========================================================
+   GTA HOLOGRAM EFFECT
+   ========================================================= */
+
+.gta-hologram {
+  position: relative;
+  overflow: hidden;
+}
+
+.gta-hologram::after {
+  content: '';
+  position: absolute;
+  inset: -100% 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 229, 255, 0.12),
+      transparent
+    );
+
+  pointer-events: none;
+
+  animation: gta-hologram-sweep 3.5s linear infinite;
+}
+
+@keyframes gta-hologram-sweep {
+  from {
+    transform: translateY(-50%);
+  }
+
+  to {
+    transform: translateY(50%);
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .gta-neon-grid,
+  .gta-neon-pulse,
+  .gta-hologram::after {
+    animation: none !important;
+  }
+
+  .gta-cursor-light {
+    display: none;
+  }
+
+  .gta-scanlines {
+    opacity: 0.12;
+  }
 }

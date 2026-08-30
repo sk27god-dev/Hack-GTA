@@ -215,14 +215,18 @@ export const CompetitionDetailModal: React.FC<CompetitionDetailModalProps> = ({
           </div>
 
           <button
-            id={`register-modal-btn-${competition.id}`}
-            onClick={() => {
-              playClickSound();
-              onRegister(competition.id);
-              onClose();
-            }}
-            className="w-full sm:w-auto bg-[#FF6FB5] hover:bg-[#00E5FF] hover:text-black text-white font-headline text-xl sm:text-2xl px-5 sm:px-6 py-2 sm:py-2.5 comic-border-sm comic-interactive flex items-center justify-center gap-2 cursor-pointer text-center"
-          >
+  id={`register-modal-btn-${competition.id}`}
+  onClick={() => {
+    playClickSound();
+
+    if (competition.registrationUrl) {
+      window.open(competition.registrationUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    onClose();
+  }}
+  className="w-full sm:w-auto bg-[#FF6FB5] hover:bg-[#00E5FF] hover:text-black text-white font-headline text-xl sm:text-2xl px-5 sm:px-6 py-2 sm:py-2.5 comic-border-sm comic-interactive flex items-center justify-center gap-2 cursor-pointer text-center"
+>
             <span>ASSEMBLE CREW / REGISTER</span>
             <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
