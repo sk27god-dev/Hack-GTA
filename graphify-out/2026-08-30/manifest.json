@@ -1,0 +1,162 @@
+{
+  "metadata.json": {
+    "mtime": 1788029720.5876818,
+    "ast_hash": "f20442e47df286ca641484721bab9601",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1788029720.5882125,
+    "ast_hash": "0079546ebb4765cdea4f2c3e1a336411",
+    "semantic_hash": ""
+  },
+  "src/App.tsx": {
+    "mtime": 1788032648.5366552,
+    "ast_hash": "bacbcc659c85c2d9f4afe011736cd9d7",
+    "semantic_hash": ""
+  },
+  "src/components/AdminLoginModal.tsx": {
+    "mtime": 1788029720.6000662,
+    "ast_hash": "ee78456a5c082739d52b6f5913bb1c24",
+    "semantic_hash": ""
+  },
+  "src/components/AuthModal.tsx": {
+    "mtime": 1788029720.6010513,
+    "ast_hash": "afb4adde9db3e97a66628eee64f9152a",
+    "semantic_hash": ""
+  },
+  "src/components/CityMapModal.tsx": {
+    "mtime": 1788029720.602052,
+    "ast_hash": "7f62fb1ee0821771b3dce14580168939",
+    "semantic_hash": ""
+  },
+  "src/components/CompetitionDetailModal.tsx": {
+    "mtime": 1788029720.6033711,
+    "ast_hash": "a0de1f7650baef0ee44d150d41cf9f54",
+    "semantic_hash": ""
+  },
+  "src/components/CrewModal.tsx": {
+    "mtime": 1788029720.6038775,
+    "ast_hash": "943e508d88dd718528e2a206f3bd2fe1",
+    "semantic_hash": ""
+  },
+  "src/components/FixerContactModal.tsx": {
+    "mtime": 1788029720.60441,
+    "ast_hash": "2ee58f274c195f46bcacd65f7a174c63",
+    "semantic_hash": ""
+  },
+  "src/components/Footer.tsx": {
+    "mtime": 1788032696.030519,
+    "ast_hash": "ff47a73265cdf1cf297877d11af33a8a",
+    "semantic_hash": ""
+  },
+  "src/components/GtaTransitionOverlay.tsx": {
+    "mtime": 1788029720.6060033,
+    "ast_hash": "7aabec87f043ab29ef5d8d5956c029c7",
+    "semantic_hash": ""
+  },
+  "src/components/MissionBanner.tsx": {
+    "mtime": 1788029720.6065314,
+    "ast_hash": "8dceb13c23803fbbc23df964f23caee1",
+    "semantic_hash": ""
+  },
+  "src/components/Navbar.tsx": {
+    "mtime": 1788032674.8154767,
+    "ast_hash": "1cb38cf8c5f3c1d4b4491253feefa5a3",
+    "semantic_hash": ""
+  },
+  "src/context/AppContext.tsx": {
+    "mtime": 1788029720.6086638,
+    "ast_hash": "ff427635e6dbd63c8bbc4c9d79ea45b7",
+    "semantic_hash": ""
+  },
+  "src/context/AuthContext.tsx": {
+    "mtime": 1788029720.6091883,
+    "ast_hash": "ec019e2265d7b5ac8037d9e1d0d076ac",
+    "semantic_hash": ""
+  },
+  "src/data/initialData.ts": {
+    "mtime": 1788029720.6108406,
+    "ast_hash": "6c72a7ab730f314daac63847182799b1",
+    "semantic_hash": ""
+  },
+  "src/main.tsx": {
+    "mtime": 1788029720.61296,
+    "ast_hash": "a0bcc3ffa5e95e1965f94969ab488283",
+    "semantic_hash": ""
+  },
+  "src/pages/AdminDashboard.tsx": {
+    "mtime": 1788029720.614016,
+    "ast_hash": "2776bf1556a3ecd3af40009a380497f8",
+    "semantic_hash": ""
+  },
+  "src/pages/CompetitionsPage.tsx": {
+    "mtime": 1788033130.9101024,
+    "ast_hash": "8ee313b5c945b88db473361379b31bf9",
+    "semantic_hash": ""
+  },
+  "src/pages/FAQPage.tsx": {
+    "mtime": 1788033663.1940596,
+    "ast_hash": "dc406c5c16d006f2b28c8b850d2a1279",
+    "semantic_hash": ""
+  },
+  "src/pages/HomePage.tsx": {
+    "mtime": 1788073513.6996682,
+    "ast_hash": "6e06e2d12462173ba7cb33f8e353d46a",
+    "semantic_hash": ""
+  },
+  "src/pages/PrizesPage.tsx": {
+    "mtime": 1788033329.334795,
+    "ast_hash": "23d8bdbf749e293795918cde7791397f",
+    "semantic_hash": ""
+  },
+  "src/pages/TimelinePage.tsx": {
+    "mtime": 1788033252.4881444,
+    "ast_hash": "ada777709ff8013320c20f6018c9377e",
+    "semantic_hash": ""
+  },
+  "src/types.ts": {
+    "mtime": 1788029720.6195555,
+    "ast_hash": "642b8a9c4124b519989ed3e85a72e3d0",
+    "semantic_hash": ""
+  },
+  "src/utils/audio.ts": {
+    "mtime": 1788029720.620556,
+    "ast_hash": "3c00166de1acbc42e134a0362e10884e",
+    "semantic_hash": ""
+  },
+  "src/vite-env.d.ts": {
+    "mtime": 1788029720.620556,
+    "ast_hash": "167d3ef1eb441d16994098ea280d0ad2",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1788029720.6215546,
+    "ast_hash": "aca6cdac13db39d03d9b95866834d84f",
+    "semantic_hash": ""
+  },
+  "vite.config.ts": {
+    "mtime": 1788029720.6225567,
+    "ast_hash": "cfc596836379397756c305b60b69ba06",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1788029720.582883,
+    "ast_hash": "1c50522b778ad53a806566418286fbb3",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1788029720.5834272,
+    "ast_hash": "eae35042262f76c2a6aa18f68b4314db",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1788029720.5871522,
+    "ast_hash": "ca7e61978dde6070d029b5e40552e2d4",
+    "semantic_hash": ""
+  },
+  "src/assets/images/gta_hero_poster.jpg": {
+    "mtime": 1788029720.5990534,
+    "ast_hash": "dabad30b76954960ed1e31d734bad8ec",
+    "semantic_hash": ""
+  }
+}

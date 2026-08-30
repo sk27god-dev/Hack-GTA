@@ -23,9 +23,9 @@ export const Footer: React.FC<FooterProps> = ({ openContactModal, openCityMapMod
   };
 
   return (
-    <footer className="bg-[#141419] text-white border-t-6 border-black relative overflow-hidden select-none">
+    <footer className="bg-[#07040e] text-slate-300 border-t border-[#ff007f]/30 relative overflow-hidden select-none shadow-[0_-5px_15px_rgba(255,0,127,0.1)]">
       {/* Top Graphic Strip with Vice Neon Gradients */}
-      <div className="h-3 bg-gradient-to-r from-[#FF6FB5] via-[#FFD54F] to-[#00E5FF] border-b-2 border-black" />
+      <div className="h-2 bg-gradient-to-r from-[#ff007f] via-[#ffe600] to-[#00f5ff]" />
 
       {/* Decorative Grid and Palms Overlay */}
       <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]" />
@@ -35,14 +35,14 @@ export const Footer: React.FC<FooterProps> = ({ openContactModal, openCityMapMod
           {/* Col 1: Brand & Lore */}
           <div className="space-y-3.5">
             <div className="flex items-center gap-2">
-              <div className="w-11 h-11 bg-[#FF6FB5] comic-border-sm flex items-center justify-center font-headline text-3xl text-white transform -rotate-3">
+              <div className="w-11 h-11 bg-[#ff007f] border border-black flex items-center justify-center font-headline text-3xl text-white transform -rotate-3 shadow-[0_0_8px_#ff007f]">
                 TF
               </div>
               <div>
-                <span className="block font-headline text-3xl tracking-wider leading-none text-white drop-shadow-[2px_2px_0px_#FF6FB5]">
-                  TECH FEST <span className="text-[#FF6FB5]">2025</span>
+                <span className="block font-headline text-3xl tracking-wider leading-none text-white drop-shadow-[2px_2px_0px_#ff007f]">
+                  TECH FEST <span className="text-[#ff007f]">2025</span>
                 </span>
-                <span className="block font-marker text-xs text-[#00E5FF] tracking-widest">
+                <span className="block font-marker text-xs text-[#00f5ff] tracking-widest">
                   VICE TECH NOIR
                 </span>
               </div>
@@ -54,32 +54,32 @@ export const Footer: React.FC<FooterProps> = ({ openContactModal, openCityMapMod
 
             <div className="inline-flex items-center gap-2 bg-black/70 border border-zinc-700 px-3 py-1.5 text-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span className="text-[#00E5FF] font-bold">GRID FREQUENCY: ACTIVE 24/7</span>
+              <span className="text-[#00f5ff] font-bold">GRID FREQUENCY: ACTIVE 24/7</span>
             </div>
           </div>
 
-          {/* Col 2: Headquarters & Minimal Contact */}
-          <div className="space-y-3.5 bg-black/40 border-2 border-zinc-800 p-5 rounded-none">
+          {/* Col 2: Headquarters & Comms */}
+          <div className="space-y-3.5 bg-black/60 border border-slate-700/60 p-5 rounded-md shadow-[0_0_15px_rgba(0,245,255,0.05)]">
             <div className="flex items-center justify-between">
-              <h4 className="font-headline text-2xl text-[#00E5FF] tracking-wider flex items-center gap-2">
-                <Shield className="w-5 h-5 text-[#FFD54F]" />
+              <h4 className="font-headline text-2xl text-[#00f5ff] tracking-wider flex items-center gap-2">
+                <Shield className="w-5 h-5 text-[#ffe600]" />
                 DISPATCH & COMMS
               </h4>
-              <Radio className="w-4 h-4 text-[#FF6FB5] animate-pulse" />
+              <Radio className="w-4 h-4 text-[#ff007f] animate-pulse" />
             </div>
 
             <div className="space-y-2 text-xs text-zinc-300">
               <p className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-[#FFD54F] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#ffe600] shrink-0 mt-0.5" />
                 <span>
                   <strong className="text-white block">Drop Coordinates:</strong>
                   Ocean Drive Innovation Hub, Sector 04, Vice Metropolis
                 </span>
               </p>
               <p className="flex items-start gap-2">
-                <Mail className="w-4 h-4 text-[#FF6FB5] shrink-0 mt-0.5" />
+                <Mail className="w-4 h-4 text-[#ff007f] shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-white block">Official Dispatch:</strong>
+                  <strong className="text-white block">Official Comms:</strong>
                   dispatch@vicecitytech.edu
                 </span>
               </p>
@@ -89,7 +89,7 @@ export const Footer: React.FC<FooterProps> = ({ openContactModal, openCityMapMod
               <button
                 id="footer-contact-fixer-btn"
                 onClick={openContactModal}
-                className="w-full bg-[#FF6FB5] hover:bg-[#00E5FF] hover:text-black text-white font-headline text-lg sm:text-xl py-2 comic-border-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[3px_3px_0px_0px_#000]"
+                className="w-full bg-[#ff007f] hover:bg-[#00f5ff] hover:text-black text-white font-headline text-lg sm:text-xl py-2 border border-black flex items-center justify-center gap-2 cursor-pointer transition-all rounded"
               >
                 <Mail className="w-4 h-4" />
                 <span>TRANSMIT DISPATCH MESSAGE</span>
@@ -99,7 +99,7 @@ export const Footer: React.FC<FooterProps> = ({ openContactModal, openCityMapMod
                 <button
                   id="footer-city-map-btn"
                   onClick={openCityMapModal}
-                  className="w-full bg-[#FFD54F] hover:bg-[#00E5FF] text-black font-headline text-base sm:text-lg py-1.5 comic-border-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[2px_2px_0px_#000]"
+                  className="w-full bg-[#ffe600] hover:bg-[#00f5ff] text-black font-headline text-base sm:text-lg py-1.5 border border-black flex items-center justify-center gap-2 cursor-pointer transition-all rounded"
                 >
                   <Compass className="w-4 h-4 text-black animate-spin [animation-duration:10s]" />
                   <span>VIEW VICE SATELLITE MAP</span>
@@ -110,8 +110,8 @@ export const Footer: React.FC<FooterProps> = ({ openContactModal, openCityMapMod
 
           {/* Col 3: Intelligence Newsletter */}
           <div className="space-y-3.5">
-            <h4 className="font-headline text-2xl text-[#FF6FB5] tracking-wider flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#00E5FF]" />
+            <h4 className="font-headline text-2xl text-[#ff007f] tracking-wider flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[#00f5ff]" />
               INTELLIGENCE WIRE
             </h4>
             <p className="text-xs text-zinc-400">
@@ -126,12 +126,12 @@ export const Footer: React.FC<FooterProps> = ({ openContactModal, openCityMapMod
                   value={newsletterEmail}
                   onChange={e => setNewsletterEmail(e.target.value)}
                   placeholder="runner@vice.city"
-                  className="w-full bg-black border-2 border-zinc-700 p-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#00E5FF]"
+                  className="w-full bg-black/60 border border-slate-700/60 rounded p-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#00f5ff]"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#00E5FF] text-black font-headline text-xl py-2 comic-border-sm hover:bg-[#FFD54F] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[3px_3px_0px_0px_#000]"
+                className="w-full bg-[#00f5ff] text-black font-headline text-xl py-2 border border-black hover:bg-[#ffe600] transition-all flex items-center justify-center gap-1.5 cursor-pointer rounded"
               >
                 <span>LINK WIRE</span>
                 <ArrowRight className="w-4 h-4" />

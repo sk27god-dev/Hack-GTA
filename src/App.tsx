@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AppProvider, useApp } from './context/AppContext';
 import { Navbar } from './components/Navbar';
@@ -19,11 +19,16 @@ import { FAQPage } from './pages/FAQPage';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { Competition } from './types';
 import { Shield, Lock, AlertTriangle } from 'lucide-react';
+import { initAudio } from './utils/audio';
 
 const MainApp: React.FC = () => {
   const { competitions } = useApp();
   const { isAdmin } = useAuth();
   const [activeTab, setActiveTab] = useState<string>('home');
+
+  useEffect(() => {
+    initAudio();
+  }, []);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [adminLoginModalOpen, setAdminLoginModalOpen] = useState(false);
   const [crewModalOpen, setCrewModalOpen] = useState(false);
@@ -63,7 +68,7 @@ const MainApp: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFF5F0] text-zinc-900 selection:bg-[#FF6FB5] selection:text-white relative">
+    <div className="min-h-screen flex flex-col bg-[#07040e] text-slate-200 selection:bg-[#ff007f] selection:text-white relative">
       {/* Retro Film Grain Effect Overlay */}
       <div className="film-grain" />
 

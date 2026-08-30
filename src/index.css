@@ -1,4 +1,19 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Press+Start+2P&family=VT323&display=swap');
+
+@theme {
+  --color-synth-bg: #07040e;
+  --color-synth-panel: #110925;
+  --color-synth-pink: #ff007f;
+  --color-synth-cyan: #00f5ff;
+  --color-synth-purple: #7000ff;
+  --color-synth-yellow: #ffe600;
+  --color-synth-orange: #ff5e00;
+
+  --font-orbitron: 'Orbitron', sans-serif;
+  --font-press-start: 'Press Start 2P', cursive;
+  --font-vt323: 'VT323', monospace;
+}
 
 @layer base {
   :root {
@@ -10,8 +25,8 @@
 
   body {
     font-family: var(--font-body);
-    background-color: #FFF5F0;
-    color: #141c29;
+    background-color: #07040e;
+    color: #e2e8f0;
     overflow-x: hidden;
   }
 }
@@ -33,104 +48,153 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Hard Shadows and Comic Borders */
+/* Synthwave Neon Borders & Shadows (Facelift from Neo-Brutalism) */
 .comic-border {
-  border: 4px solid #000000;
-  box-shadow: 6px 6px 0px 0px #000000;
+  border: 2px solid #ff007f;
+  background: rgba(17, 9, 37, 0.7);
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.35), inset 0 0 8px rgba(255, 0, 127, 0.15);
+  backdrop-filter: blur(8px);
 }
 
 .comic-border-sm {
-  border: 3px solid #000000;
-  box-shadow: 4px 4px 0px 0px #000000;
+  border: 1px solid #00f5ff;
+  background: rgba(8, 12, 28, 0.7);
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.25);
+  backdrop-filter: blur(6px);
 }
 
 .comic-border-lg {
-  border: 5px solid #000000;
-  box-shadow: 8px 8px 0px 0px #000000;
+  border: 2px solid #b967ff;
+  background: rgba(22, 11, 45, 0.75);
+  box-shadow: 0 0 20px rgba(185, 103, 255, 0.4), inset 0 0 12px rgba(185, 103, 255, 0.2);
+  backdrop-filter: blur(12px);
 }
 
 .comic-border-xl {
-  border: 6px solid #000000;
-  box-shadow: 12px 12px 0px 0px #000000;
+  border: 3px solid #ff007f;
+  background: rgba(14, 7, 30, 0.85);
+  box-shadow: 0 0 30px rgba(255, 0, 127, 0.55), inset 0 0 15px rgba(255, 0, 127, 0.25);
+  backdrop-filter: blur(16px);
 }
 
 .comic-interactive {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .comic-interactive:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0px 0px #000000;
+  transform: translateY(-3px);
+  box-shadow: 0 0 22px rgba(0, 245, 255, 0.55), 0 0 44px rgba(255, 0, 127, 0.35);
+  border-color: #00f5ff;
 }
 
 .comic-interactive:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px 0px #000000;
+  transform: translateY(1px);
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
 }
 
-/* Text Outlines and Shadows */
+/* Neon Text Shadows & Outlines */
 .comic-text-outline {
   color: #FFFFFF;
   text-shadow: 
-    -2px -2px 0 #000,  
-     2px -2px 0 #000,
-    -2px  2px 0 #000,
-     2px  2px 0 #000,
-     5px  5px 0 #FF6FB5;
+    0 0 5px #fff,
+    0 0 10px #ff007f,
+    0 0 20px #ff007f,
+    0 0 40px #ff007f;
 }
 
 .comic-text-outline-cyan {
   color: #FFFFFF;
   text-shadow: 
-    -2px -2px 0 #000,  
-     2px -2px 0 #000,
-    -2px  2px 0 #000,
-     2px  2px 0 #000,
-     5px  5px 0 #00E5FF;
+    0 0 5px #fff,
+    0 0 10px #00f5ff,
+    0 0 20px #00f5ff,
+    0 0 40px #00f5ff;
 }
 
 .comic-text-outline-yellow {
   color: #FFFFFF;
   text-shadow: 
-    -2px -2px 0 #000,  
-     2px -2px 0 #000,
-    -2px  2px 0 #000,
-     2px  2px 0 #000,
-     5px  5px 0 #FFD54F;
+    0 0 5px #fff,
+    0 0 10px #ffe600,
+    0 0 20px #ffe600,
+    0 0 40px #ffe600;
 }
 
 .gta-shadow-black {
-  text-shadow: 4px 4px 0px #000000;
+  text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 2px 2px 0px #000;
 }
 
 .gta-shadow-white {
-  text-shadow: 2px 2px 0px #FFFFFF;
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.6), 2px 2px 0px #fff;
 }
 
 .title-stroke {
-  -webkit-text-stroke: 3px #FF6FB5;
+  -webkit-text-stroke: 1.5px #ff007f;
+  text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
 }
 
 .title-stroke-cyan {
-  -webkit-text-stroke: 3px #00E5FF;
+  -webkit-text-stroke: 1.5px #00f5ff;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
 }
 
 .text-cyan-outline {
-  color: #000000;
-  -webkit-text-stroke: 2.5px #00E5FF;
-  text-shadow: 5px 5px 0px rgba(0,0,0,1);
+  color: #ffffff;
+  -webkit-text-stroke: 1.5px #00f5ff;
+  text-shadow: 0 0 15px rgba(0,245,255,0.7);
 }
 
 /* Background Patterns */
 .halftone-bg {
-  background-image: radial-gradient(circle at center, #d2daed 2px, transparent 2px);
-  background-size: 18px 18px;
+  background-color: #07040e;
+  background-image: radial-gradient(circle at center, rgba(255, 0, 127, 0.12) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
 }
 
 .grid-bg {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-color: #07040e;
+  background-image: 
+    linear-gradient(rgba(0, 245, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* 3D Perspective Scrolling Neon Grid Floor */
+.synthwave-grid-perspective {
+  perspective: 260px;
+  perspective-origin: 50% 50%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.synthwave-grid-lines {
+  background-image: 
+    linear-gradient(rgba(0, 245, 255, 0.22) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.22) 1.5px, transparent 1.5px);
+  background-size: 60px 60px;
+  width: 250%;
+  height: 250%;
+  position: absolute;
+  top: -75%;
+  left: -75%;
+  transform: rotateX(75deg);
+  transform-origin: center center;
+  animation: grid-scroll 24s linear infinite;
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 70%, transparent 100%);
+}
+
+@keyframes grid-scroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 1440px;
+  }
 }
 
 /* Film Grain Overlay */
@@ -139,65 +203,69 @@
   top: 0; left: 0; right: 0; bottom: 0;
   pointer-events: none;
   z-index: 99;
-  opacity: 0.035;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Polaroids */
+/* Polaroids (Glow wired version) */
 .polaroid {
-  background: #FFFFFF;
+  background: rgba(22, 11, 45, 0.75);
   padding: 0.875rem 0.875rem 2.25rem 0.875rem;
-  border: 4px solid #000000;
-  box-shadow: 6px 6px 0px 0px #000000;
+  border: 2px solid #ff007f;
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.35);
+  border-radius: 6px;
+  backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .polaroid:hover {
-  transform: rotate(0deg) scale(1.03) !important;
+  transform: rotate(0deg) scale(1.04) !important;
   z-index: 20;
-  box-shadow: 10px 10px 0px 0px #000000;
+  box-shadow: 0 0 25px rgba(0, 245, 255, 0.55);
+  border-color: #00f5ff;
 }
 
-/* Bullet Hole Effect */
+/* Bullet Hole Effect (Luminous impact marker) */
 .bullet-hole {
   width: 22px;
   height: 22px;
-  background: radial-gradient(circle, #222 15%, #000 45%, rgba(0,0,0,0.4) 65%, transparent 75%);
+  background: radial-gradient(circle, #00f5ff 15%, rgba(255, 0, 127, 0.8) 45%, rgba(0,0,0,0.6) 65%, transparent 75%);
   border-radius: 50%;
   position: absolute;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0.9;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
 }
 
-/* Stamps */
+/* Stamps (Cyber stamps) */
 .stamp-passed {
-  border: 4px solid #0B6B5A;
-  color: #0B6B5A;
-  font-family: 'Bebas Neue', sans-serif;
+  border: 2px solid #00f5ff;
+  color: #00f5ff;
+  font-family: 'Orbitron', sans-serif;
   letter-spacing: 0.05em;
   transform: rotate(-10deg);
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 2px 2px 0px #000000;
+  background-color: rgba(6, 2, 15, 0.9);
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.4);
 }
 
 .stamp-progress {
-  border: 4px solid #B33A3A;
-  color: #B33A3A;
-  font-family: 'Bebas Neue', sans-serif;
+  border: 2px solid #ff007f;
+  color: #ff007f;
+  font-family: 'Orbitron', sans-serif;
   letter-spacing: 0.05em;
   transform: rotate(8deg);
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 2px 2px 0px #000000;
+  background-color: rgba(6, 2, 15, 0.9);
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
 }
 
 .stamp-upcoming {
-  border: 4px solid #006875;
-  color: #006875;
-  font-family: 'Bebas Neue', sans-serif;
+  border: 2px solid #ffe600;
+  color: #ffe600;
+  font-family: 'Orbitron', sans-serif;
   letter-spacing: 0.05em;
   transform: rotate(-4deg);
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 2px 2px 0px #000000;
+  background-color: rgba(6, 2, 15, 0.9);
+  box-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
 }
 
 /* Custom Scrollbar */
@@ -206,15 +274,16 @@
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f0f3ff;
-  border-left: 2px solid #000;
+  background: #090514;
+  border-left: 1px solid #1f123b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FF6FB5;
-  border: 2px solid #000;
+  background: #ff007f;
+  border: 2px solid #090514;
+  border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00E5FF;
+  background: #00f5ff;
 }
 
 /* GTA Radar & City Map CSS Animations */
