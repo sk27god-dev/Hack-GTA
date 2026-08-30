@@ -95,7 +95,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     teamSizeLabel: '2–4 MEMBERS',
 
-    image: '/images/hackathon.jpg',
+    image: '/assets/images/hackers.jpg',
 
     featured: true,
 
@@ -149,6 +149,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
       'Any form of cheating or unfair play will result in disqualification.'
     ],
 
+
     judgingCriteria: [],
 
     schedule: {
@@ -170,7 +171,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     teamSizeLabel: 'SOLO / 3–4 TREASURE HUNT',
 
-    image: '/images/battlezone.jpg',
+    image: '/assets/images/cyber.jpg',
 
     featured: true,
 
@@ -222,7 +223,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     statusLabel: 'STANDBY',
 
-    image: '/images/hackathon.jpg',
+    image: '/assets/images/IT-Lab.jpg',
 
     track: 'TECHNOVA 4.0',
 
@@ -251,7 +252,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     statusLabel: 'IN PROGRESS',
 
-    image: '/images/hackathon.jpg',
+    image: '/assets/images/coder.jpg',
 
     track: 'Hackathon',
 
@@ -280,7 +281,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     statusLabel: 'STANDBY',
 
-    image: '/images/battlezone.jpg',
+    image: '/assets/images/cyber.jpg',
 
     track: 'Gaming',
 
@@ -309,7 +310,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     statusLabel: 'FINAL DIRECTIVE',
 
-    image: '/images/hackathon.jpg',
+    image: '/assets/images/Event.jpg',
 
     track: 'Hackathon',
 

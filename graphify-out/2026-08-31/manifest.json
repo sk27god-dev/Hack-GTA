@@ -5,18 +5,18 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1788106592.5376017,
-    "ast_hash": "312550e961150c78fbb631a1f6033e91",
+    "mtime": 1788029720.5882125,
+    "ast_hash": "0079546ebb4765cdea4f2c3e1a336411",
     "semantic_hash": ""
   },
   "src/App.tsx": {
-    "mtime": 1788117535.557822,
-    "ast_hash": "f4153f3c4d0b7e8bcdb1af25b9c644ce",
+    "mtime": 1788085290.0150137,
+    "ast_hash": "54b5317d167c3bd572b40adaee502c6a",
     "semantic_hash": ""
   },
   "src/components/AdminLoginModal.tsx": {
-    "mtime": 1788120112.924322,
-    "ast_hash": "38c705779ce88ca6aeda74c8d0736825",
+    "mtime": 1788029720.6000662,
+    "ast_hash": "ee78456a5c082739d52b6f5913bb1c24",
     "semantic_hash": ""
   },
   "src/components/AuthModal.tsx": {
@@ -30,8 +30,8 @@
     "semantic_hash": ""
   },
   "src/components/CompetitionDetailModal.tsx": {
-    "mtime": 1788115487.9197745,
-    "ast_hash": "90fa4c1748adfbddb60be8ec8fbd23f2",
+    "mtime": 1788029720.6033711,
+    "ast_hash": "a0de1f7650baef0ee44d150d41cf9f54",
     "semantic_hash": ""
   },
   "src/components/CrewModal.tsx": {
@@ -40,7 +40,7 @@
     "semantic_hash": ""
   },
   "src/components/FixerContactModal.tsx": {
-    "mtime": 1788115487.921896,
+    "mtime": 1788029720.60441,
     "ast_hash": "2ee58f274c195f46bcacd65f7a174c63",
     "semantic_hash": ""
   },
@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "src/components/Navbar.tsx": {
-    "mtime": 1788115487.9244428,
-    "ast_hash": "d6cda88d3088ce1c1cb4eeb30dc966cf",
+    "mtime": 1788085319.0039794,
+    "ast_hash": "d7173eebde6e4e180341f97871192478",
     "semantic_hash": ""
   },
   "src/context/AppContext.tsx": {
@@ -70,13 +70,13 @@
     "semantic_hash": ""
   },
   "src/context/AuthContext.tsx": {
-    "mtime": 1788120088.6664028,
-    "ast_hash": "9d1b93b410a34bc8e06e7f8b364b7e12",
+    "mtime": 1788029720.6091883,
+    "ast_hash": "ec019e2265d7b5ac8037d9e1d0d076ac",
     "semantic_hash": ""
   },
   "src/data/initialData.ts": {
-    "mtime": 1788119599.4659734,
-    "ast_hash": "0205e4283e65cc87c5374a27f3a94bbb",
+    "mtime": 1788029720.6108406,
+    "ast_hash": "6c72a7ab730f314daac63847182799b1",
     "semantic_hash": ""
   },
   "src/main.tsx": {
@@ -90,33 +90,33 @@
     "semantic_hash": ""
   },
   "src/pages/CompetitionsPage.tsx": {
-    "mtime": 1788115487.9316702,
+    "mtime": 1788033130.9101024,
     "ast_hash": "8ee313b5c945b88db473361379b31bf9",
     "semantic_hash": ""
   },
   "src/pages/FAQPage.tsx": {
-    "mtime": 1788115487.9336934,
+    "mtime": 1788033663.1940596,
     "ast_hash": "dc406c5c16d006f2b28c8b850d2a1279",
     "semantic_hash": ""
   },
   "src/pages/HomePage.tsx": {
-    "mtime": 1788115487.9356933,
-    "ast_hash": "9106714d2489035bcd522f0c7b871a85",
+    "mtime": 1788073513.6996682,
+    "ast_hash": "6e06e2d12462173ba7cb33f8e353d46a",
     "semantic_hash": ""
   },
   "src/pages/PrizesPage.tsx": {
-    "mtime": 1788118980.0242238,
-    "ast_hash": "b2da24c5326e3a0ac6bcd1a9f8207531",
+    "mtime": 1788033329.334795,
+    "ast_hash": "23d8bdbf749e293795918cde7791397f",
     "semantic_hash": ""
   },
   "src/pages/TimelinePage.tsx": {
-    "mtime": 1788115487.9396796,
+    "mtime": 1788033252.4881444,
     "ast_hash": "ada777709ff8013320c20f6018c9377e",
     "semantic_hash": ""
   },
   "src/types.ts": {
-    "mtime": 1788106593.0051475,
-    "ast_hash": "446f0ceede7063e30080b8ea2f064b74",
+    "mtime": 1788029720.6195555,
+    "ast_hash": "642b8a9c4124b519989ed3e85a72e3d0",
     "semantic_hash": ""
   },
   "src/utils/audio.ts": {
@@ -145,8 +145,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1788120142.1397583,
-    "ast_hash": "c3b1abdbb0db62706e0310f3d0fabc5a",
+    "mtime": 1788029720.5834272,
+    "ast_hash": "eae35042262f76c2a6aa18f68b4314db",
     "semantic_hash": ""
   },
   "index.html": {
@@ -162,56 +162,6 @@
   "src/assets/GTA Theme.mp3": {
     "mtime": 1788081287.5930595,
     "ast_hash": "3c941c94c843bfc94f2d82cc3c283ca0",
-    "semantic_hash": ""
-  },
-  "src/components/GlobalMusic.tsx": {
-    "mtime": 1788106592.918916,
-    "ast_hash": "5f45985d6ef4faaf42765dedfd3ebc46",
-    "semantic_hash": ""
-  },
-  "src/components/GtaAmbientFX.tsx": {
-    "mtime": 1788106592.9334252,
-    "ast_hash": "20ec9e49e6fe3725e7fe7a1faa07522b",
-    "semantic_hash": ""
-  },
-  "src/assets/images/Cyber.jpg": {
-    "mtime": 1788114184.1898713,
-    "ast_hash": "217259c2d3ab626d493a735eefd220b0",
-    "semantic_hash": ""
-  },
-  "src/assets/images/Event.jpg": {
-    "mtime": 1788119105.0110884,
-    "ast_hash": "0a14a9c54227bcd0d6defe0715670af9",
-    "semantic_hash": ""
-  },
-  "src/assets/images/Hackers.jpg": {
-    "mtime": 1788114159.42997,
-    "ast_hash": "3b6bb03d47ea3d5bac1b2f62a390cf70",
-    "semantic_hash": ""
-  },
-  "src/assets/images/IT-Lab.jpg": {
-    "mtime": 1788114122.045365,
-    "ast_hash": "9d8fbd7b4d670da8c715495004e5127a",
-    "semantic_hash": ""
-  },
-  "src/assets/images/coder.jpg": {
-    "mtime": 1788106425.2415884,
-    "ast_hash": "261e98273bad645bd33266bd8fe9545c",
-    "semantic_hash": ""
-  },
-  "src/assets/images/vice.jpg": {
-    "mtime": 1788119080.8574352,
-    "ast_hash": "9234d34b1059b60b15ddb6be773be8f8",
-    "semantic_hash": ""
-  },
-  "src/assets/audio/gta-theme.mp3.mp3": {
-    "mtime": 1788106592.6058254,
-    "ast_hash": "21d5f35b805220157606a552216a1b3f",
-    "semantic_hash": ""
-  },
-  "src/assets/videos/technova-bg.mp4.mp4": {
-    "mtime": 1788106592.8955448,
-    "ast_hash": "006fbacb17074d78f74b0e6fb9d7d315",
     "semantic_hash": ""
   }
 }

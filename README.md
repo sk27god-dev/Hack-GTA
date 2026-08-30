@@ -145,8 +145,8 @@ To access **Mission Control (Admin Dashboard)**:
 2. **Tap or Click the Logo 3 times** in rapid succession (within 1.6 seconds).
 3. The **Admin Clearance Gateway Modal** will automatically appear.
 4. Enter the administrator credentials:
-   - **Admin ID**: `admin` *(or `tommy.vercetti@vice.city`)*
-   - **Passcode**: `admin123`
+   - **Admin ID**: `technova-admin` *(or `tommy.vercetti@vice.city`)*
+   - **Passcode**: `secret-pass-2026`
 5. Press **AUTHORIZE CLEARANCE** to unlock full root administrator permissions and jump into the Admin Dashboard.
 6. An **Exit Admin** button is available in the navigation bar to quickly return to standard participant mode.
 

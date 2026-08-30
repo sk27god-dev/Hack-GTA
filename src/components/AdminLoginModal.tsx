@@ -15,8 +15,8 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
   onSuccess
 }) => {
   const { loginAdmin } = useAuth();
-  const [adminId, setAdminId] = useState('admin');
-  const [passcode, setPasscode] = useState('admin123');
+  const [adminId, setAdminId] = useState('');
+  const [passcode, setPasscode] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -98,9 +98,8 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
 
           <form onSubmit={handleSubmit} className="space-y-3.5">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-1 flex items-center justify-between">
-                <span>Admin Clearance ID</span>
-                <span className="text-[10px] text-[#00E5FF] font-mono">ID: admin</span>
+              <label className="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-1">
+                Admin Clearance ID
               </label>
               <div className="relative">
                 <UserIcon className="w-4 h-4 absolute left-3 top-2.5 text-zinc-400" />
@@ -110,16 +109,15 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
                   required
                   value={adminId}
                   onChange={e => setAdminId(e.target.value)}
-                  placeholder="admin or tommy.vercetti@vice.city"
+                  placeholder="Enter ID"
                   className="w-full bg-[#242430] text-white border-2 border-zinc-700 pl-9 pr-3 py-2 text-xs sm:text-sm focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_10px_rgba(0,229,255,0.4)]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-1 flex items-center justify-between">
-                <span>Security Passcode</span>
-                <span className="text-[10px] text-[#FFD54F] font-mono">Pass: admin123</span>
+              <label className="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-1">
+                Security Passcode
               </label>
               <div className="relative">
                 <Lock className="w-4 h-4 absolute left-3 top-2.5 text-zinc-400" />
@@ -129,7 +127,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
                   required
                   value={passcode}
                   onChange={e => setPasscode(e.target.value)}
-                  placeholder="••••••••••••"
+                  placeholder=""
                   className="w-full bg-[#242430] text-white border-2 border-zinc-700 pl-9 pr-10 py-2 text-xs sm:text-sm focus:outline-none focus:border-[#FF6FB5] focus:shadow-[0_0_10px_rgba(255,111,181,0.4)]"
                 />
                 <button
@@ -142,23 +140,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
               </div>
             </div>
 
-            {/* Quick Fill Preset Credential Help */}
-            <div className="bg-[#141419] border border-zinc-700 p-2.5 flex items-center justify-between gap-2 text-xs">
-              <div className="flex items-center gap-1.5 text-zinc-400 font-mono text-[11px]">
-                <Key className="w-3.5 h-3.5 text-[#00E5FF]" />
-                <span>Default: ID: <strong className="text-white">admin</strong> | Key: <strong className="text-white">admin123</strong></span>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setAdminId('admin');
-                  setPasscode('admin123');
-                }}
-                className="text-[10px] bg-zinc-700 hover:bg-[#00E5FF] hover:text-black px-2 py-0.5 font-bold uppercase transition-colors cursor-pointer"
-              >
-                Autofill
-              </button>
-            </div>
+
 
             <button
               id="admin-submit-auth-btn"

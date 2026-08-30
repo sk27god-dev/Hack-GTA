@@ -75,7 +75,7 @@ export const PrizesPage: React.FC = () => {
               GUARANTEED TOTAL BOUNTY POOL
             </span>
             <span className="font-headline text-3xl xs:text-4xl sm:text-6xl text-[#ffe600] tracking-wide block leading-none drop-shadow-[0_0_10px_rgba(255,230,0,0.35)]">
-              $500,000 USD
+              ₹35,000
             </span>
           </div>
 
@@ -112,7 +112,7 @@ export const PrizesPage: React.FC = () => {
             </div>
             <div className="text-center space-y-1">
               <h3 className="font-headline text-2xl sm:text-3xl text-white">THE CONSIGLIERE</h3>
-              <span className="font-headline text-3xl sm:text-4xl text-[#00f5ff] block font-bold">$100,000</span>
+              <span className="font-headline text-3xl sm:text-4xl text-[#00f5ff] block font-bold">₹10,000</span>
               <p className="text-xs text-zinc-350 font-medium">
                 Silver Cup + Fast-Track Venture Incubator Access + Cloud Infrastructure Credits.
               </p>
@@ -138,7 +138,7 @@ export const PrizesPage: React.FC = () => {
             <div className="text-center space-y-1">
               <h3 className="font-headline text-3xl sm:text-4xl text-white">THE VICE OVERLORD</h3>
               <span className="font-headline text-4xl sm:text-5xl text-[#ffe600] block drop-shadow-[0_0_12px_rgba(255,230,0,0.45)]">
-                $150,000
+                ₹15,000
               </span>
               <p className="text-xs text-zinc-200 font-bold">
                 Gold Cup + Guaranteed Seed Term Sheet + Direct VIP Pass to Global Tech Syndicate Finals.
@@ -160,7 +160,7 @@ export const PrizesPage: React.FC = () => {
             </div>
             <div className="text-center space-y-1">
               <h3 className="font-headline text-2xl sm:text-3xl text-white">THE ENFORCER</h3>
-              <span className="font-headline text-3xl sm:text-4xl text-amber-550 block font-bold">$50,000</span>
+              <span className="font-headline text-3xl sm:text-4xl text-amber-550 block font-bold">₹5,000</span>
               <p className="text-xs text-zinc-350 font-medium">
                 Bronze Trophy + Enterprise Hardware Pass + Hardware Security Modules.
               </p>
@@ -181,7 +181,7 @@ export const PrizesPage: React.FC = () => {
             </h2>
           </div>
           <span className="font-headline text-lg sm:text-2xl text-[#ff007f] bg-[#ff007f]/25 px-3 py-1 border border-[#ff007f]/35 rounded shadow-[0_0_8px_rgba(255,0,127,0.2)] self-start sm:self-auto">
-            $25,000 PER BOUNTY
+            Diff PER BOUNTY
           </span>
         </div>
 

@@ -112,11 +112,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const cleanId = adminId.trim().toLowerCase();
     const cleanPass = passcode.trim();
 
-    const validAdminIds = ['admin', 'tommy', 'tommy.vercetti@vice.city', 'admin@vice.city', 'root'];
-    const validPasscodes = ['admin123', 'vicecity2025', 'admin', 'root', 'tommy123'];
+    const validAdminIds = ['technova-admin', 'tommy', 'tommy.vercetti@vice.city', 'root'];
+    const validPasscodes = ['secret-pass-2026', 'vicecity2025', 'root', 'tommy123'];
 
-    const isIdValid = validAdminIds.includes(cleanId) || cleanId.includes('admin') || cleanId.includes('tommy');
-    const isPassValid = validPasscodes.includes(cleanPass.toLowerCase());
+    const isIdValid = validAdminIds.includes(cleanId);
+    const isPassValid = validPasscodes.includes(cleanPass);
 
     if (isIdValid && isPassValid) {
       // Find or create the Admin user
@@ -143,7 +143,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     return {
       success: false,
-      message: 'Invalid Admin credentials! Use ID: "admin" and Passcode: "admin123"'
+      message: 'Invalid Admin credentials! Access Denied.'
     };
   };
 
