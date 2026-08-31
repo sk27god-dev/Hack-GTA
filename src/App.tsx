@@ -26,6 +26,8 @@ import {
   GtaTransitionRef
 } from './components/GtaTransitionOverlay';
 
+import LoadingScreen from './components/LoadingScreen';
+
 import { AuthModal } from './components/AuthModal';
 import { AdminLoginModal } from './components/AdminLoginModal';
 import { CrewModal } from './components/CrewModal';
@@ -804,19 +806,25 @@ APP ROOT
 */
 
 export default function App() {
+  const [showLoadingScreen, setShowLoadingScreen] = useState(true);
 
   return (
+    <>
+      {showLoadingScreen && (
+        <LoadingScreen
+          onComplete={() => setShowLoadingScreen(false)}
+        />
+      )}
 
-    <AuthProvider>
-
-      <AppProvider>
-
-        <MainApp />
-
-      </AppProvider>
-
-    </AuthProvider>
-
+      <AuthProvider>
+        
+        <AppProvider>
+         
+          <MainApp />
+       
+        </AppProvider>
+     
+      </AuthProvider>
+    </>
   );
-
 }
