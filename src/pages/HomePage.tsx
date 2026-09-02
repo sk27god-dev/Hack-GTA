@@ -12,7 +12,7 @@ import {
   type Variants
 } from 'motion/react';
 
-import technovaBg from '../assets/videos/technova-bg.mp4.mp4';
+import technovaBg from '../assets/videos/technova-bg-gta.mp4';
 
 
 import {
