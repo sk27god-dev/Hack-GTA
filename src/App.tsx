@@ -1,8 +1,8 @@
-
 import React, {
   useState,
   useRef,
-  useCallback
+  useCallback,
+  useEffect
 } from 'react';
 
 import {
@@ -14,8 +14,6 @@ import {
   AppProvider,
   useApp
 } from './context/AppContext';
-
-
 
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -59,7 +57,6 @@ import {
 
 import { Competition } from './types';
 
-
 import {
   Lock
 } from 'lucide-react';
@@ -67,19 +64,31 @@ import {
 import GlobalMusic from './components/GlobalMusic';
 
 
-/*
-============================================================
-MAIN APP
-============================================================
-*/
-
-
 const MainApp: React.FC = () => {
 
   const { competitions } = useApp();
-
   const { isAdmin } = useAuth();
 
+
+  /*
+  ============================================================
+  THEME STATE
+  ============================================================
+  */
+
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    const saved = localStorage.getItem('techfest-theme');
+    return (saved === 'light' || saved === 'dark') ? saved : 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('techfest-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  }, []);
 
 
   /*
@@ -88,56 +97,14 @@ const MainApp: React.FC = () => {
   ============================================================
   */
 
-  const [
-    activeTab,
-    setActiveTab
-  ] = useState<string>('home');
-
-
-  const [
-    authModalOpen,
-    setAuthModalOpen
-  ] = useState(false);
-
-
-  const [
-    adminLoginModalOpen,
-    setAdminLoginModalOpen
-  ] = useState(false);
-
-
-  const [
-    crewModalOpen,
-    setCrewModalOpen
-  ] = useState(false);
-
-
-  const [
-    crewModalCompId,
-    setCrewModalCompId
-  ] = useState<
-    string | undefined
-  >(undefined);
-
-
-  const [
-    selectedCompForDetail,
-    setSelectedCompForDetail
-  ] = useState<
-    Competition | null
-  >(null);
-
-
-  const [
-    contactModalOpen,
-    setContactModalOpen
-  ] = useState(false);
-
-
-  const [
-    cityMapModalOpen,
-    setCityMapModalOpen
-  ] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>('home');
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [adminLoginModalOpen, setAdminLoginModalOpen] = useState(false);
+  const [crewModalOpen, setCrewModalOpen] = useState(false);
+  const [crewModalCompId, setCrewModalCompId] = useState<string | undefined>(undefined);
+  const [selectedCompForDetail, setSelectedCompForDetail] = useState<Competition | null>(null);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const [cityMapModalOpen, setCityMapModalOpen] = useState(false);
 
 
   /*
@@ -146,8 +113,7 @@ const MainApp: React.FC = () => {
   ============================================================
   */
 
-  const transitionRef =
-    useRef<GtaTransitionRef>(null);
+  const transitionRef = useRef<GtaTransitionRef>(null);
 
 
   /*
@@ -156,54 +122,22 @@ const MainApp: React.FC = () => {
   ============================================================
   */
 
-  const handleTabChange =
-    useCallback(
-      (newTab: string) => {
+  const handleTabChange = useCallback(
+    (newTab: string) => {
+      if (newTab === activeTab) return;
 
-        if (
-          newTab === activeTab
-        ) {
-          return;
-        }
-
-
-        if (
-          transitionRef.current
-        ) {
-
-          transitionRef.current
-            .triggerTransition(
-              newTab,
-              () => {
-
-                setActiveTab(
-                  newTab
-                );
-
-                window.scrollTo({
-                  top: 0,
-                  behavior: 'instant'
-                });
-
-              }
-            );
-
-        } else {
-
-          setActiveTab(
-            newTab
-          );
-
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-
-        }
-
-      },
-      [activeTab]
-    );
+      if (transitionRef.current) {
+        transitionRef.current.triggerTransition(newTab, () => {
+          setActiveTab(newTab);
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        });
+      } else {
+        setActiveTab(newTab);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    },
+    [activeTab]
+  );
 
 
   /*
@@ -212,18 +146,9 @@ const MainApp: React.FC = () => {
   ============================================================
   */
 
-  const handleOpenCrewModal = (
-    compId?: string
-  ) => {
-
-    setCrewModalCompId(
-      compId
-    );
-
-    setCrewModalOpen(
-      true
-    );
-
+  const handleOpenCrewModal = (compId?: string) => {
+    setCrewModalCompId(compId);
+    setCrewModalOpen(true);
   };
 
 
@@ -233,18 +158,10 @@ const MainApp: React.FC = () => {
   ============================================================
   */
 
-  const handleRegisterFromDetail =
-    (compId: string) => {
-
-      setCrewModalCompId(
-        compId
-      );
-
-      setCrewModalOpen(
-        true
-      );
-
-    };
+  const handleRegisterFromDetail = (compId: string) => {
+    setCrewModalCompId(compId);
+    setCrewModalOpen(true);
+  };
 
 
   /*
@@ -260,12 +177,16 @@ const MainApp: React.FC = () => {
         min-h-screen
         flex
         flex-col
-        bg-[#FFF5F0]
-        text-zinc-900
         selection:bg-[#FF6FB5]
         selection:text-white
         relative
+        transition-colors
+        duration-300
       "
+      style={{
+        backgroundColor: 'var(--bg-primary)',
+        color: 'var(--text-primary)'
+      }}
     >
 
       {/* ======================================================
@@ -286,12 +207,7 @@ const MainApp: React.FC = () => {
           FILM GRAIN
           ====================================================== */}
 
-      <div
-        className="
-          film-grain
-          pointer-events-none
-        "
-      />
+      <div className="film-grain pointer-events-none" />
 
 
       {/* ======================================================
@@ -305,41 +221,22 @@ const MainApp: React.FC = () => {
           PAGE TRANSITION
           ====================================================== */}
 
-      <GtaTransitionOverlay
-        ref={transitionRef}
-      />
+      <GtaTransitionOverlay ref={transitionRef} />
 
 
       {/* ======================================================
-          NAVBAR
+          NAVBAR (Now receives theme + toggleTheme props)
           ====================================================== */}
 
       <Navbar
-
-        activeTab={
-          activeTab
-        }
-
-        setActiveTab={
-          handleTabChange
-        }
-
-        openAuthModal={() =>
-          setAuthModalOpen(true)
-        }
-
-        openAdminLoginModal={() =>
-          setAdminLoginModalOpen(true)
-        }
-
-        openCrewModal={() =>
-          handleOpenCrewModal()
-        }
-
-        openCityMapModal={() =>
-          setCityMapModalOpen(true)
-        }
-
+        activeTab={activeTab}
+        setActiveTab={handleTabChange}
+        openAuthModal={() => setAuthModalOpen(true)}
+        openAdminLoginModal={() => setAdminLoginModalOpen(true)}
+        openCrewModal={() => handleOpenCrewModal()}
+        openCityMapModal={() => setCityMapModalOpen(true)}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
 
 
@@ -349,423 +246,128 @@ const MainApp: React.FC = () => {
 
       <main className="flex-1">
 
-
         {/* HOME */}
-
         {activeTab === 'home' && (
-
           <HomePage
-
-            setActiveTab={
-              handleTabChange
-            }
-
-            openCompetitionModal={
-              comp =>
-                setSelectedCompForDetail(
-                  comp
-                )
-            }
-
-            openAuthModal={() =>
-              setAuthModalOpen(
-                true
-              )
-            }
-
-            openCrewModal={() =>
-              handleOpenCrewModal()
-            }
-
-            openCityMapModal={() =>
-              setCityMapModalOpen(
-                true
-              )
-            }
-
+            setActiveTab={handleTabChange}
+            openCompetitionModal={comp => setSelectedCompForDetail(comp)}
+            openAuthModal={() => setAuthModalOpen(true)}
+            openCrewModal={() => handleOpenCrewModal()}
+            openCityMapModal={() => setCityMapModalOpen(true)}
           />
-
         )}
-
 
         {/* COMPETITIONS */}
-
-        {activeTab ===
-          'competitions' && (
-
+        {activeTab === 'competitions' && (
           <CompetitionsPage
-
-            openCompetitionModal={
-              comp =>
-                setSelectedCompForDetail(
-                  comp
-                )
-            }
-
-            openCrewModal={
-              compId =>
-                handleOpenCrewModal(
-                  compId
-                )
-            }
-
-            openCityMapModal={() =>
-              setCityMapModalOpen(
-                true
-              )
-            }
-
+            openCompetitionModal={comp => setSelectedCompForDetail(comp)}
+            openCrewModal={compId => handleOpenCrewModal(compId)}
+            openCityMapModal={() => setCityMapModalOpen(true)}
           />
-
         )}
-
 
         {/* TIMELINE */}
-
-        {activeTab ===
-          'timeline' && (
-
-          <TimelinePage />
-
-        )}
-
+        {activeTab === 'timeline' && <TimelinePage />}
 
         {/* PRIZES */}
-
-        {activeTab ===
-          'prizes' && (
-
-          <PrizesPage />
-
-        )}
-
+        {activeTab === 'prizes' && <PrizesPage />}
 
         {/* FAQ */}
-
-        {activeTab ===
-          'faq' && (
-
+        {activeTab === 'faq' && (
           <FAQPage
-
-            openContactModal={() =>
-              setContactModalOpen(
-                true
-              )
-            }
-
+            openContactModal={() => setContactModalOpen(true)}
           />
-
         )}
 
-
         {/* ADMIN */}
-
         {activeTab === 'admin' && (
-
           isAdmin ? (
-
             <AdminDashboard />
-
           ) : (
-
-            <div
-              className="
-                py-20
-                px-4
-                max-w-lg
-                mx-auto
-                text-center
-              "
-            >
-
+            <div className="py-20 px-4 max-w-lg mx-auto text-center">
               <div
-                className="
-                  bg-[#18181F]
-                  text-white
-                  p-8
-                  comic-border-xl
-                  shadow-[6px_6px_0px_#000]
-                  space-y-4
-                "
+                className="p-8 comic-border-xl space-y-4"
+                style={{
+                  backgroundColor: 'var(--card-bg-solid)',
+                  color: 'var(--text-primary)',
+                  boxShadow: '6px 6px 0px rgba(0,0,0,0.3)'
+                }}
               >
-
-                <div
-                  className="
-                    w-16
-                    h-16
-                    mx-auto
-                    bg-red-600
-                    comic-border-sm
-                    flex
-                    items-center
-                    justify-center
-                  "
-                >
-
-                  <Lock
-                    className="
-                      w-8
-                      h-8
-                      text-white
-                      animate-pulse
-                    "
-                  />
-
+                <div className="w-16 h-16 mx-auto bg-red-600 comic-border-sm flex items-center justify-center">
+                  <Lock className="w-8 h-8 text-white animate-pulse" />
                 </div>
 
-
-                <h2
-                  className="
-                    font-headline
-                    text-3xl
-                    text-red-500
-                    tracking-wider
-                  "
-                >
-
-                  MISSION CONTROL
-                  RESTRICTED
-
+                <h2 className="font-headline text-3xl text-red-500 tracking-wider">
+                  MISSION CONTROL RESTRICTED
                 </h2>
 
-
-                <p
-                  className="
-                    text-sm
-                    text-zinc-400
-                  "
-                >
-
-                  Admin authorization
-                  is required.
-
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  Admin authorization is required.
                   Tap the
-                  <strong>
-                    Tech Fest Logo 3 times
-                  </strong>
-                  in the navigation bar
-                  to trigger root clearance.
-
+                  <strong> Tech Fest Logo 3 times </strong>
+                  in the navigation bar to trigger root clearance.
                 </p>
 
-
-                <div
-                  className="
-                    flex
-                    gap-3
-                    pt-2
-                  "
-                >
-
+                <div className="flex gap-3 pt-2">
                   <button
-                    onClick={() =>
-                      setAdminLoginModalOpen(
-                        true
-                      )
-                    }
-                    className="
-                      flex-1
-                      bg-red-600
-                      hover:bg-red-500
-                      text-white
-                      font-headline
-                      text-lg
-                      py-2
-                      comic-border-sm
-                      cursor-pointer
-                    "
+                    onClick={() => setAdminLoginModalOpen(true)}
+                    className="flex-1 bg-red-600 hover:bg-red-500 text-white font-headline text-lg py-2 comic-border-sm cursor-pointer"
                   >
-
                     ENTER ADMIN ID
-
                   </button>
-
 
                   <button
-                    onClick={() =>
-                      handleTabChange(
-                        'home'
-                      )
-                    }
-                    className="
-                      flex-1
-                      bg-white
-                      text-black
-                      hover:bg-[#00E5FF]
-                      font-headline
-                      text-lg
-                      py-2
-                      comic-border-sm
-                      cursor-pointer
-                    "
+                    onClick={() => handleTabChange('home')}
+                    className="flex-1 font-headline text-lg py-2 comic-border-sm cursor-pointer transition-colors hover:opacity-80"
+                    style={{
+                      backgroundColor: 'var(--card-bg)',
+                      color: 'var(--text-primary)'
+                    }}
                   >
-
                     RETURN HOME
-
                   </button>
-
                 </div>
-
               </div>
-
             </div>
-
           )
-
         )}
 
       </main>
 
 
       {/* ======================================================
-          AUTH MODAL
+          MODALS
           ====================================================== */}
 
-      <AuthModal
-
-        isOpen={
-          authModalOpen
-        }
-
-        onClose={() =>
-          setAuthModalOpen(
-            false
-          )
-        }
-
-      />
-
-
-      {/* ======================================================
-          ADMIN LOGIN
-          ====================================================== */}
-
+      <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
       <AdminLoginModal
-
-        isOpen={
-          adminLoginModalOpen
-        }
-
-        onClose={() =>
-          setAdminLoginModalOpen(
-            false
-          )
-        }
-
-        onSuccess={() =>
-          handleTabChange(
-            'admin'
-          )
-        }
-
+        isOpen={adminLoginModalOpen}
+        onClose={() => setAdminLoginModalOpen(false)}
+        onSuccess={() => handleTabChange('admin')}
       />
-
-
-      {/* ======================================================
-          CREW MODAL
-          ====================================================== */}
-
       <CrewModal
-
-        isOpen={
-          crewModalOpen
-        }
-
+        isOpen={crewModalOpen}
         onClose={() => {
-
-          setCrewModalOpen(
-            false
-          );
-
-          setCrewModalCompId(
-            undefined
-          );
-
+          setCrewModalOpen(false);
+          setCrewModalCompId(undefined);
         }}
-
-        defaultCompetitionId={
-          crewModalCompId
-        }
-
+        defaultCompetitionId={crewModalCompId}
       />
-
-
-      {/* ======================================================
-          COMPETITION DETAIL
-          ====================================================== */}
-
       <CompetitionDetailModal
-
-        competition={
-          selectedCompForDetail
-        }
-
-        onClose={() =>
-          setSelectedCompForDetail(
-            null
-          )
-        }
-
-        onRegister={
-          handleRegisterFromDetail
-        }
-
+        competition={selectedCompForDetail}
+        onClose={() => setSelectedCompForDetail(null)}
+        onRegister={handleRegisterFromDetail}
       />
-
-
-      {/* ======================================================
-          CONTACT
-          ====================================================== */}
-
       <FixerContactModal
-
-        isOpen={
-          contactModalOpen
-        }
-
-        onClose={() =>
-          setContactModalOpen(
-            false
-          )
-        }
-
+        isOpen={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
       />
-
-
-      {/* ======================================================
-          CITY MAP
-          ====================================================== */}
-
       <CityMapModal
-
-        isOpen={
-          cityMapModalOpen
-        }
-
-        onClose={() =>
-          setCityMapModalOpen(
-            false
-          )
-        }
-
-        onSelectCompetition={
-          comp =>
-            setSelectedCompForDetail(
-              comp
-            )
-        }
-
-        onDeployCrew={
-          compId =>
-            handleOpenCrewModal(
-              compId
-            )
-        }
-
-        competitions={
-          competitions
-        }
-
+        isOpen={cityMapModalOpen}
+        onClose={() => setCityMapModalOpen(false)}
+        onSelectCompetition={comp => setSelectedCompForDetail(comp)}
+        onDeployCrew={compId => handleOpenCrewModal(compId)}
+        competitions={competitions}
       />
 
 
@@ -774,23 +376,9 @@ const MainApp: React.FC = () => {
           ====================================================== */}
 
       <Footer
-
-        setActiveTab={
-          handleTabChange
-        }
-
-        openContactModal={() =>
-          setContactModalOpen(
-            true
-          )
-        }
-
-        openCityMapModal={() =>
-          setCityMapModalOpen(
-            true
-          )
-        }
-
+        setActiveTab={handleTabChange}
+        openContactModal={() => setContactModalOpen(true)}
+        openCityMapModal={() => setCityMapModalOpen(true)}
       />
 
     </div>
@@ -798,12 +386,6 @@ const MainApp: React.FC = () => {
   );
 };
 
-
-/*
-==============================================================
-APP ROOT
-==============================================================
-*/
 
 export default function App() {
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
@@ -817,13 +399,9 @@ export default function App() {
       )}
 
       <AuthProvider>
-        
         <AppProvider>
-         
           <MainApp />
-       
         </AppProvider>
-     
       </AuthProvider>
     </>
   );

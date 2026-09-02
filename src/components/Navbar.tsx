@@ -8,13 +8,13 @@ import {
   User as UserIcon,
   Shield,
   LogOut,
-
+  Sun,
+  Moon,
   Calendar,
   Trophy,
   HelpCircle,
   Home,
   Gamepad2
-
 } from 'lucide-react';
 import {
   playClickSound,
@@ -28,6 +28,8 @@ interface NavbarProps {
   openCrewModal: () => void;
   openCityMapModal?: () => void;
   openAdminLoginModal: () => void;
+  theme: 'dark' | 'light';
+  toggleTheme: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -35,7 +37,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   openAuthModal,
   openCrewModal,
-  openAdminLoginModal
+  openAdminLoginModal,
+  theme,
+  toggleTheme
 }) => {
 
   const {
@@ -44,7 +48,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     logout,
     exitAdminMode
   } = useAuth();
-
 
   const { teams } = useApp();
 
@@ -164,9 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           DESKTOP / MAIN NAVBAR
           ====================================================== */}
 
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-
 
         <div className="flex items-center justify-between gap-4">
 
@@ -264,7 +265,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                   {item.adminOnly && (
                     <span className="text-[8px] bg-black text-white px-1">
                       ROOT
-
                     </span>
                   )}
 
@@ -311,6 +311,43 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               </div>
             )}
+
+
+            {/* ==================================================
+                THEME TOGGLE BUTTON (Newly added)
+                ================================================== */}
+
+            <button
+              id="theme-toggle-btn"
+              onClick={toggleTheme}
+              className={`
+                w-10
+                h-10
+                sm:w-11
+                sm:h-11
+                flex
+                items-center
+                justify-center
+                border-2
+                border-black
+                shadow-[3px_3px_0px_0px_#000]
+                cursor-pointer
+                transition-all
+                hover:shadow-[4px_4px_0px_0px_#000]
+                active:translate-x-[3px]
+                active:translate-y-[3px]
+                active:shadow-none
+                ${theme === 'dark' ? 'bg-[#FFD54F] text-black' : 'bg-[#1a1a2e] text-[#FFD54F]'}
+              `}
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5" strokeWidth={2.5} />
+              ) : (
+                <Moon className="w-5 h-5" strokeWidth={2.5} />
+              )}
+            </button>
 
 
             {/* ==================================================
@@ -433,8 +470,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           </div>
 
-
-
         </div>
 
       </div>
@@ -445,7 +480,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           ====================================================== */}
 
       {mobileMenuOpen && (
-
 
         <div
           className="
@@ -460,7 +494,6 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
 
           {/* NAV LINKS */}
-
 
           {navItems.map(item => {
 
@@ -506,7 +539,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 </div>
 
-
                 {item.adminOnly && (
                   <span className="text-[9px] bg-black text-white px-2 py-1">
                     ROOT
@@ -517,6 +549,46 @@ export const Navbar: React.FC<NavbarProps> = ({
             );
 
           })}
+
+
+          {/* MOBILE THEME TOGGLE */}
+
+          <button
+            onClick={() => {
+              toggleTheme();
+              setMobileMenuOpen(false);
+            }}
+            className={`
+              w-full
+              font-headline
+              text-xl
+              px-4
+              py-3
+              border-2
+              border-black
+              flex
+              items-center
+              justify-between
+              cursor-pointer
+              shadow-[3px_3px_0px_0px_#000]
+              active:translate-x-[3px]
+              active:translate-y-[3px]
+              active:shadow-none
+              ${theme === 'dark' ? 'bg-[#FFD54F] text-black' : 'bg-[#1a1a2e] text-[#FFD54F]'}
+            `}
+          >
+            <div className="flex items-center gap-3">
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5" strokeWidth={2.5} />
+              ) : (
+                <Moon className="w-5 h-5" strokeWidth={2.5} />
+              )}
+              <span>{theme === 'dark' ? 'LIGHT MODE' : 'DARK MODE'}</span>
+            </div>
+            <span className="text-[10px] bg-black text-white px-2 py-1 font-bold">
+              SWITCH
+            </span>
+          </button>
 
 
           {/* MOBILE ACTIONS */}

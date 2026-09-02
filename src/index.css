@@ -1,35 +1,128 @@
 @import "tailwindcss";
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&display=swap');
-.font-headline {
-  font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
-  font-weight: 700;
+
+/* =========================================
+   THEME VARIABLES (Dark & Light)
+   ========================================= */
+:root {
+  --font-headline: 'Bebas Neue', sans-serif;
+  --font-marker: 'Permanent Marker', cursive;
+  --font-display: 'Oswald', 'Bebas Neue', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+
+  /* Dark Theme (Default) */
+  --bg-primary: #07040e;
+  --bg-secondary: #0d0a1a;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --card-bg: rgba(17, 9, 37, 0.7);
+  --card-bg-2: rgba(22, 11, 45, 0.75);
+  --card-bg-solid: #110925;
+  --border-primary: #ff007f;
+  --border-secondary: #00f5ff;
+  --border-tertiary: #b967ff;
+  --shadow-glow-1: rgba(255, 0, 127, 0.35);
+  --shadow-glow-2: rgba(0, 245, 255, 0.35);
+  --shadow-glow-3: rgba(185, 103, 255, 0.4);
 }
 
-.font-marker {
-  font-family: 'Permanent Marker', cursive;
-
+[data-theme="light"] {
+  --bg-primary: #FFF5F0;
+  --bg-secondary: #fdf2ec;
+  --text-primary: #1a1a2e;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-bg-2: rgba(255, 245, 240, 0.95);
+  --card-bg-solid: #ffffff;
+  --border-primary: #ff007f;
+  --border-secondary: #00b4d8;
+  --border-tertiary: #9b59b6;
+  --shadow-glow-1: rgba(255, 0, 127, 0.15);
+  --shadow-glow-2: rgba(0, 180, 216, 0.15);
+  --shadow-glow-3: rgba(155, 89, 182, 0.2);
 }
 
 @layer base {
-  :root {
-    --font-headline: 'Bebas Neue', sans-serif;
-    --font-marker: 'Permanent Marker', cursive;
-    --font-display: 'Oswald', 'Bebas Neue', sans-serif;
-    --font-body: 'Montserrat', sans-serif;
-  }
-
   body {
     font-family: var(--font-body);
-    background-color: #07040e;
-    color: #e2e8f0;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, button, input, textarea, select {
+    color: inherit;
+  }
+
+  /* Force text color in dark mode */
+  [data-theme="dark"] .text-zinc-900,
+  [data-theme="dark"] .text-zinc-800,
+  [data-theme="dark"] .text-zinc-700,
+  [data-theme="dark"] .text-black,
+  [data-theme="dark"] .text-gray-900,
+  [data-theme="dark"] .text-gray-800,
+  [data-theme="dark"] .text-gray-700,
+  [data-theme="dark"] .text-slate-900,
+  [data-theme="dark"] .text-slate-800,
+  [data-theme="dark"] .text-slate-700 {
+    color: var(--text-primary) !important;
+  }
+
+  [data-theme="dark"] .text-zinc-600,
+  [data-theme="dark"] .text-gray-600,
+  [data-theme="dark"] .text-slate-600,
+  [data-theme="dark"] .text-zinc-500,
+  [data-theme="dark"] .text-gray-500,
+  [data-theme="dark"] .text-slate-500 {
+    color: var(--text-secondary) !important;
+  }
+
+  [data-theme="dark"] .text-zinc-400,
+  [data-theme="dark"] .text-gray-400,
+  [data-theme="dark"] .text-slate-400 {
+    color: var(--text-muted) !important;
+  }
+
+  /* Force backgrounds in dark mode */
+  [data-theme="dark"] .bg-white,
+  [data-theme="dark"] .bg-\[\#FFF5F0\],
+  [data-theme="dark"] .bg-\[\#fff\],
+  [data-theme="dark"] .bg-\[\#ffffff\],
+  [data-theme="dark"] .bg-zinc-50,
+  [data-theme="dark"] .bg-zinc-100,
+  [data-theme="dark"] .bg-gray-50,
+  [data-theme="dark"] .bg-gray-100,
+  [data-theme="dark"] .bg-slate-50,
+  [data-theme="dark"] .bg-slate-100 {
+    background-color: var(--bg-secondary) !important;
+  }
+
+  /* Force backgrounds in light mode */
+  [data-theme="light"] .bg-\[\#18181F\],
+  [data-theme="light"] .bg-\[\#07040e\],
+  [data-theme="light"] .bg-\[\#0d0a1a\],
+  [data-theme="light"] .bg-zinc-900,
+  [data-theme="light"] .bg-zinc-950,
+  [data-theme="light"] .bg-gray-900,
+  [data-theme="light"] .bg-black {
+    background-color: var(--card-bg-solid) !important;
+  }
+
+  [data-theme="light"] .text-white {
+    color: var(--text-primary) !important;
   }
 }
 
-/* Custom GTA & Comic Theme Utility Classes */
+/* =========================================
+   CUSTOM FONT CLASSES
+   ========================================= */
 .font-headline {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  font-weight: 700;
 }
 
 .font-marker {
@@ -44,33 +137,39 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Synthwave Neon Borders & Shadows (Facelift from Neo-Brutalism) */
+/* =========================================
+   SYNTHWAVE NEON BORDERS & SHADOWS
+   ========================================= */
 .comic-border {
-  border: 2px solid #ff007f;
-  background: rgba(17, 9, 37, 0.7);
-  box-shadow: 0 0 12px rgba(255, 0, 127, 0.35), inset 0 0 8px rgba(255, 0, 127, 0.15);
+  border: 2px solid var(--border-primary);
+  background: var(--card-bg);
+  box-shadow: 0 0 12px var(--shadow-glow-1), inset 0 0 8px var(--shadow-glow-1);
   backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
 }
 
 .comic-border-sm {
-  border: 1px solid #00f5ff;
-  background: rgba(8, 12, 28, 0.7);
-  box-shadow: 0 0 8px rgba(0, 245, 255, 0.25);
+  border: 1px solid var(--border-secondary);
+  background: var(--card-bg);
+  box-shadow: 0 0 8px var(--shadow-glow-2);
   backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
 }
 
 .comic-border-lg {
-  border: 2px solid #b967ff;
-  background: rgba(22, 11, 45, 0.75);
-  box-shadow: 0 0 20px rgba(185, 103, 255, 0.4), inset 0 0 12px rgba(185, 103, 255, 0.2);
+  border: 2px solid var(--border-tertiary);
+  background: var(--card-bg-2);
+  box-shadow: 0 0 20px var(--shadow-glow-3), inset 0 0 12px var(--shadow-glow-3);
   backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
 }
 
 .comic-border-xl {
-  border: 3px solid #ff007f;
-  background: rgba(14, 7, 30, 0.85);
-  box-shadow: 0 0 30px rgba(255, 0, 127, 0.55), inset 0 0 15px rgba(255, 0, 127, 0.25);
+  border: 3px solid var(--border-primary);
+  background: var(--card-bg-2);
+  box-shadow: 0 0 30px var(--shadow-glow-1), inset 0 0 15px var(--shadow-glow-1);
   backdrop-filter: blur(16px);
+  transition: all 0.3s ease;
 }
 
 .comic-interactive {
@@ -79,16 +178,18 @@
 
 .comic-interactive:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 22px rgba(0, 245, 255, 0.55), 0 0 44px rgba(255, 0, 127, 0.35);
-  border-color: #00f5ff;
+  box-shadow: 0 0 22px var(--shadow-glow-2), 0 0 44px var(--shadow-glow-1);
+  border-color: var(--border-secondary);
 }
 
 .comic-interactive:active {
   transform: translateY(1px);
-  box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+  box-shadow: 0 0 10px var(--shadow-glow-2);
 }
 
-/* Neon Text Shadows & Outlines */
+/* =========================================
+   NEON TEXT SHADOWS & OUTLINES
+   ========================================= */
 .comic-text-outline {
   color: #FFFFFF;
   text-shadow: 
@@ -140,22 +241,26 @@
   text-shadow: 0 0 15px rgba(0,245,255,0.7);
 }
 
-/* Background Patterns */
+/* =========================================
+   BACKGROUND PATTERNS
+   ========================================= */
 .halftone-bg {
-  background-color: #07040e;
+  background-color: var(--bg-primary);
   background-image: radial-gradient(circle at center, rgba(255, 0, 127, 0.12) 1.5px, transparent 1.5px);
   background-size: 20px 20px;
 }
 
 .grid-bg {
-  background-color: #07040e;
+  background-color: var(--bg-primary);
   background-image: 
     linear-gradient(rgba(0, 245, 255, 0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 245, 255, 0.08) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* 3D Perspective Scrolling Neon Grid Floor */
+/* =========================================
+   3D PERSPECTIVE SCROLLING NEON GRID FLOOR
+   ========================================= */
 .synthwave-grid-perspective {
   perspective: 260px;
   perspective-origin: 50% 50%;
@@ -185,15 +290,13 @@
 }
 
 @keyframes grid-scroll {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 0 1440px;
-  }
+  from { background-position: 0 0; }
+  to { background-position: 0 1440px; }
 }
 
-/* Film Grain Overlay */
+/* =========================================
+   FILM GRAIN OVERLAY
+   ========================================= */
 .film-grain {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -203,12 +306,14 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Polaroids (Glow wired version) */
+/* =========================================
+   POLAROIDS
+   ========================================= */
 .polaroid {
-  background: rgba(22, 11, 45, 0.75);
+  background: var(--card-bg-2);
   padding: 0.875rem 0.875rem 2.25rem 0.875rem;
-  border: 2px solid #ff007f;
-  box-shadow: 0 0 15px rgba(255, 0, 127, 0.35);
+  border: 2px solid var(--border-primary);
+  box-shadow: 0 0 15px var(--shadow-glow-1);
   border-radius: 6px;
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -217,11 +322,13 @@
 .polaroid:hover {
   transform: rotate(0deg) scale(1.04) !important;
   z-index: 20;
-  box-shadow: 0 0 25px rgba(0, 245, 255, 0.55);
-  border-color: #00f5ff;
+  box-shadow: 0 0 25px var(--shadow-glow-2);
+  border-color: var(--border-secondary);
 }
 
-/* Bullet Hole Effect (Luminous impact marker) */
+/* =========================================
+   BULLET HOLE EFFECT
+   ========================================= */
 .bullet-hole {
   width: 22px;
   height: 22px;
@@ -233,7 +340,9 @@
   box-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
 }
 
-/* Stamps (Cyber stamps) */
+/* =========================================
+   STAMPS
+   ========================================= */
 .stamp-passed {
   border: 2px solid #00f5ff;
   color: #00f5ff;
@@ -264,80 +373,56 @@
   box-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
 }
 
-/* Custom Scrollbar */
+/* =========================================
+   CUSTOM SCROLLBAR
+   ========================================= */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #090514;
-  border-left: 1px solid #1f123b;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: #ff007f;
-  border: 2px solid #090514;
+  background: var(--border-primary);
+  border: 2px solid var(--bg-secondary);
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00f5ff;
+  background: var(--border-secondary);
 }
 
-/* GTA Radar & City Map CSS Animations */
+/* =========================================
+   GTA RADAR ANIMATIONS
+   ========================================= */
 @keyframes radar-sweep {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes radar-pulse-ring {
-  0% {
-    r: 10px;
-    opacity: 0.9;
-    stroke-width: 3px;
-  }
-  100% {
-    r: 45px;
-    opacity: 0;
-    stroke-width: 1px;
-  }
+  0% { r: 10px; opacity: 0.9; stroke-width: 3px; }
+  100% { r: 45px; opacity: 0; stroke-width: 1px; }
 }
 
 @keyframes blip-beacon {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 4px currentColor);
-  }
-  50% {
-    transform: scale(1.18);
-    filter: drop-shadow(0 0 12px currentColor);
-  }
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px currentColor); }
+  50% { transform: scale(1.18); filter: drop-shadow(0 0 12px currentColor); }
 }
 
 @keyframes gps-line-flow {
-  to {
-    stroke-dashoffset: -40;
-  }
+  to { stroke-dashoffset: -40; }
 }
 
 @keyframes waypoint-bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes scanline-anim {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 100%;
-  }
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
 }
 
 .animate-radar-sweep {
@@ -357,6 +442,81 @@
 .animate-blip-beacon {
   animation: blip-beacon 2s ease-in-out infinite;
 }
+
+/* =========================================================
+   THEME TOGGLE BUTTON - RESPONSIVE
+   ========================================================= */
+
+   .theme-toggle-btn {
+    position: fixed !important;
+    top: 20px;
+    right: 20px;
+    bottom: auto;
+    left: auto;
+    z-index: 99999 !important;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 0 25px var(--shadow-glow-2) !important;
+    border-color: var(--border-secondary) !important;
+  }
+  
+  .theme-toggle-btn svg {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.5s ease;
+  }
+  
+  /* Mobile: Bottom-right, clearly visible */
+  @media (max-width: 768px) {
+    .theme-toggle-btn {
+      top: auto !important;
+      bottom: 80px !important;
+      right: 16px !important;
+      width: 44px;
+      height: 44px;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  
+    .theme-toggle-btn:hover,
+    .theme-toggle-btn:active {
+      transform: scale(1.1);
+    }
+  
+    .theme-toggle-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  /* Very small screens */
+  @media (max-width: 380px) {
+    .theme-toggle-btn {
+      bottom: 70px !important;
+      right: 12px !important;
+      width: 40px;
+      height: 40px;
+    }
+  
+    .theme-toggle-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
 /* =========================================================
    GTA CINEMATIC AMBIENT FX
    ========================================================= */
@@ -369,49 +529,31 @@
   border-radius: 50%;
   pointer-events: none;
   z-index: 2;
-
   background: radial-gradient(
     circle,
     rgba(0, 229, 255, 0.09) 0%,
     rgba(255, 111, 181, 0.045) 35%,
     transparent 70%
   );
-
   filter: blur(8px);
-
-  transition:
-    left 0.18s ease-out,
-    top 0.18s ease-out;
+  transition: left 0.18s ease-out, top 0.18s ease-out;
 }
-
-
-/* =========================================================
-   CINEMATIC SCANLINES
-   ========================================================= */
 
 .gta-scanlines {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 97;
-
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.025) 0px,
-      rgba(255, 255, 255, 0.025) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 4px
+  );
   opacity: 0.35;
   mix-blend-mode: overlay;
 }
-
-
-/* =========================================================
-   MOVING NEON GRID
-   ========================================================= */
 
 .gta-neon-grid {
   position: fixed;
@@ -419,49 +561,22 @@
   right: 0;
   bottom: 0;
   height: 45vh;
-
   pointer-events: none;
   z-index: 1;
-
   background-image:
-    linear-gradient(
-      rgba(0, 229, 255, 0.055) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 111, 181, 0.055) 1px,
-      transparent 1px
-    );
-
+    linear-gradient(rgba(0, 229, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 111, 181, 0.055) 1px, transparent 1px);
   background-size: 60px 60px;
-
   transform: perspective(500px) rotateX(58deg) scale(1.4);
   transform-origin: bottom center;
-
   opacity: 0.35;
-
   animation: gta-grid-move 8s linear infinite;
 }
 
 @keyframes gta-grid-move {
-  from {
-    background-position:
-      0 0,
-      0 0;
-  }
-
-  to {
-    background-position:
-      0 60px,
-      60px 0;
-  }
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 60px, 60px 0; }
 }
-
-
-/* =========================================================
-   FLOATING PARTICLES
-   ========================================================= */
 
 .gta-particle-field {
   position: fixed;
@@ -474,80 +589,46 @@
 .gta-particle {
   position: absolute;
   display: block;
-
   background: #00e5ff;
   border-radius: 50%;
-
-  box-shadow:
-    0 0 6px #00e5ff,
-    0 0 14px rgba(0, 229, 255, 0.65);
-
+  box-shadow: 0 0 6px #00e5ff, 0 0 14px rgba(0, 229, 255, 0.65);
   will-change: transform, opacity;
 }
-
-
-/* =========================================================
-   CINEMATIC VIGNETTE
-   ========================================================= */
 
 .gta-vignette {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 96;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 45%,
-      rgba(0, 0, 0, 0.12) 75%,
-      rgba(0, 0, 0, 0.42) 100%
-    );
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(0, 0, 0, 0.12) 75%,
+    rgba(0, 0, 0, 0.42) 100%
+  );
 }
-
-
-/* =========================================================
-   SCREEN FLICKER
-   ========================================================= */
 
 .gta-screen-flicker {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 98;
-
   background: #ffffff;
   mix-blend-mode: screen;
 }
-
-
-/* =========================================================
-   GTA NEON PULSE
-   ========================================================= */
 
 .gta-neon-pulse {
   animation: gta-neon-pulse 2s ease-in-out infinite;
 }
 
 @keyframes gta-neon-pulse {
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 rgba(0, 229, 255, 0),
-      0 0 0 rgba(255, 111, 181, 0);
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(0, 229, 255, 0), 0 0 0 rgba(255, 111, 181, 0);
   }
-
   50% {
-    box-shadow:
-      0 0 18px rgba(0, 229, 255, 0.35),
-      0 0 35px rgba(255, 111, 181, 0.15);
+    box-shadow: 0 0 18px rgba(0, 229, 255, 0.35), 0 0 35px rgba(255, 111, 181, 0.15);
   }
 }
-
-
-/* =========================================================
-   GTA HOLOGRAM EFFECT
-   ========================================================= */
 
 .gta-hologram {
   position: relative;
@@ -558,30 +639,87 @@
   content: '';
   position: absolute;
   inset: -100% 0;
-
-  background:
-    linear-gradient(
-      to bottom,
-      transparent,
-      rgba(0, 229, 255, 0.12),
-      transparent
-    );
-
+  background: linear-gradient(to bottom, transparent, rgba(0, 229, 255, 0.12), transparent);
   pointer-events: none;
-
   animation: gta-hologram-sweep 3.5s linear infinite;
 }
 
 @keyframes gta-hologram-sweep {
-  from {
-    transform: translateY(-50%);
-  }
-
-  to {
-    transform: translateY(50%);
-  }
+  from { transform: translateY(-50%); }
+  to { transform: translateY(50%); }
 }
 
+/* =========================================================
+   LIGHT THEME OVERRIDES
+   ========================================================= */
+
+[data-theme="light"] .comic-text-outline,
+[data-theme="light"] .comic-text-outline-cyan,
+[data-theme="light"] .comic-text-outline-yellow,
+[data-theme="light"] .text-cyan-outline {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+  -webkit-text-stroke: 0;
+}
+
+[data-theme="light"] .title-stroke,
+[data-theme="light"] .title-stroke-cyan {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .gta-shadow-black {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .gta-shadow-white {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .halftone-bg {
+  background-image: radial-gradient(circle at center, rgba(255, 0, 127, 0.06) 1.5px, transparent 1.5px);
+}
+
+[data-theme="light"] .grid-bg {
+  background-image: 
+    linear-gradient(rgba(0, 180, 216, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 180, 216, 0.06) 1px, transparent 1px);
+}
+
+[data-theme="light"] .gta-scanlines {
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="light"] .gta-vignette {
+  opacity: 0.2;
+}
+
+[data-theme="light"] .film-grain {
+  opacity: 0.02;
+}
+
+[data-theme="light"] .gta-neon-grid {
+  opacity: 0.12;
+}
+
+[data-theme="light"] .stamp-passed,
+[data-theme="light"] .stamp-progress,
+[data-theme="light"] .stamp-upcoming {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .gta-cursor-light {
+  background: radial-gradient(
+    circle,
+    rgba(0, 229, 255, 0.04) 0%,
+    rgba(255, 111, 181, 0.02) 35%,
+    transparent 70%
+  );
+}
+
+[data-theme="light"] .gta-screen-flicker {
+  opacity: 0;
+}
 
 /* =========================================================
    REDUCED MOTION ACCESSIBILITY
