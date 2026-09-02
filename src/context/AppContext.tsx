@@ -70,6 +70,7 @@ interface AppContextType {
     captainEmail: string,
     college: string
   ) => Team;
+
   joinTeamByCode: (
     code: string,
     uid: string,
@@ -77,11 +78,20 @@ interface AppContextType {
     email: string,
     college: string
   ) => { success: boolean; message: string; team?: Team };
+
   leaveTeam: (teamId: string, uid: string) => void;
-  updateTeamProject: (teamId: string, title: string, repo: string) => void;
+
+  updateTeamProject: (
+    teamId: string,
+    title: string,
+    repo: string
+  ) => void;
 
   // Contact / Fixer Dispatch
-  sendContactMessage: (msg: Omit<ContactMessage, 'id' | 'createdAt' | 'status'>) => void;
+  sendContactMessage: (
+    msg: Omit<ContactMessage, 'id' | 'createdAt' | 'status'>
+  ) => void;
+
   resolveMessage: (id: string) => void;
 
   // Master Reset
@@ -90,96 +100,327 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
+  children
+}) => {
+
+  /* ============================================================
+     COMPETITIONS
+     ============================================================ */
+
   const [competitions, setCompetitions] = useState<Competition[]>(() => {
     const saved = localStorage.getItem('vice_competitions');
-    return saved ? JSON.parse(saved) : INITIAL_COMPETITIONS;
+
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return INITIAL_COMPETITIONS;
+      }
+    }
+
+    return INITIAL_COMPETITIONS;
   });
+
+  /* ============================================================
+     TIMELINE
+     ============================================================ */
 
   const [timeline, setTimeline] = useState<TimelineEvent[]>(() => {
     const saved = localStorage.getItem('vice_timeline');
-    return saved ? JSON.parse(saved) : INITIAL_TIMELINE;
+
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return INITIAL_TIMELINE;
+      }
+    }
+
+    return INITIAL_TIMELINE;
   });
+
+  /* ============================================================
+     FAQ
+     ============================================================ */
 
   const [faqs, setFaqs] = useState<FAQItem[]>(() => {
     const saved = localStorage.getItem('vice_faqs');
-    return saved ? JSON.parse(saved) : INITIAL_FAQS;
+
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return INITIAL_FAQS;
+      }
+    }
+
+    return INITIAL_FAQS;
   });
+
+  /* ============================================================
+     PRIZES
+     
+     IMPORTANT:
+     Removes old Treasure Hunt data and updates:
+     BGMI       → ₹2,500
+     E-Football → ₹2,500
+     Hackathon  → ₹30,000
+     ============================================================ */
 
   const [prizes, setPrizes] = useState<PrizeCategory[]>(() => {
     const saved = localStorage.getItem('vice_prizes');
-    return saved ? JSON.parse(saved) : INITIAL_PRIZES;
+
+    // No old saved data → use new INITIAL_PRIZES
+    if (!saved) {
+      return INITIAL_PRIZES;
+    }
+
+    try {
+      const parsed = JSON.parse(saved) as PrizeCategory[];
+
+      /*
+       * Check whether the saved data is the old event configuration.
+       */
+      const hasTreasureHunt = parsed.some(
+        prize =>
+          prize.title?.toLowerCase().includes('treasure') ||
+          prize.subtitle?.toLowerCase().includes('treasure') ||
+          prize.description?.toLowerCase().includes('treasure')
+      );
+
+      /*
+       * If Treasure Hunt exists, completely replace the old
+       * prize configuration with the new official configuration.
+       */
+      if (hasTreasureHunt) {
+        return INITIAL_PRIZES;
+      }
+
+      /*
+       * Also check if the saved data does not contain exactly
+       * the three current prize categories.
+       */
+      const hasHackathon = parsed.some(prize =>
+        prize.title?.toLowerCase().includes('hackathon')
+      );
+
+      const hasBGMI = parsed.some(prize =>
+        prize.title?.toLowerCase().includes('bgmi')
+      );
+
+      const hasEFootball = parsed.some(prize => {
+        const title = prize.title?.toLowerCase() || '';
+
+        return (
+          title.includes('e-football') ||
+          title.includes('efootball') ||
+          title.includes('fifa')
+        );
+      });
+
+      /*
+       * If any required prize is missing,
+       * use the official INITIAL_PRIZES.
+       */
+      if (!hasHackathon || !hasBGMI || !hasEFootball) {
+        return INITIAL_PRIZES;
+      }
+
+      /*
+       * Update existing saved data to the new amounts.
+       */
+      return parsed.map(prize => {
+        const title = prize.title?.toLowerCase() || '';
+
+        // BGMI → ₹2,500
+        if (title.includes('bgmi')) {
+          return {
+            ...prize,
+            amount: '₹2,500',
+            numericalAmount: 2500
+          };
+        }
+
+        // E-Football → ₹2,500
+        if (
+          title.includes('e-football') ||
+          title.includes('efootball') ||
+          title.includes('fifa')
+        ) {
+          return {
+            ...prize,
+            title: 'E-Football',
+            amount: '₹2,500',
+            numericalAmount: 2500
+          };
+        }
+
+        // Hackathon → ₹30,000
+        if (title.includes('hackathon')) {
+          return {
+            ...prize,
+            amount: '₹30,000',
+            numericalAmount: 30000
+          };
+        }
+
+        return prize;
+      });
+
+    } catch {
+      return INITIAL_PRIZES;
+    }
   });
+
+  /* ============================================================
+     TEAMS
+     ============================================================ */
 
   const [teams, setTeams] = useState<Team[]>(() => {
     const saved = localStorage.getItem('vice_teams');
-    return saved ? JSON.parse(saved) : SAMPLE_TEAMS;
+
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return SAMPLE_TEAMS;
+      }
+    }
+
+    return SAMPLE_TEAMS;
   });
+
+  /* ============================================================
+     CONTACT MESSAGES
+     ============================================================ */
 
   const [messages, setMessages] = useState<ContactMessage[]>(() => {
     const saved = localStorage.getItem('vice_messages');
-    return saved ? JSON.parse(saved) : [
+
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return [];
+      }
+    }
+
+    return [
       {
         id: 'msg-1',
         name: 'Ken Rosenberg',
         codename: 'The Fixer',
         email: 'rosenberg@vice.law',
         topic: 'Hardware Tap Clearance',
-        message: 'Tommy, I secured the 10Gbps dedicated switch for the Data Vault. Keep the cops off the frequency!',
+        message:
+          'Tommy, I secured the 10Gbps dedicated switch for the Data Vault. Keep the cops off the frequency!',
         createdAt: '2025-05-10',
         status: 'unread'
       }
     ];
   });
 
-  const [soundEnabled, setSoundState] = useState<boolean>(() => getSoundEnabled());
-  const [missionBanner, setMissionBanner] = useState<MissionPassedBanner | null>(null);
+  /* ============================================================
+     SOUND
+     ============================================================ */
 
-  // Sync state to localStorage
+  const [soundEnabled, setSoundState] = useState<boolean>(() =>
+    getSoundEnabled()
+  );
+
+  const [missionBanner, setMissionBanner] =
+    useState<MissionPassedBanner | null>(null);
+
+  /* ============================================================
+     LOCAL STORAGE SYNC
+     ============================================================ */
+
   useEffect(() => {
-    localStorage.setItem('vice_competitions', JSON.stringify(competitions));
+    localStorage.setItem(
+      'vice_competitions',
+      JSON.stringify(competitions)
+    );
   }, [competitions]);
 
   useEffect(() => {
-    localStorage.setItem('vice_timeline', JSON.stringify(timeline));
+    localStorage.setItem(
+      'vice_timeline',
+      JSON.stringify(timeline)
+    );
   }, [timeline]);
 
   useEffect(() => {
-    localStorage.setItem('vice_faqs', JSON.stringify(faqs));
+    localStorage.setItem(
+      'vice_faqs',
+      JSON.stringify(faqs)
+    );
   }, [faqs]);
 
   useEffect(() => {
-    localStorage.setItem('vice_prizes', JSON.stringify(prizes));
+    localStorage.setItem(
+      'vice_prizes',
+      JSON.stringify(prizes)
+    );
   }, [prizes]);
 
   useEffect(() => {
-    localStorage.setItem('vice_teams', JSON.stringify(teams));
+    localStorage.setItem(
+      'vice_teams',
+      JSON.stringify(teams)
+    );
   }, [teams]);
 
   useEffect(() => {
-    localStorage.setItem('vice_messages', JSON.stringify(messages));
+    localStorage.setItem(
+      'vice_messages',
+      JSON.stringify(messages)
+    );
   }, [messages]);
+
+  /* ============================================================
+     SOUND TOGGLE
+     ============================================================ */
 
   const toggleSound = () => {
     const next = !soundEnabled;
+
     setSoundState(next);
     setAudioSetting(next);
+
     if (next) {
       playClickSound();
     }
   };
 
-  const triggerMissionPassed = (title = 'MISSION PASSED!', subtitle = 'DIRECTIVE SECURED • RESPECT +') => {
-    playMissionPassedSound();
-    setMissionBanner({ show: true, title, subtitle });
+  /* ============================================================
+     MISSION PASSED
+     ============================================================ */
 
-    // Blast celebratory GTA neon confetti
+  const triggerMissionPassed = (
+    title = 'MISSION PASSED!',
+    subtitle = 'DIRECTIVE SECURED • RESPECT +'
+  ) => {
+    playMissionPassedSound();
+
+    setMissionBanner({
+      show: true,
+      title,
+      subtitle
+    });
+
     try {
       confetti({
         particleCount: 80,
         spread: 90,
         origin: { y: 0.6 },
-        colors: ['#FF6FB5', '#00E5FF', '#FFD54F', '#000000', '#FFFFFF']
+        colors: [
+          '#FF6FB5',
+          '#00E5FF',
+          '#FFD54F',
+          '#000000',
+          '#FFFFFF'
+        ]
       });
     } catch (e) {
       console.warn('Confetti trigger error', e);
@@ -194,95 +435,186 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setMissionBanner(null);
   };
 
-  // Competition CRUD
+  /* ============================================================
+     COMPETITION CRUD
+     ============================================================ */
+
   const addCompetition = (comp: Omit<Competition, 'id'>) => {
     const newComp: Competition = {
       ...comp,
       id: `comp-${Date.now()}`
     };
+
     setCompetitions(prev => [newComp, ...prev]);
-    triggerMissionPassed('COMPETITION CREATED!', 'NEW SECTOR CONTRACT UNLOCKED');
+
+    triggerMissionPassed(
+      'COMPETITION CREATED!',
+      'NEW SECTOR CONTRACT UNLOCKED'
+    );
   };
 
-  const updateCompetition = (id: string, updated: Partial<Competition>) => {
+  const updateCompetition = (
+    id: string,
+    updated: Partial<Competition>
+  ) => {
     setCompetitions(prev =>
-      prev.map(c => (c.id === id ? { ...c, ...updated } : c))
+      prev.map(c =>
+        c.id === id
+          ? { ...c, ...updated }
+          : c
+      )
     );
+
     playClickSound();
   };
 
   const deleteCompetition = (id: string) => {
-    setCompetitions(prev => prev.filter(c => c.id !== id));
+    setCompetitions(prev =>
+      prev.filter(c => c.id !== id)
+    );
+
     playClickSound();
   };
 
-  // Timeline CRUD
-  const addTimelineEvent = (event: Omit<TimelineEvent, 'id'>) => {
+  /* ============================================================
+     TIMELINE CRUD
+     ============================================================ */
+
+  const addTimelineEvent = (
+    event: Omit<TimelineEvent, 'id'>
+  ) => {
     const newEvent: TimelineEvent = {
       ...event,
       id: `event-${Date.now()}`
     };
-    setTimeline(prev => [...prev, newEvent]);
-    triggerMissionPassed('TIMELINE UPDATED!', 'MISSION LOG REGISTERED');
+
+    setTimeline(prev => [
+      ...prev,
+      newEvent
+    ]);
+
+    triggerMissionPassed(
+      'TIMELINE UPDATED!',
+      'MISSION LOG REGISTERED'
+    );
   };
 
-  const updateTimelineEvent = (id: string, updated: Partial<TimelineEvent>) => {
+  const updateTimelineEvent = (
+    id: string,
+    updated: Partial<TimelineEvent>
+  ) => {
     setTimeline(prev =>
-      prev.map(t => (t.id === id ? { ...t, ...updated } : t))
+      prev.map(t =>
+        t.id === id
+          ? { ...t, ...updated }
+          : t
+      )
     );
+
     playClickSound();
   };
 
   const deleteTimelineEvent = (id: string) => {
-    setTimeline(prev => prev.filter(t => t.id !== id));
+    setTimeline(prev =>
+      prev.filter(t => t.id !== id)
+    );
+
     playClickSound();
   };
 
-  // FAQ CRUD
-  const addFAQ = (faq: Omit<FAQItem, 'id'>) => {
+  /* ============================================================
+     FAQ CRUD
+     ============================================================ */
+
+  const addFAQ = (
+    faq: Omit<FAQItem, 'id'>
+  ) => {
     const newFaq: FAQItem = {
       ...faq,
       id: `faq-${Date.now()}`
     };
-    setFaqs(prev => [...prev, newFaq]);
+
+    setFaqs(prev => [
+      ...prev,
+      newFaq
+    ]);
+
     playClickSound();
   };
 
-  const updateFAQ = (id: string, updated: Partial<FAQItem>) => {
+  const updateFAQ = (
+    id: string,
+    updated: Partial<FAQItem>
+  ) => {
     setFaqs(prev =>
-      prev.map(f => (f.id === id ? { ...f, ...updated } : f))
+      prev.map(f =>
+        f.id === id
+          ? { ...f, ...updated }
+          : f
+      )
     );
+
     playClickSound();
   };
 
   const deleteFAQ = (id: string) => {
-    setFaqs(prev => prev.filter(f => f.id !== id));
-    playClickSound();
-  };
-
-  // Prize CRUD
-  const updatePrizeCategory = (id: string, prize: Partial<PrizeCategory>) => {
-    setPrizes(prev =>
-      prev.map(p => (p.id === id ? { ...p, ...prize } : p))
+    setFaqs(prev =>
+      prev.filter(f => f.id !== id)
     );
+
     playClickSound();
   };
 
-  const addPrizeCategory = (prize: Omit<PrizeCategory, 'id'>) => {
+  /* ============================================================
+     PRIZE CRUD
+     ============================================================ */
+
+  const updatePrizeCategory = (
+    id: string,
+    prize: Partial<PrizeCategory>
+  ) => {
+    setPrizes(prev =>
+      prev.map(p =>
+        p.id === id
+          ? { ...p, ...prize }
+          : p
+      )
+    );
+
+    playClickSound();
+  };
+
+  const addPrizeCategory = (
+    prize: Omit<PrizeCategory, 'id'>
+  ) => {
     const newPrize: PrizeCategory = {
       ...prize,
       id: `prize-${Date.now()}`
     };
-    setPrizes(prev => [...prev, newPrize]);
-    triggerMissionPassed('BOUNTY POSTED!', 'PRIZE POOL EXPANDED');
+
+    setPrizes(prev => [
+      ...prev,
+      newPrize
+    ]);
+
+    triggerMissionPassed(
+      'BOUNTY POSTED!',
+      'PRIZE POOL EXPANDED'
+    );
   };
 
   const deletePrizeCategory = (id: string) => {
-    setPrizes(prev => prev.filter(p => p.id !== id));
+    setPrizes(prev =>
+      prev.filter(p => p.id !== id)
+    );
+
     playClickSound();
   };
 
-  // Team Management
+  /* ============================================================
+     TEAM MANAGEMENT
+     ============================================================ */
+
   const createTeam = (
     competitionId: string,
     teamName: string,
@@ -291,17 +623,27 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     captainEmail: string,
     college: string
   ): Team => {
-    const comp = competitions.find(c => c.id === competitionId);
-    const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+
+    const comp = competitions.find(
+      c => c.id === competitionId
+    );
+
+    const code = Math.random()
+      .toString(36)
+      .substring(2, 8)
+      .toUpperCase();
+
     const newTeam: Team = {
       id: `team-${Date.now()}`,
       code,
       name: teamName,
       competitionId,
-      competitionTitle: comp?.title || 'Unknown Competition',
+      competitionTitle:
+        comp?.title || 'Unknown Competition',
       captainId: captainUid,
       captainName,
       captainEmail,
+
       members: [
         {
           uid: captainUid,
@@ -309,16 +651,34 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           email: captainEmail,
           college,
           role: 'captain',
-          joinedAt: new Date().toISOString().split('T')[0]
+          joinedAt:
+            new Date()
+              .toISOString()
+              .split('T')[0]
         }
       ],
-      maxMembers: comp?.teamSize || 4,
+
+      maxMembers:
+        comp?.teamSize || 4,
+
       status: 'recruiting',
-      createdAt: new Date().toISOString().split('T')[0]
+
+      createdAt:
+        new Date()
+          .toISOString()
+          .split('T')[0]
     };
 
-    setTeams(prev => [newTeam, ...prev]);
-    triggerMissionPassed('CREW ASSEMBLED!', `SYNDICATE CODE: ${code}`);
+    setTeams(prev => [
+      newTeam,
+      ...prev
+    ]);
+
+    triggerMissionPassed(
+      'CREW ASSEMBLED!',
+      `SYNDICATE CODE: ${code}`
+    );
+
     return newTeam;
   };
 
@@ -329,15 +689,42 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     email: string,
     college: string
   ) => {
-    const team = teams.find(t => t.code.toUpperCase() === code.trim().toUpperCase());
+
+    const team = teams.find(
+      t =>
+        t.code.toUpperCase() ===
+        code.trim().toUpperCase()
+    );
+
     if (!team) {
-      return { success: false, message: 'Invalid Crew Syndicate Code! Check with your captain.' };
+      return {
+        success: false,
+        message:
+          'Invalid Crew Syndicate Code! Check with your captain.'
+      };
     }
-    if (team.members.some(m => m.uid === uid)) {
-      return { success: false, message: 'You are already an operative in this crew.' };
+
+    if (
+      team.members.some(
+        m => m.uid === uid
+      )
+    ) {
+      return {
+        success: false,
+        message:
+          'You are already an operative in this crew.'
+      };
     }
-    if (team.members.length >= team.maxMembers) {
-      return { success: false, message: 'Crew roster is already at maximum capacity.' };
+
+    if (
+      team.members.length >=
+      team.maxMembers
+    ) {
+      return {
+        success: false,
+        message:
+          'Crew roster is already at maximum capacity.'
+      };
     }
 
     const updatedMembers = [
@@ -348,87 +735,250 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         email,
         college,
         role: 'member' as const,
-        joinedAt: new Date().toISOString().split('T')[0]
+        joinedAt:
+          new Date()
+            .toISOString()
+            .split('T')[0]
       }
     ];
 
-    const isFull = updatedMembers.length >= team.maxMembers;
+    const isFull =
+      updatedMembers.length >=
+      team.maxMembers;
+
     const updatedTeam: Team = {
       ...team,
       members: updatedMembers,
-      status: isFull ? 'ready' : 'recruiting'
+      status: isFull
+        ? 'ready'
+        : 'recruiting'
     };
 
-    setTeams(prev => prev.map(t => (t.id === team.id ? updatedTeam : t)));
-    triggerMissionPassed('JOINED CREW!', `INFILTRATED ${team.name.toUpperCase()}`);
-    return { success: true, message: `Successfully joined ${team.name}!`, team: updatedTeam };
+    setTeams(prev =>
+      prev.map(t =>
+        t.id === team.id
+          ? updatedTeam
+          : t
+      )
+    );
+
+    triggerMissionPassed(
+      'JOINED CREW!',
+      `INFILTRATED ${team.name.toUpperCase()}`
+    );
+
+    return {
+      success: true,
+      message:
+        `Successfully joined ${team.name}!`,
+      team: updatedTeam
+    };
   };
 
-  const leaveTeam = (teamId: string, uid: string) => {
+  const leaveTeam = (
+    teamId: string,
+    uid: string
+  ) => {
+
     playClickSound();
+
     setTeams(prev =>
       prev
         .map(t => {
-          if (t.id !== teamId) return t;
-          const filtered = t.members.filter(m => m.uid !== uid);
-          if (filtered.length === 0) return null; // Team dissolved
-          // If captain left, promote next
-          if (t.captainId === uid && filtered.length > 0) {
-            filtered[0].role = 'captain';
+
+          if (t.id !== teamId) {
+            return t;
+          }
+
+          const filtered =
+            t.members.filter(
+              m => m.uid !== uid
+            );
+
+          // Team dissolved
+          if (filtered.length === 0) {
+            return null;
+          }
+
+          // Captain leaves
+          if (
+            t.captainId === uid &&
+            filtered.length > 0
+          ) {
+
+            filtered[0].role =
+              'captain';
+
             return {
               ...t,
-              captainId: filtered[0].uid,
-              captainName: filtered[0].displayName,
-              captainEmail: filtered[0].email,
+
+              captainId:
+                filtered[0].uid,
+
+              captainName:
+                filtered[0].displayName,
+
+              captainEmail:
+                filtered[0].email,
+
               members: filtered,
-              status: 'recruiting' as const
+
+              status:
+                'recruiting' as const
             };
           }
+
           return {
             ...t,
             members: filtered,
-            status: 'recruiting' as const
+            status:
+              'recruiting' as const
           };
         })
-        .filter((t): t is Team => t !== null)
+        .filter(
+          (t): t is Team =>
+            t !== null
+        )
     );
   };
 
-  const updateTeamProject = (teamId: string, title: string, repo: string) => {
+  const updateTeamProject = (
+    teamId: string,
+    title: string,
+    repo: string
+  ) => {
+
     setTeams(prev =>
       prev.map(t =>
-        t.id === teamId ? { ...t, projectTitle: title, projectRepo: repo, status: 'submitted' } : t
+        t.id === teamId
+          ? {
+              ...t,
+              projectTitle: title,
+              projectRepo: repo,
+              status: 'submitted'
+            }
+          : t
       )
     );
-    triggerMissionPassed('PAYLOAD UPLOADED!', 'FINAL SUBMISSION RECORDED');
+
+    triggerMissionPassed(
+      'PAYLOAD UPLOADED!',
+      'FINAL SUBMISSION RECORDED'
+    );
   };
 
-  const sendContactMessage = (msg: Omit<ContactMessage, 'id' | 'createdAt' | 'status'>) => {
+  /* ============================================================
+     CONTACT / FIXER
+     ============================================================ */
+
+  const sendContactMessage = (
+    msg: Omit<
+      ContactMessage,
+      'id' | 'createdAt' | 'status'
+    >
+  ) => {
+
     const newMsg: ContactMessage = {
       ...msg,
+
       id: `msg-${Date.now()}`,
-      createdAt: new Date().toISOString().split('T')[0],
+
+      createdAt:
+        new Date()
+          .toISOString()
+          .split('T')[0],
+
       status: 'unread'
     };
-    setMessages(prev => [newMsg, ...prev]);
-    triggerMissionPassed('DISPATCH TRANSMITTED!', 'OUR FIXERS HAVE RECEIVED YOUR FREQUENCY');
+
+    setMessages(prev => [
+      newMsg,
+      ...prev
+    ]);
+
+    triggerMissionPassed(
+      'DISPATCH TRANSMITTED!',
+      'OUR FIXERS HAVE RECEIVED YOUR FREQUENCY'
+    );
   };
 
   const resolveMessage = (id: string) => {
+
     setMessages(prev =>
-      prev.map(m => (m.id === id ? { ...m, status: 'resolved' } : m))
+      prev.map(m =>
+        m.id === id
+          ? {
+              ...m,
+              status: 'resolved'
+            }
+          : m
+      )
     );
+
     playClickSound();
   };
 
+  /* ============================================================
+     MASTER RESET
+     ============================================================ */
+
   const resetToDefaults = () => {
-    setCompetitions(INITIAL_COMPETITIONS);
-    setTimeline(INITIAL_TIMELINE);
-    setFaqs(INITIAL_FAQS);
-    setPrizes(INITIAL_PRIZES);
-    setTeams(SAMPLE_TEAMS);
-    triggerMissionPassed('SYSTEM PURGED!', 'RESET TO FACTORY DIRECTIVES');
+
+    setCompetitions(
+      INITIAL_COMPETITIONS
+    );
+
+    setTimeline(
+      INITIAL_TIMELINE
+    );
+
+    setFaqs(
+      INITIAL_FAQS
+    );
+
+    setPrizes(
+      INITIAL_PRIZES
+    );
+
+    setTeams(
+      SAMPLE_TEAMS
+    );
+
+    // Explicitly update localStorage immediately
+    localStorage.setItem(
+      'vice_competitions',
+      JSON.stringify(INITIAL_COMPETITIONS)
+    );
+
+    localStorage.setItem(
+      'vice_timeline',
+      JSON.stringify(INITIAL_TIMELINE)
+    );
+
+    localStorage.setItem(
+      'vice_faqs',
+      JSON.stringify(INITIAL_FAQS)
+    );
+
+    localStorage.setItem(
+      'vice_prizes',
+      JSON.stringify(INITIAL_PRIZES)
+    );
+
+    localStorage.setItem(
+      'vice_teams',
+      JSON.stringify(SAMPLE_TEAMS)
+    );
+
+    triggerMissionPassed(
+      'SYSTEM PURGED!',
+      'RESET TO FACTORY DIRECTIVES'
+    );
   };
+
+  /* ============================================================
+     PROVIDER
+     ============================================================ */
 
   return (
     <AppContext.Provider
@@ -439,29 +989,45 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         prizes,
         teams,
         messages,
+
         soundEnabled,
         toggleSound,
+
         missionBanner,
         triggerMissionPassed,
         closeMissionBanner,
+
+        // Competition
         addCompetition,
         updateCompetition,
         deleteCompetition,
+
+        // Timeline
         addTimelineEvent,
         updateTimelineEvent,
         deleteTimelineEvent,
+
+        // FAQ
         addFAQ,
         updateFAQ,
         deleteFAQ,
+
+        // Prize
         updatePrizeCategory,
         addPrizeCategory,
         deletePrizeCategory,
+
+        // Teams
         createTeam,
         joinTeamByCode,
         leaveTeam,
         updateTeamProject,
+
+        // Contact
         sendContactMessage,
         resolveMessage,
+
+        // Reset
         resetToDefaults
       }}
     >
@@ -472,8 +1038,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
 export const useApp = () => {
   const context = useContext(AppContext);
+
   if (!context) {
-    throw new Error('useApp must be used within an AppProvider');
+    throw new Error(
+      'useApp must be used within an AppProvider'
+    );
   }
+
   return context;
 };

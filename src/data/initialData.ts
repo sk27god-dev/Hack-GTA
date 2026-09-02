@@ -18,6 +18,10 @@ import {
  * 1. TECHNOVA HACKATHON
  * 2. BATTLEZONE
  *
+ * Battlezone Events:
+ * 1. BGMI
+ * 2. FIFA MOBILE / E-FOOTBALL
+ *
  * ============================================================
  */
 
@@ -138,17 +142,15 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     category: 'Battlezone',
 
     description:
-      'The gaming arena of TECHNOVA 4.0 featuring Treasure Hunt, BGMI and FIFA Mobile / E-Football. Pick your battlefield and fight your way to the top.',
+      'The gaming arena of TECHNOVA 4.0 featuring BGMI and FIFA Mobile / E-Football. Pick your battlefield and fight your way to the top.',
 
     rules: [
       'Participants must register for their selected Battlezone event.',
       'BGMI is a solo competition.',
       'FIFA Mobile / E-Football is a solo competition.',
-      'Treasure Hunt requires a team of 3–4 participants.',
       'Participants must follow the event-specific rules announced by the organisers.',
       'Any form of cheating or unfair play will result in disqualification.'
     ],
-
 
     judgingCriteria: [],
 
@@ -167,9 +169,9 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     teamSizeMin: 1,
 
-    teamSizeMax: 4,
+    teamSizeMax: 1,
 
-    teamSizeLabel: 'SOLO / 3–4 TREASURE HUNT',
+    teamSizeLabel: 'SOLO EVENTS',
 
     image: '/assets/images/cyber.jpg',
 
@@ -178,11 +180,10 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     colorAccent: 'pink',
 
     tags: [
-      'TREASURE HUNT — ₹2,000',
-      'BGMI — ₹1,500',
-      'E-FOOTBALL — ₹1,500',
-      'SOLO EVENTS',
-      'TREASURE HUNT 3–4'
+      'BGMI — ₹2,500',
+      'E-FOOTBALL — ₹2,500',
+      '₹5,000 TOTAL PRIZE POOL',
+      'SOLO EVENTS'
     ],
 
     registrationUrl:
@@ -275,7 +276,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
     location: 'TECHNOVA 4.0',
 
     description:
-      'Treasure Hunt, BGMI and FIFA Mobile / E-Football competitions take place during the event.',
+      'BGMI and FIFA Mobile / E-Football competitions take place during the event.',
 
     status: 'upcoming',
 
@@ -379,22 +380,11 @@ export const INITIAL_FAQS: FAQItem[] = [
     question: 'What events are included in Battlezone?',
 
     answer:
-      'Battlezone includes Treasure Hunt, BGMI and FIFA Mobile / E-Football.',
+      'Battlezone includes BGMI and FIFA Mobile / E-Football.',
 
     category: 'Registration',
 
     featured: true
-  },
-
-  {
-    id: 'faq-treasure-team',
-
-    question: 'What is the Treasure Hunt team size?',
-
-    answer:
-      'Treasure Hunt teams must have 3 to 4 participants.',
-
-    category: 'Rules & Loadout'
   },
 
   {
@@ -414,7 +404,7 @@ export const INITIAL_FAQS: FAQItem[] = [
     question: 'What are the prizes?',
 
     answer:
-      'The Hackathon has a ₹30,000 prize pool. Battlezone has ₹2,000 for Treasure Hunt and ₹1,500 each for BGMI and FIFA Mobile / E-Football.',
+      'The Hackathon has a ₹30,000 prize pool. Battlezone has ₹2,500 each for BGMI and FIFA Mobile / E-Football, making the total Battlezone prize pool ₹5,000.',
 
     category: 'Prizes & Crypto',
 
@@ -451,43 +441,20 @@ export const INITIAL_PRIZES: PrizeCategory[] = [
   },
 
   {
-    id: 'treasure-prize',
-
-    title: 'TREASURE HUNT',
-
-    subtitle: 'BATTLEZONE',
-
-    amount: '₹2,000',
-
-    numericalAmount: 2000,
-
-    icon: '🗺️',
-
-    description:
-      '₹2,000 prize pool for the Battlezone Treasure Hunt.',
-
-    badgeBg: '#FFD54F',
-
-    badgeText: '#000000',
-
-    accentColor: 'yellow'
-  },
-
-  {
     id: 'bgmi-prize',
 
     title: 'BGMI',
 
     subtitle: 'BATTLEZONE • SOLO',
 
-    amount: '₹1,500',
+    amount: '₹2,500',
 
-    numericalAmount: 1500,
+    numericalAmount: 2500,
 
     icon: '🎮',
 
     description:
-      '₹1,500 prize pool for the individual BGMI competition.',
+      '₹2,500 prize pool for the individual BGMI competition.',
 
     badgeBg: '#FF6FB5',
 
@@ -503,14 +470,14 @@ export const INITIAL_PRIZES: PrizeCategory[] = [
 
     subtitle: 'BATTLEZONE • SOLO',
 
-    amount: '₹1,500',
+    amount: '₹2,500',
 
-    numericalAmount: 1500,
+    numericalAmount: 2500,
 
     icon: '⚽',
 
     description:
-      '₹1,500 prize pool for the individual FIFA Mobile / E-Football competition.',
+      '₹2,500 prize pool for the individual FIFA Mobile / E-Football competition.',
 
     badgeBg: '#00E5FF',
 

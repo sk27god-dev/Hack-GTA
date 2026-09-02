@@ -1,6 +1,13 @@
 import React, { useEffect } from 'react';
 import { useApp } from '../context/AppContext';
-import { Trophy, Award, Sparkles, DollarSign, Crown, Zap, Shield, Gift, CheckCircle2 } from 'lucide-react';
+import {
+  Trophy,
+  Gamepad2,
+  Goal,
+  Sparkles,
+  Crown,
+  Zap
+} from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { playClickSound, playHoverSound } from '../utils/audio';
@@ -8,241 +15,427 @@ import { playClickSound, playHoverSound } from '../utils/audio';
 gsap.registerPlugin(ScrollTrigger);
 
 export const PrizesPage: React.FC = () => {
-  const { prizes, triggerMissionPassed } = useApp();
+  const { prizes } = useApp();
 
   useEffect(() => {
-    // Stagger reveal for polaroids
-    gsap.fromTo(
-      '.polaroid',
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.polaroid',
-          start: 'top 88%',
-          toggleActions: 'play none none none',
+    const ctx = gsap.context(() => {
+      // Header animation
+      gsap.fromTo(
+        '.prize-header',
+        {
+          opacity: 0,
+          y: 35
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out'
         }
-      }
-    );
+      );
 
-    // Stagger reveal for category awards
-    gsap.fromTo(
-      '[id^="bounty-card-"]',
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '[id^="bounty-card-"]',
-          start: 'top 88%',
-          toggleActions: 'play none none none',
+      // Main hackathon prize
+      gsap.fromTo(
+        '.main-prize-card',
+        {
+          opacity: 0,
+          y: 60,
+          scale: 0.96
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          delay: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.main-prize-card',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
         }
-      }
-    );
+      );
+
+      // Battlezone cards
+      gsap.fromTo(
+        '.battle-prize-card',
+        {
+          opacity: 0,
+          y: 50
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.battle-prizes-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ctx.revert();
     };
   }, []);
 
+  /*
+   * Only use the three official prizes.
+   * This also protects the page if an old localStorage entry
+   * somehow contains outdated prize categories.
+   */
+  const officialPrizes = prizes.filter(prize => {
+    const title = prize.title.toLowerCase();
+
+    return (
+      title.includes('hackathon') ||
+      title.includes('bgmi') ||
+      title.includes('e-football') ||
+      title.includes('efootball') ||
+      title.includes('fifa')
+    );
+  });
+
+  const hackathonPrize =
+    officialPrizes.find(prize =>
+      prize.title.toLowerCase().includes('hackathon')
+    );
+
+  const bgmiPrize =
+    officialPrizes.find(prize =>
+      prize.title.toLowerCase().includes('bgmi')
+    );
+
+  const eFootballPrize =
+    officialPrizes.find(prize => {
+      const title = prize.title.toLowerCase();
+
+      return (
+        title.includes('e-football') ||
+        title.includes('efootball') ||
+        title.includes('fifa')
+      );
+    });
+
+  const totalPrize = 35000;
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-12">
-      {/* 1. Grand Payday Marquee Header */}
-      <div className="bg-[#110925]/75 border border-[#ff007f]/30 p-5 sm:p-10 text-center relative overflow-hidden rounded-lg shadow-[0_0_20px_rgba(255,0,127,0.2)]">
-        <div className="absolute inset-0 halftone-bg opacity-10" />
-        <div className="bullet-hole top-4 left-6 hidden sm:block" />
-        <div className="bullet-hole bottom-4 right-6 hidden sm:block" />
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-10 sm:space-y-14">
 
-        <div className="relative z-10 max-w-4xl mx-auto space-y-2.5 sm:space-y-3">
-          <div className="inline-block bg-[#ff007f]/20 text-[#ff007f] border border-[#ff007f]/35 px-3 sm:px-4 py-1 font-headline text-sm sm:text-xl tracking-widest transform -rotate-1 rounded">
-            <Sparkles className="w-4 h-4 inline-block mr-1 text-[#ffe600]" />
-            SECURED SYNDICATE ESCROW POOL
-          </div>
+      {/* ============================================================
+          HEADER
+          ============================================================ */}
 
-          <h1 className="font-headline text-4xl xs:text-5xl sm:text-7xl md:text-8xl text-white drop-shadow-[0_0_15px_rgba(255,0,127,0.85)] leading-none">
-            THE <span className="text-[#ffe600]">PAYDAY</span>
-          </h1>
+      <section className="prize-header">
+        <div className="relative overflow-hidden rounded-xl border border-[#ff007f]/40 bg-[#110925]/85 shadow-[0_0_30px_rgba(255,0,127,0.18)]">
 
-          <div className="bg-black/60 border border-[#00f5ff]/45 p-3 sm:p-4 max-w-xl mx-auto rounded shadow-[0_0_15px_rgba(0,245,255,0.25)]">
-            <span className="block text-[10px] sm:text-xs font-bold text-[#00f5ff] uppercase tracking-widest mb-0.5">
-              GUARANTEED TOTAL BOUNTY POOL
-            </span>
-            <span className="font-headline text-3xl xs:text-4xl sm:text-6xl text-[#ffe600] tracking-wide block leading-none drop-shadow-[0_0_10px_rgba(255,230,0,0.35)]">
-              ₹35,000
-            </span>
-          </div>
+          {/* Background effects */}
+          <div className="absolute inset-0 halftone-bg opacity-10" />
 
-          <p className="text-xs sm:text-sm text-zinc-355 font-medium max-w-2xl mx-auto pt-1 sm:pt-2">
-            Disbursed immediately following the Grand Closing ceremony at The Palms Amphitheater.
-            Wire transfer, certified check, or decentralized stablecoin settlement available.
-          </p>
-        </div>
-      </div>
+          <div className="absolute -top-24 -left-24 w-64 h-64 bg-[#ff007f]/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-[#00f5ff]/10 rounded-full blur-3xl" />
 
-      {/* 2. Top 3 Podium Cards (Polaroid 3D Frames) */}
-      <section className="space-y-4 sm:space-y-6">
-        <div className="text-center">
-          <h2 className="font-headline text-3xl sm:text-5xl text-white drop-shadow-[0_0_8px_rgba(255,0,127,0.3)]">
-            GRAND TOURNAMENT PODIUM
-          </h2>
-          <p className="font-marker text-xs sm:text-sm text-[#ff007f]">
-            Overall General Standings Across All Tracks
-          </p>
-        </div>
+          <div className="relative z-10 text-center px-5 py-10 sm:px-10 sm:py-14">
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 pt-2 sm:pt-4 items-end">
-          {/* 2nd Place: Silver Runner Up */}
-          <div className="order-2 md:order-1 polaroid bg-[#110925]/75 border border-[#00f5ff]/30 text-white p-4 rounded-lg shadow-[0_0_15px_rgba(0,245,255,0.15)] hover:border-[#00f5ff] hover:shadow-[0_0_20px_rgba(0,245,255,0.3)] transition-all transform -rotate-1 hover:rotate-0">
-            <div className="relative border border-slate-700/60 overflow-hidden mb-3 rounded">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJPHfJquAUlkYaW2BlDh3xIutd2oUsjauq9wnywyUgpMdyBIJBKczISQ7hxisHPREho3JewnktQ7fJcFCtkqv3kf8a7uCvIu6cDXkFW0IdbuUdZIqxt-hPmpMGtUgCCWXSEC1Nz5rxanLbJbw8H119QdHy68mz-KhYW9yEY5ndzFRryqZj_MvouMegf_WuS8bkQG5Dpar6DGn2fEdzHapYKNPDvAzAmergIaLrtxyfusCaeM0R6NBm"
-                alt="2nd Place Trophy"
-                className="w-full h-48 sm:h-64 object-cover rounded"
-              />
-              <div className="absolute top-2 left-2 bg-[#87ceeb]/25 border border-[#87ceeb]/40 text-[#87ceeb] font-headline text-base sm:text-lg px-2.5 py-0.5 rounded">
-                2ND PLACE
-              </div>
-            </div>
-            <div className="text-center space-y-1">
-              <h3 className="font-headline text-2xl sm:text-3xl text-white">THE CONSIGLIERE</h3>
-              <span className="font-headline text-3xl sm:text-4xl text-[#00f5ff] block font-bold">₹10,000</span>
-              <p className="text-xs text-zinc-350 font-medium">
-                Silver Cup + Fast-Track Venture Incubator Access + Cloud Infrastructure Credits.
-              </p>
-            </div>
-          </div>
+            <div className="inline-flex items-center gap-2 bg-[#00f5ff]/10 border border-[#00f5ff]/40 text-[#00f5ff] px-3 sm:px-5 py-1.5 rounded mb-4 transform -rotate-1">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
 
-          {/* 1st Place: Grand Champion Kingpin (Elevated Center) */}
-          <div className="order-1 md:order-2 polaroid transform scale-100 sm:scale-105 border-2 border-[#ffe600]/80 p-5 rounded-lg shadow-[0_0_25px_rgba(255,230,0,0.3)] hover:scale-[1.07] transition-all bg-[#1a0c32]/85 text-white relative">
-            <div className="absolute -top-3.5 sm:-top-4 -right-2 sm:-right-3 bg-[#ff007f] text-white border border-black font-headline text-sm sm:text-lg px-2.5 sm:px-3 py-0.5 sm:py-1 rotate-3 sm:rotate-6 z-20 rounded">
-              <Crown className="w-3.5 h-3.5 sm:w-4 sm:h-4 inline-block mr-1" /> GRAND CHAMPION
-            </div>
-
-            <div className="relative border border-slate-700/60 overflow-hidden mb-3 rounded">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAednQoOXLj6Ul2sPuhPwlk9zZ-kDi7ZY6tQtKd5F-Huywz8KsAAsVdbrfdGtgPgayQ1NMricFyYZcGKPXr_bIHUWtSdj25i_SJVLG48PhYNA7ejLcKr9ejYqVjL_YU5BdCvigZs7FSInxCWgwJkdOgaeQcvjf9U-wF6lylLBNl2iqadpMxgffKLizZovUUvoF48C4lOtjgm19Haa618CFjz6CUylvvChedz_prnSMcLIz8qnzK0wn0"
-                alt="1st Place Gold Trophy"
-                className="w-full h-52 sm:h-72 object-cover rounded"
-              />
-              <div className="absolute top-2 left-2 bg-[#ffe600] text-black border border-black font-headline text-lg sm:text-xl px-2.5 sm:px-3 py-0.5 sm:py-1 rounded">
-                1ST PLACE • KINGPIN
-              </div>
-            </div>
-            <div className="text-center space-y-1">
-              <h3 className="font-headline text-3xl sm:text-4xl text-white">THE VICE OVERLORD</h3>
-              <span className="font-headline text-4xl sm:text-5xl text-[#ffe600] block drop-shadow-[0_0_12px_rgba(255,230,0,0.45)]">
-                ₹15,000
+              <span className="font-headline text-sm sm:text-lg tracking-widest">
+                TECHNOVA 4.0
               </span>
-              <p className="text-xs text-zinc-200 font-bold">
-                Gold Cup + Guaranteed Seed Term Sheet + Direct VIP Pass to Global Tech Syndicate Finals.
-              </p>
             </div>
-          </div>
 
-          {/* 3rd Place: Bronze Elite */}
-          <div className="order-3 polaroid bg-[#110925]/75 border border-[#ff007f]/30 text-white p-4 rounded-lg shadow-[0_0_15px_rgba(255,0,127,0.15)] hover:border-[#ff007f] hover:shadow-[0_0_20px_rgba(255,0,127,0.3)] transition-all transform rotate-1 hover:rotate-0">
-            <div className="relative border border-slate-700/60 overflow-hidden mb-3 rounded">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0MUda7ipGT5vJo2WSCrC7gFPiUsmoKYyUtKHH9K9iKwNlgJVqyg4S1bkCGt9JbpTCwocbXHw-3L-5bTFnL_1-WAJektQyaLB6cOM084L4aBeQp3kx8ytVZHUGMnaWleXDU-QehA7MlM8xKg46jgRXIiix8NHOvGzBzl0xXRx7ZvnTaFYDQCPDhKQP_686mGHomqFAYi-ueAzVg662M8ribzejPs7sTDnypTgeGqST4ekQpfbMW23Y"
-                alt="3rd Place Bronze Trophy"
-                className="w-full h-48 sm:h-64 object-cover rounded"
-              />
-              <div className="absolute top-2 left-2 bg-amber-600/25 border border-amber-600/40 text-amber-500 font-headline text-base sm:text-lg px-2.5 py-0.5 rounded">
-                3RD PLACE
+            <h1 className="font-headline text-5xl sm:text-7xl md:text-8xl text-white leading-none drop-shadow-[0_0_18px_rgba(255,0,127,0.7)]">
+              THE <span className="text-[#ff007f]">PRIZE</span> POOL
+            </h1>
+
+            <p className="font-marker text-sm sm:text-base text-[#00f5ff] mt-3 tracking-wide">
+              THREE BATTLEGROUNDS • ONE TECHNOVA
+            </p>
+
+            {/* Total */}
+            <div className="mt-7 mx-auto max-w-md bg-black/60 border border-[#ffe600]/50 rounded-lg p-5 shadow-[0_0_25px_rgba(255,230,0,0.15)]">
+
+              <span className="block text-[10px] sm:text-xs font-bold text-[#00f5ff] uppercase tracking-[0.25em] mb-2">
+                TOTAL PRIZE POOL
+              </span>
+
+              <div className="flex items-center justify-center gap-2">
+                <Trophy className="w-7 h-7 sm:w-9 sm:h-9 text-[#ffe600]" />
+
+                <span className="font-headline text-5xl sm:text-6xl md:text-7xl text-[#ffe600] leading-none drop-shadow-[0_0_15px_rgba(255,230,0,0.45)]">
+                  ₹{totalPrize.toLocaleString('en-IN')}+
+                </span>
               </div>
             </div>
-            <div className="text-center space-y-1">
-              <h3 className="font-headline text-2xl sm:text-3xl text-white">THE ENFORCER</h3>
-              <span className="font-headline text-3xl sm:text-4xl text-amber-550 block font-bold">₹5,000</span>
-              <p className="text-xs text-zinc-350 font-medium">
-                Bronze Trophy + Enterprise Hardware Pass + Hardware Security Modules.
-              </p>
-            </div>
+
+            <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl mx-auto mt-5">
+              Bring your best game. Build. Battle. Compete.
+              <br className="hidden sm:block" />
+              The biggest rewards are waiting at the end of the mission.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* 3. Category Bounties Grid ($25,000 USD each) */}
-      <section className="space-y-4 sm:space-y-6 pt-4 sm:pt-6">
-        <div className="border-b border-zinc-800 pb-3 flex flex-col sm:flex-row sm:items-end justify-between gap-2 sm:gap-4">
-          <div>
-            <div className="inline-block bg-[#00f5ff]/20 text-[#00f5ff] border border-[#00f5ff]/35 px-2.5 py-0.5 font-headline text-sm sm:text-lg tracking-wider mb-1 rounded">
-              SPECIALIST AWARDS
-            </div>
-            <h2 className="font-headline text-3xl sm:text-5xl text-white drop-shadow-[0_0_8px_rgba(255,0,127,0.3)] leading-none">
-              CATEGORY BOUNTIES & SIDE CONTRACTS
-            </h2>
+
+      {/* ============================================================
+          MAIN HACKATHON PRIZE
+          ============================================================ */}
+
+      <section className="main-prize-card">
+
+        <div className="text-center mb-5 sm:mb-7">
+
+          <div className="inline-flex items-center gap-2 bg-[#ffe600]/15 border border-[#ffe600]/40 text-[#ffe600] px-3 sm:px-4 py-1 rounded transform rotate-1">
+            <Crown className="w-4 h-4" />
+
+            <span className="font-headline text-sm sm:text-lg tracking-wider">
+              GRAND MISSION
+            </span>
           </div>
-          <span className="font-headline text-lg sm:text-2xl text-[#ff007f] bg-[#ff007f]/25 px-3 py-1 border border-[#ff007f]/35 rounded shadow-[0_0_8px_rgba(255,0,127,0.2)] self-start sm:self-auto">
-            Diff PER BOUNTY
-          </span>
+
+          <h2 className="font-headline text-3xl sm:text-5xl text-white mt-3">
+            TECHNOVA HACKATHON
+          </h2>
+
+          <p className="font-marker text-xs sm:text-sm text-[#ff007f] mt-1">
+            BUILD • AUTOMATE • VISUALIZE • WIN
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {prizes.map(bounty => (
-            <div
-              key={bounty.id}
-              id={`bounty-card-${bounty.id}`}
-              className="bg-[#110925]/75 border border-slate-700/60 p-4 sm:p-5 flex flex-col justify-between hover:-translate-y-1.5 transition-all rounded-lg text-white shadow-[0_0_10px_rgba(0,0,0,0.3)] hover:border-[#00f5ff] hover:shadow-[0_0_15px_rgba(0,245,255,0.2)]"
-            >
-              <div>
-                <div
-                  className="w-10 h-10 sm:w-12 sm:h-12 border flex items-center justify-center font-headline text-xl sm:text-2xl mb-2 sm:mb-3 shadow-[0_0_8px_rgba(0,245,255,0.2)] rounded"
-                  style={{ backgroundColor: bounty.badgeBg, color: bounty.badgeText, borderColor: bounty.badgeText }}
-                >
-                  <Award className="w-5 h-5 sm:w-6 sm:h-6" />
+
+        <div className="relative overflow-hidden rounded-xl border-2 border-[#ffe600]/70 bg-gradient-to-br from-[#1a0c32] via-[#110925] to-[#080414] shadow-[0_0_35px_rgba(255,230,0,0.2)]">
+
+          {/* Glow effects */}
+          <div className="absolute -top-32 -right-32 w-72 h-72 bg-[#ffe600]/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-32 -left-32 w-72 h-72 bg-[#ff007f]/10 rounded-full blur-3xl" />
+
+          <div className="relative z-10 p-6 sm:p-10 md:p-14 text-center">
+
+            <div className="flex justify-center mb-5">
+
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-[#ffe600] bg-[#ffe600]/10 flex items-center justify-center shadow-[0_0_25px_rgba(255,230,0,0.3)]">
+
+                <Trophy className="w-8 h-8 sm:w-10 sm:h-10 text-[#ffe600]" />
+
+              </div>
+
+            </div>
+
+            
+
+            <div className="font-headline text-6xl sm:text-8xl md:text-9xl text-[#ffe600] leading-none mt-2 drop-shadow-[0_0_20px_rgba(255,230,0,0.45)]">
+              ₹30,000
+            </div>
+
+            <p className="text-sm sm:text-base text-zinc-300 max-w-2xl mx-auto mt-5 leading-relaxed">
+              The ultimate TECHNOVA challenge. Solve the problem statement,
+              build your solution, automate the workflow and visualize the
+              results to claim the biggest bounty of the event.
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-7">
+
+              <span className="bg-[#ffe600]/10 border border-[#ffe600]/35 text-[#ffe600] px-3 py-1.5 rounded text-xs font-bold">
+                ₹30,000 PRIZE
+              </span>
+
+              <span className="bg-[#00f5ff]/10 border border-[#00f5ff]/35 text-[#00f5ff] px-3 py-1.5 rounded text-xs font-bold">
+                HACKATHON
+              </span>
+
+              <span className="bg-[#ff007f]/10 border border-[#ff007f]/35 text-[#ff007f] px-3 py-1.5 rounded text-xs font-bold">
+                TECHNOVА 4.0
+              </span>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      {/* ============================================================
+          BATTLEZONE
+          ============================================================ */}
+
+      <section>
+
+        <div className="text-center mb-6 sm:mb-8">
+
+          <div className="inline-flex items-center gap-2 bg-[#ff007f]/15 border border-[#ff007f]/40 text-[#ff007f] px-3 sm:px-4 py-1 rounded">
+            <Zap className="w-4 h-4" />
+
+            <span className="font-headline text-sm sm:text-lg tracking-wider">
+              BATTLEZONE
+            </span>
+          </div>
+
+          <h2 className="font-headline text-3xl sm:text-5xl text-white mt-3">
+            GAME BOUNTIES
+          </h2>
+
+          <p className="font-marker text-xs sm:text-sm text-[#00f5ff] mt-1">
+            TWO GAMES • ₹5,000 TOTAL
+          </p>
+        </div>
+
+
+        <div className="battle-prizes-grid grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7 max-w-5xl mx-auto">
+
+          {/* ========================================================
+              BGMI
+              ======================================================== */}
+
+          <div
+            className="battle-prize-card group relative overflow-hidden rounded-xl border border-[#00f5ff]/40 bg-[#110925]/85 p-6 sm:p-8 text-white shadow-[0_0_20px_rgba(0,245,255,0.1)] hover:border-[#00f5ff] hover:shadow-[0_0_30px_rgba(0,245,255,0.25)] hover:-translate-y-2 transition-all duration-300"
+            onMouseEnter={playHoverSound}
+            onClick={playClickSound}
+          >
+
+            <div className="absolute -top-20 -right-20 w-48 h-48 bg-[#00f5ff]/10 rounded-full blur-3xl group-hover:bg-[#00f5ff]/20 transition-all" />
+
+            <div className="relative z-10">
+
+              <div className="flex items-start justify-between gap-4">
+
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg bg-[#00f5ff]/10 border border-[#00f5ff]/40 flex items-center justify-center">
+                  <Gamepad2 className="w-7 h-7 sm:w-8 sm:h-8 text-[#00f5ff]" />
                 </div>
 
-                <span className="font-marker text-xs text-[#ff007f] block mb-0.5">
-                  {bounty.subtitle}
+                <span className="font-headline text-sm sm:text-base bg-[#00f5ff]/10 border border-[#00f5ff]/30 text-[#00f5ff] px-3 py-1 rounded">
+                  BATTLE 01
                 </span>
-                <h3 className="font-headline text-2xl sm:text-3xl text-white leading-none mb-2">
-                  {bounty.title}
-                </h3>
-                <p className="text-xs text-zinc-350 leading-relaxed mb-3 sm:mb-4">
-                  {bounty.description}
-                </p>
+
               </div>
 
-              <div className="pt-2 sm:pt-3 border-t border-zinc-800/80 flex items-center justify-between">
-                <span className="text-[10px] sm:text-xs font-bold text-zinc-400 uppercase">Payout</span>
-                <span className="font-headline text-2xl sm:text-3xl text-[#00f5ff] drop-shadow-[0_0_5px_rgba(0,245,255,0.25)]">
-                  {bounty.amount}
-                </span>
-              </div>
+              <p className="font-marker text-xs text-[#00f5ff] mt-6">
+                BATTLEGROUND MOBILE
+              </p>
+
+              <h3 className="font-headline text-4xl sm:text-5xl text-white mt-1">
+                BGMI
+              </h3>
+
+              <div className="h-px bg-[#00f5ff]/20 my-5" />
+
+              <span className="block text-xs text-zinc-400 uppercase tracking-widest">
+                PRIZE
+              </span>
+
+              <span className="font-headline text-5xl sm:text-6xl text-[#00f5ff] block mt-1 drop-shadow-[0_0_12px_rgba(0,245,255,0.35)]">
+                ₹2,500
+              </span>
+
+              <p className="text-xs sm:text-sm text-zinc-300 mt-4 leading-relaxed">
+                Enter the BattleZone and prove your skills in BGMI.
+                Only the strongest player walks away with the bounty.
+              </p>
+
             </div>
-          ))}
+          </div>
+
+
+          {/* ========================================================
+              E-FOOTBALL
+              ======================================================== */}
+
+          <div
+            className="battle-prize-card group relative overflow-hidden rounded-xl border border-[#ff007f]/40 bg-[#110925]/85 p-6 sm:p-8 text-white shadow-[0_0_20px_rgba(255,0,127,0.1)] hover:border-[#ff007f] hover:shadow-[0_0_30px_rgba(255,0,127,0.25)] hover:-translate-y-2 transition-all duration-300"
+            onMouseEnter={playHoverSound}
+            onClick={playClickSound}
+          >
+
+            <div className="absolute -top-20 -right-20 w-48 h-48 bg-[#ff007f]/10 rounded-full blur-3xl group-hover:bg-[#ff007f]/20 transition-all" />
+
+            <div className="relative z-10">
+
+              <div className="flex items-start justify-between gap-4">
+
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg bg-[#ff007f]/10 border border-[#ff007f]/40 flex items-center justify-center">
+                  <Goal className="w-7 h-7 sm:w-8 sm:h-8 text-[#ff007f]" />
+                </div>
+
+                <span className="font-headline text-sm sm:text-base bg-[#ff007f]/10 border border-[#ff007f]/30 text-[#ff007f] px-3 py-1 rounded">
+                  BATTLE 02
+                </span>
+
+              </div>
+
+              <p className="font-marker text-xs text-[#ff007f] mt-6">
+                FOOTBALL SHOWDOWN
+              </p>
+
+              <h3 className="font-headline text-4xl sm:text-5xl text-white mt-1">
+                E-FOOTBALL
+              </h3>
+
+              <div className="h-px bg-[#ff007f]/20 my-5" />
+
+              <span className="block text-xs text-zinc-400 uppercase tracking-widest">
+                PRIZE
+              </span>
+
+              <span className="font-headline text-5xl sm:text-6xl text-[#ff007f] block mt-1 drop-shadow-[0_0_12px_rgba(255,0,127,0.35)]">
+                ₹2,500
+              </span>
+
+              <p className="text-xs sm:text-sm text-zinc-300 mt-4 leading-relaxed">
+                Take control of the pitch, outplay your opponent and
+                claim the E-Football BattleZone bounty.
+              </p>
+
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* 4. Sponsor Swag & Hardware Perk Stash */}
-      <div className="bg-[#110925]/75 border border-[#ff007f]/30 p-5 sm:p-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6 rounded-lg shadow-[0_0_15px_rgba(255,0,127,0.1)]">
-        <div className="space-y-1">
-          <h3 className="font-headline text-2xl sm:text-3xl text-white flex items-center gap-2">
-            <Gift className="w-5 h-5 sm:w-6 sm:h-6 text-[#ff007f] shrink-0" />
-            <span>RUNNER LOADOUT & HARDWARE STASH</span>
-          </h3>
-          <p className="text-xs sm:text-sm text-zinc-300 font-medium max-w-xl">
-            Every accepted participant receives the limited-edition Vice City Tech Bomber Jacket,
-            custom USB-C security key, NFC VIP badge, and $1,500 in cloud credits.
-          </p>
+
+      {/* ============================================================
+          FINAL PRIZE SUMMARY
+          ============================================================ */}
+
+      <section className="border border-[#00f5ff]/25 bg-[#110925]/70 rounded-xl p-5 sm:p-8 shadow-[0_0_20px_rgba(0,245,255,0.08)]">
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+
+          <div className="text-center sm:text-left">
+
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+
+              <Sparkles className="w-5 h-5 text-[#ffe600]" />
+
+              <span className="font-headline text-xl sm:text-2xl text-white">
+                THREE MISSIONS. ₹35,000+ AT STAKE.
+              </span>
+
+            </div>
+
+            <p className="text-xs sm:text-sm text-zinc-400 mt-2">
+              Technova Hackathon + BGMI + E-Football
+            </p>
+
+          </div>
+
+          <div className="flex items-center gap-2">
+
+            <span className="font-headline text-3xl sm:text-4xl text-[#ffe600]">
+              ₹35,000+
+            </span>
+
+          </div>
+
         </div>
 
-        <button
-          id="claim-swag-sound-btn"
-          onClick={() => triggerMissionPassed('LOADOUT DISPATCHED!', 'CHECK YOUR REGISTERED EMAIL')}
-          className="bg-[#00f5ff] hover:bg-[#ffe600] text-black font-headline text-xl sm:text-2xl px-5 sm:px-6 py-2.5 border border-black transition-all shrink-0 cursor-pointer text-center rounded shadow-[0_0_10px_rgba(0,245,255,0.35)]"
-        >
-          <span>VIEW LOADOUT SPECS</span>
-        </button>
-      </div>
+      </section>
+
     </div>
   );
 };
