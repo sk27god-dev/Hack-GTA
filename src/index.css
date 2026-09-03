@@ -83,42 +83,59 @@
      ========================================= */
 
   /* Default Headings on light surfaces */
-  [data-theme="light"] h1:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] h2:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] h3:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] h4:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] h5:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] h6:not(.keep-white):not(#mission-select *):not(.mission-card-dark *) {
+  [data-theme="light"] h1:not(.keep-white):not(#hero-section *):not(.hero-technova-title):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] h2:not(.keep-white):not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] h3:not(.keep-white):not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *):not(.mission-active-title),
+  [data-theme="light"] h4:not(.keep-white):not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] h5:not(.keep-white):not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] h6:not(.keep-white):not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *) {
     color: #000000 !important;
     text-shadow: none !important;
     filter: none !important;
   }
 
   /* Default Text on light surfaces */
-  [data-theme="light"] .text-white:not(.keep-white):not(.btn-pink):not(.btn-pink *):not(.bg-\[\#FF6FB5\]):not(.bg-\[\#FF6FB5\] *):not(.bg-\[\#ff007f\]):not(.bg-\[\#ff007f\] *):not(.bg-red-600):not(.bg-red-600 *):not(#nav-logo-btn .bg-\[\#FF6FB5\] *):not(#mission-register-btn):not(#mission-register-btn *):not(#mission-select *):not(.mission-card-dark *) {
+  [data-theme="light"] .text-white:not(.keep-white):not(.btn-pink):not(.btn-pink *):not(.bg-\[\#FF6FB5\]):not(.bg-\[\#FF6FB5\] *):not(.bg-\[\#ff007f\]):not(.bg-\[\#ff007f\] *):not(.bg-red-600):not(.bg-red-600 *):not(#nav-logo-btn .bg-\[\#FF6FB5\] *):not(#mission-register-btn):not(#mission-register-btn *):not(#prize-breakdown-btn):not(#prize-breakdown-btn *):not(#hero-section *):not(.hero-technova-title):not(.hero-tagline):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *) {
     color: #000000 !important;
   }
 
-  [data-theme="light"] .text-zinc-100:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-zinc-200:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-zinc-300:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-zinc-350:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-slate-100:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-slate-200:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-slate-250:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-slate-300:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-slate-355:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-gray-100:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-gray-200:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-gray-300:not(#mission-select *):not(.mission-card-dark *) {
+  [data-theme="light"] .text-zinc-100:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-zinc-200:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-zinc-300:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-zinc-350:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-slate-100:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-slate-200:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-slate-250:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-slate-300:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-slate-355:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-gray-100:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-gray-200:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-gray-300:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *) {
     color: #18181b !important;
   }
 
-  [data-theme="light"] .text-zinc-400:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-zinc-500:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-slate-400:not(#mission-select *):not(.mission-card-dark *),
-  [data-theme="light"] .text-slate-500:not(#mission-select *):not(.mission-card-dark *) {
+  [data-theme="light"] .text-zinc-400:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-zinc-500:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-slate-400:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *),
+  [data-theme="light"] .text-slate-500:not(#hero-section *):not(#mission-select *):not(#mission-select-section *):not(.bg-\[\#141419\] *):not(.bg-\[\#0d0d11\] *) {
     color: #3f3f46 !important;
+  }
+
+  /* =========================================
+     HERO SECTION OVER DARK VIDEO (Always High Contrast)
+     ========================================= */
+  [data-theme="light"] #hero-section h1,
+  [data-theme="light"] .hero-technova-title,
+  [data-theme="light"] #hero-section .hero-tagline,
+  [data-theme="light"] .hero-tagline {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 0px #000000, -1px -1px 0px #000000, 1px -1px 0px #000000, -1px 1px 0px #000000, 4px 4px 0px rgba(0,0,0,0.85) !important;
+  }
+
+  [data-theme="light"] #hero-section .hero-technova-sub,
+  [data-theme="light"] #hero-section .hero-tagline-sub {
+    color: #FFD54F !important;
+    text-shadow: 2px 2px 0px #000000, -1px -1px 0px #000000, 1px -1px 0px #000000, -1px 1px 0px #000000, 3px 3px 0px rgba(0,0,0,0.85) !important;
   }
 
   /* =========================================
@@ -154,7 +171,9 @@
   [data-theme="light"] [id^="comp-card-"] .text-zinc-350,
   [data-theme="light"] [id^="comp-card-"] .text-zinc-400,
   [data-theme="light"] [id^="comp-card-"] .text-slate-250,
-  [data-theme="light"] [id^="comp-card-"] .text-slate-300 {
+  [data-theme="light"] [id^="comp-card-"] .text-slate-300,
+  [data-theme="light"] .bg-white p,
+  [data-theme="light"] .bg-white span:not(.text-black):not(.text-white) {
     color: #000000 !important;
   }
 
@@ -203,29 +222,53 @@
   }
 
   /* =========================================
-     DARK MISSION SELECT PANEL ONLY (Preserves Bright Text)
+     DARK MISSION SELECT PANEL & MISSION DATA (Always Bright)
      ========================================= */
-  [data-theme="light"] #mission-select,
-  [data-theme="light"] #mission-select-card,
-  [data-theme="light"] .mission-card-dark,
-  [data-theme="light"] #mission-select .bg-\[\#141419\],
-  [data-theme="light"] #mission-select .bg-\[\#0d0d11\] {
+  [data-theme="light"] #mission-select-section .bg-\[\#141419\],
+  [data-theme="light"] #mission-select-section .bg-\[\#0d0d11\],
+  [data-theme="light"] .bg-\[\#141419\],
+  [data-theme="light"] .bg-\[\#0d0d11\] {
     color: #ffffff !important;
   }
 
-  [data-theme="light"] #mission-select h3,
-  [data-theme="light"] #mission-select .text-white,
-  [data-theme="light"] #mission-select-card h3,
-  [data-theme="light"] #mission-select-card .text-white {
+  [data-theme="light"] #mission-select-section .bg-\[\#141419\] h3,
+  [data-theme="light"] .mission-active-title,
+  [data-theme="light"] .bg-\[\#141419\] h3,
+  [data-theme="light"] .bg-\[\#141419\] .text-white {
     color: #ffffff !important;
   }
 
-  [data-theme="light"] #mission-select .text-zinc-300 {
+  [data-theme="light"] #mission-select-section .bg-\[\#141419\] p,
+  [data-theme="light"] .bg-\[\#141419\] p,
+  [data-theme="light"] .bg-\[\#141419\] .text-zinc-300 {
     color: #e4e4e7 !important;
   }
 
-  [data-theme="light"] #mission-select .text-zinc-200 {
+  [data-theme="light"] #mission-select-section .bg-\[\#0d0d11\] span,
+  [data-theme="light"] .bg-\[\#0d0d11\] span,
+  [data-theme="light"] #mission-select-section .bg-black span.text-zinc-200,
+  [data-theme="light"] .bg-black span.text-zinc-200 {
     color: #f4f4f5 !important;
+  }
+
+  /* =========================================
+     PRIZE VAULT & BREAKDOWN BUTTON
+     ========================================= */
+  [data-theme="light"] #prize-breakdown-btn {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+  }
+
+  [data-theme="light"] #prize-breakdown-btn:hover {
+    background-color: #00E5FF !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+  }
+
+  [data-theme="light"] #prize-breakdown-btn *,
+  [data-theme="light"] #prize-breakdown-btn:hover * {
+    color: inherit !important;
   }
 
   [data-theme="light"] .text-black {

@@ -305,6 +305,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           ======================================================== */}
 
       <section
+        id="hero-section"
         className="
           relative
           min-h-[78vh]
@@ -496,6 +497,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <h1
               className="
                 font-headline
+                hero-technova-title
 
                 text-[2.75rem]
                 xs:text-[3.5rem]
@@ -518,7 +520,8 @@ export const HomePage: React.FC<HomePageProps> = ({
               "
               style={{
                 fontFamily:
-                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif'
+                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
+                color: '#ffffff'
               }}
             >
               TECHNOVA
@@ -533,6 +536,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 sm:mt-4
 
                 font-headline
+                hero-technova-sub
 
                 text-3xl
                 xs:text-4xl
@@ -549,7 +553,8 @@ export const HomePage: React.FC<HomePageProps> = ({
               "
               style={{
                 fontFamily:
-                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif'
+                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
+                color: '#FFD54F'
               }}
             >
               4.0
@@ -572,6 +577,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <p
               className="
                 text-white
+                hero-tagline
 
                 text-xs
                 xs:text-sm
@@ -587,6 +593,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 gta-shadow-black
               "
+              style={{
+                color: '#ffffff'
+              }}
             >
               ENTER THE CITY. CHOOSE YOUR MISSION.
             </p>
@@ -597,6 +606,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 mt-1
 
                 text-[#FFD54F]
+                hero-tagline-sub
 
                 text-[10px]
                 xs:text-xs
@@ -610,6 +620,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 gta-shadow-black
               "
+              style={{
+                color: '#FFD54F'
+              }}
             >
               MAKE YOUR MOVE.
             </p>
@@ -1221,6 +1234,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <h3
                   className="
                     font-headline
+                    mission-active-title
 
                     text-4xl
                     sm:text-5xl
@@ -1234,7 +1248,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                   "
                   style={{
                     fontFamily:
-                      'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif'
+                      'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
+                    color: '#ffffff'
                   }}
                 >
                   {missions[activeMission].title}
@@ -1254,6 +1269,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                     tracking-wider
                   "
+                  style={{
+                    color: '#FFD54F'
+                  }}
                 >
                   {missions[activeMission].subtitle}
                 </div>
@@ -1272,6 +1290,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                     max-w-3xl
                   "
+                  style={{
+                    color: '#e4e4e7'
+                  }}
                 >
                   {missions[activeMission].description}
                 </p>
@@ -1484,11 +1505,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <span
                     className="
                       font-headline
-
                       text-lg
-
                       tracking-wider
+                      text-white
                     "
+                    style={{
+                      color: '#ffffff'
+                    }}
                   >
                     MISSION DATA
                   </span>
@@ -1546,6 +1569,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                             tracking-wide
                           "
+                          style={{
+                            color: '#f4f4f5'
+                          }}
                         >
                           {detail}
                         </span>
@@ -2666,44 +2692,33 @@ export const HomePage: React.FC<HomePageProps> = ({
 
 
             <button
-
+              id="prize-breakdown-btn"
               onClick={() =>
                 setActiveTab('prizes')
               }
               className="
                 bg-black
-
                 hover:bg-[#00E5FF]
                 hover:text-black
-
                 text-white
-
                 font-headline
-
                 text-lg
-
                 px-4
                 py-2
-
                 border-2
                 border-black
-
                 flex
                 items-center
                 justify-center
                 gap-2
-
                 cursor-pointer
+                shadow-[3px_3px_0px_#000]
+                transition-all
               "
             >
-
               <Trophy className="w-4 h-4 text-[#FFD54F]" />
-
               PRIZE BREAKDOWN
-
-
               <ArrowRight className="w-4 h-4" />
-
             </button>
 
           </div>
