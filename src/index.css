@@ -82,125 +82,150 @@
      LIGHT THEME TYPOGRAPHY & CONTRAST
      ========================================= */
 
-  /* Headings on light surfaces */
-  [data-theme="light"] h1:not(.keep-white):not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not([class*="bg-\[\#12081f\]"] *):not([class*="bg-\[\#150d2a\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] h2:not(.keep-white):not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not([class*="bg-\[\#12081f\]"] *):not([class*="bg-\[\#150d2a\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] h3:not(.keep-white):not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not([class*="bg-\[\#12081f\]"] *):not([class*="bg-\[\#150d2a\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] h4:not(.keep-white):not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not([class*="bg-\[\#12081f\]"] *):not([class*="bg-\[\#150d2a\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] h5:not(.keep-white):not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not([class*="bg-\[\#12081f\]"] *):not([class*="bg-\[\#150d2a\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] h6:not(.keep-white):not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not([class*="bg-\[\#12081f\]"] *):not([class*="bg-\[\#150d2a\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *) {
+  /* Default Headings on light surfaces */
+  [data-theme="light"] h1:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] h2:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] h3:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] h4:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] h5:not(.keep-white):not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] h6:not(.keep-white):not(#mission-select *):not(.mission-card-dark *) {
     color: #000000 !important;
     text-shadow: none !important;
     filter: none !important;
   }
 
-  /* Text on light surfaces */
-  [data-theme="light"] .text-white:not(.keep-white):not(.btn-pink):not(.btn-pink *):not(.bg-\[\#FF6FB5\]):not(.bg-\[\#FF6FB5\] *):not(.bg-\[\#ff007f\]):not(.bg-\[\#ff007f\] *):not(.bg-red-600):not(.bg-red-600 *):not(#nav-logo-btn .bg-\[\#FF6FB5\] *):not(#mission-register-btn):not(#mission-register-btn *):not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not([class*="bg-\[\#12081f\]"] *):not([class*="bg-\[\#150d2a\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *) {
+  /* Default Text on light surfaces */
+  [data-theme="light"] .text-white:not(.keep-white):not(.btn-pink):not(.btn-pink *):not(.bg-\[\#FF6FB5\]):not(.bg-\[\#FF6FB5\] *):not(.bg-\[\#ff007f\]):not(.bg-\[\#ff007f\] *):not(.bg-red-600):not(.bg-red-600 *):not(#nav-logo-btn .bg-\[\#FF6FB5\] *):not(#mission-register-btn):not(#mission-register-btn *):not(#mission-select *):not(.mission-card-dark *) {
     color: #000000 !important;
   }
 
-  [data-theme="light"] .text-zinc-100:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-zinc-200:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-zinc-300:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-zinc-350:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-slate-100:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-slate-200:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-slate-250:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-slate-300:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-slate-355:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-gray-100:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-gray-200:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *),
-  [data-theme="light"] .text-gray-300:not([class*="bg-black"] *):not([class*="bg-\[\#110925\]"] *):not([class*="bg-\[\#141419\]"] *):not([class*="bg-\[\#0d0d11\]"] *):not(.bg-black *):not(.bg-zinc-900 *):not(.bg-slate-900 *) {
-    color: #27272a !important;
+  [data-theme="light"] .text-zinc-100:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-zinc-200:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-zinc-300:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-zinc-350:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-slate-100:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-slate-200:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-slate-250:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-slate-300:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-slate-355:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-gray-100:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-gray-200:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-gray-300:not(#mission-select *):not(.mission-card-dark *) {
+    color: #18181b !important;
+  }
+
+  [data-theme="light"] .text-zinc-400:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-zinc-500:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-slate-400:not(#mission-select *):not(.mission-card-dark *),
+  [data-theme="light"] .text-slate-500:not(#mission-select *):not(.mission-card-dark *) {
+    color: #3f3f46 !important;
   }
 
   /* =========================================
-     DARK & BLACK CARDS CONTRAST PRESERVATION
-     (Competitions, Missions, Timeline, Prizes, FAQ)
+     WHITE CARDS IN LIGHT THEME (Visible Black Text)
      ========================================= */
-  [data-theme="light"] [class*="bg-black"] h1,
-  [data-theme="light"] [class*="bg-black"] h2,
-  [data-theme="light"] [class*="bg-black"] h3,
-  [data-theme="light"] [class*="bg-black"] h4,
-  [data-theme="light"] [class*="bg-black"] h5,
-  [data-theme="light"] [class*="bg-black"] h6,
-  [data-theme="light"] [class*="bg-black"] .font-headline:not(.text-black):not(.bg-\[\#ffe600\] *):not(.bg-\[\#00f5ff\] *):not(.bg-\[\#00E5FF\] *):not(.bg-\[\#FFD54F\] *),
-  [data-theme="light"] [class*="bg-\[\#110925\]"] h1,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] h2,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] h3,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] h4,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] h5,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] h6,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .font-headline:not(.text-black):not(.bg-\[\#ffe600\] *):not(.bg-\[\#00f5ff\] *):not(.bg-\[\#00E5FF\] *):not(.bg-\[\#FFD54F\] *),
-  [data-theme="light"] [class*="bg-\[\#141419\]"] h1,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] h2,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] h3,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] h4,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] .font-headline:not(.text-black):not(.bg-\[\#ffe600\] *):not(.bg-\[\#00f5ff\] *):not(.bg-\[\#00E5FF\] *):not(.bg-\[\#FFD54F\] *),
-  [data-theme="light"] [class*="bg-\[\#0d0d11\]"] .font-headline:not(.text-black):not(.bg-\[\#ffe600\] *):not(.bg-\[\#00f5ff\] *):not(.bg-\[\#00E5FF\] *):not(.bg-\[\#FFD54F\] *),
-  [data-theme="light"] .bg-black h1,
-  [data-theme="light"] .bg-black h2,
-  [data-theme="light"] .bg-black h3,
-  [data-theme="light"] .bg-black h4,
-  [data-theme="light"] .bg-black .font-headline:not(.text-black):not(.bg-\[\#ffe600\] *):not(.bg-\[\#00f5ff\] *):not(.bg-\[\#00E5FF\] *):not(.bg-\[\#FFD54F\] *) {
+  [data-theme="light"] [id^="comp-card-"],
+  [data-theme="light"] .bg-white,
+  [data-theme="light"] [id^="timeline-event-"],
+  [data-theme="light"] [id^="faq-item-"],
+  [data-theme="light"] .main-prize-card,
+  [data-theme="light"] .battle-prize-card {
+    background-color: #ffffff !important;
+    border-color: #000000 !important;
+    color: #000000 !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+  }
+
+  [data-theme="light"] [id^="comp-card-"] h3,
+  [data-theme="light"] [id^="comp-card-"] .font-headline,
+  [data-theme="light"] .bg-white h3,
+  [data-theme="light"] .bg-white .font-headline,
+  [data-theme="light"] [id^="timeline-event-"] h3,
+  [data-theme="light"] [id^="faq-item-"] h3,
+  [data-theme="light"] .main-prize-card h3,
+  [data-theme="light"] .battle-prize-card h3 {
+    color: #000000 !important;
+  }
+
+  [data-theme="light"] [id^="comp-card-"] p,
+  [data-theme="light"] [id^="comp-card-"] span:not(.font-marker):not(.text-black),
+  [data-theme="light"] [id^="comp-card-"] .text-white,
+  [data-theme="light"] [id^="comp-card-"] .text-zinc-300,
+  [data-theme="light"] [id^="comp-card-"] .text-zinc-350,
+  [data-theme="light"] [id^="comp-card-"] .text-zinc-400,
+  [data-theme="light"] [id^="comp-card-"] .text-slate-250,
+  [data-theme="light"] [id^="comp-card-"] .text-slate-300 {
+    color: #000000 !important;
+  }
+
+  [data-theme="light"] [id^="comp-card-"] .font-marker {
+    color: #e6006f !important;
+  }
+
+  /* Tags & Schedule Bar inside competition white cards */
+  [data-theme="light"] [id^="comp-card-"] .bg-black\/45,
+  [data-theme="light"] [id^="comp-card-"] .bg-black\/55,
+  [data-theme="light"] [id^="comp-card-"] .bg-black\/60 {
+    background-color: #f4f4f5 !important;
+    border-color: #000000 !important;
+    color: #000000 !important;
+  }
+
+  [data-theme="light"] [id^="comp-card-"] .bg-black\/45 span,
+  [data-theme="light"] [id^="comp-card-"] .bg-black\/55 span {
+    color: #000000 !important;
+  }
+
+  /* Bottom action bar inside white cards */
+  [data-theme="light"] [id^="comp-card-"] .border-slate-800,
+  [data-theme="light"] [id^="comp-card-"] .border-t {
+    border-color: #000000 !important;
+  }
+
+  [data-theme="light"] [id^="comp-card-"] [id^="view-comp-details-btn-"],
+  [data-theme="light"] [id^="comp-card-"] button.border-slate-650 {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+  }
+
+  [data-theme="light"] [id^="comp-card-"] [id^="view-comp-details-btn-"]:hover,
+  [data-theme="light"] [id^="comp-card-"] button.border-slate-650:hover {
+    background-color: #ffe600 !important;
+    color: #000000 !important;
+  }
+
+  [data-theme="light"] [id^="comp-card-"] [id^="enlist-comp-btn-"],
+  [data-theme="light"] [id^="comp-card-"] [id^="enlist-comp-btn-"] * {
+    background-color: #00f5ff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+  }
+
+  /* =========================================
+     DARK MISSION SELECT PANEL ONLY (Preserves Bright Text)
+     ========================================= */
+  [data-theme="light"] #mission-select,
+  [data-theme="light"] #mission-select-card,
+  [data-theme="light"] .mission-card-dark,
+  [data-theme="light"] #mission-select .bg-\[\#141419\],
+  [data-theme="light"] #mission-select .bg-\[\#0d0d11\] {
     color: #ffffff !important;
   }
 
-  /* Bright legible text inside all dark/black cards */
-  [data-theme="light"] [class*="bg-black"] .text-white,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-white,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] .text-white,
-  [data-theme="light"] [class*="bg-\[\#0d0d11\]"] .text-white,
-  [data-theme="light"] [class*="bg-\[\#12081f\]"] .text-white,
-  [data-theme="light"] [class*="bg-\[\#150d2a\]"] .text-white,
-  [data-theme="light"] .bg-black .text-white {
+  [data-theme="light"] #mission-select h3,
+  [data-theme="light"] #mission-select .text-white,
+  [data-theme="light"] #mission-select-card h3,
+  [data-theme="light"] #mission-select-card .text-white {
     color: #ffffff !important;
   }
 
-  [data-theme="light"] [class*="bg-black"] .text-zinc-100,
-  [data-theme="light"] [class*="bg-black"] .text-zinc-200,
-  [data-theme="light"] [class*="bg-black"] .text-zinc-300,
-  [data-theme="light"] [class*="bg-black"] .text-zinc-350,
-  [data-theme="light"] [class*="bg-black"] .text-slate-100,
-  [data-theme="light"] [class*="bg-black"] .text-slate-200,
-  [data-theme="light"] [class*="bg-black"] .text-slate-250,
-  [data-theme="light"] [class*="bg-black"] .text-slate-300,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-zinc-100,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-zinc-200,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-zinc-300,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-zinc-350,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-slate-100,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-slate-200,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-slate-250,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-slate-300,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] .text-zinc-100,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] .text-zinc-200,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] .text-zinc-300,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] .text-zinc-350,
-  [data-theme="light"] [class*="bg-\[\#0d0d11\]"] .text-zinc-100,
-  [data-theme="light"] [class*="bg-\[\#0d0d11\]"] .text-zinc-200,
-  [data-theme="light"] [class*="bg-\[\#0d0d11\]"] .text-zinc-300,
-  [data-theme="light"] [class*="bg-\[\#0d0d11\]"] .text-zinc-350,
-  [data-theme="light"] .bg-black .text-zinc-100,
-  [data-theme="light"] .bg-black .text-zinc-200,
-  [data-theme="light"] .bg-black .text-zinc-300,
-  [data-theme="light"] .bg-black .text-zinc-350 {
-    color: #e2e8f0 !important;
+  [data-theme="light"] #mission-select .text-zinc-300 {
+    color: #e4e4e7 !important;
   }
 
-  [data-theme="light"] [class*="bg-black"] .text-zinc-400,
-  [data-theme="light"] [class*="bg-black"] .text-zinc-500,
-  [data-theme="light"] [class*="bg-black"] .text-slate-400,
-  [data-theme="light"] [class*="bg-black"] .text-slate-500,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-zinc-400,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-zinc-500,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-slate-400,
-  [data-theme="light"] [class*="bg-\[\#110925\]"] .text-slate-500,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] .text-zinc-400,
-  [data-theme="light"] [class*="bg-\[\#141419\]"] .text-slate-400,
-  [data-theme="light"] .bg-black .text-zinc-400,
-  [data-theme="light"] .bg-black .text-slate-400 {
-    color: #94a3b8 !important;
+  [data-theme="light"] #mission-select .text-zinc-200 {
+    color: #f4f4f5 !important;
   }
 
   [data-theme="light"] .text-black {
