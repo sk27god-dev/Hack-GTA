@@ -7,6 +7,13 @@ import {
   User
 } from '../types';
 
+import hackersImg from '../assets/images/Hackers.jpg';
+import efootballPoster from '../assets/images/efootball_poster.jpg';
+import bgmiPoster from '../assets/images/bgmi_poster.jpg';
+import itLabImg from '../assets/images/IT-Lab.jpg';
+import coderImg from '../assets/images/coder.jpg';
+import eventImg from '../assets/images/Event.jpg';
+
 /**
  * ============================================================
  * ITSA PRESENTS — TECHNOVA 4.0
@@ -16,11 +23,8 @@ import {
  *
  * Main Events:
  * 1. TECHNOVA HACKATHON
- * 2. BATTLEZONE
- *
- * Battlezone Events:
- * 1. BGMI
- * 2. FIFA MOBILE / E-FOOTBALL
+ * 2. E-FOOTBALL
+ * 3. BGMI
  *
  * ============================================================
  */
@@ -99,7 +103,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     teamSizeLabel: '2–4 MEMBERS',
 
-    image: '/assets/images/hackers.jpg',
+    image: hackersImg,
 
     featured: true,
 
@@ -127,27 +131,26 @@ export const INITIAL_COMPETITIONS: Competition[] = [
   },
 
   /* ==========================================================
-     BATTLEZONE
+     CARD 1 — E-FOOTBALL
      ========================================================== */
 
   {
-    id: 'battlezone',
+    id: 'efootball',
 
-    title: 'BATTLEZONE',
+    title: 'E-FOOTBALL',
 
-    subtitle: 'CHOOSE YOUR BATTLEFIELD.',
+    subtitle: 'FROM THE STREETS TO THE STADIUM.',
 
     track: 'Gaming',
 
-    category: 'Battlezone',
+    category: 'E-Football',
 
     description:
-      'The gaming arena of TECHNOVA 4.0 featuring BGMI and FIFA Mobile / E-Football. Pick your battlefield and fight your way to the top.',
+      'The gaming arena of TECHNOVA 4.0 featuring E-Football. Pick your battlefield and fight your way to the top.',
 
     rules: [
-      'Participants must register for their selected Battlezone event.',
-      'BGMI is a solo competition.',
-      'FIFA Mobile / E-Football is a solo competition.',
+      'Participants must register for the E-Football event.',
+      'E-Football is a solo competition.',
       'Participants must follow the event-specific rules announced by the organisers.',
       'Any form of cheating or unfair play will result in disqualification.'
     ],
@@ -158,12 +161,12 @@ export const INITIAL_COMPETITIONS: Competition[] = [
       date: '26 September 2026',
       time: 'Event timings will be announced',
       location: 'TECHNOVA 4.0',
-      stage: 'BATTLEZONE'
+      stage: 'E-FOOTBALL'
     },
 
-    prize: '₹5,000 TOTAL',
+    prize: '₹2,500',
 
-    prizeAmount: 5000,
+    prizeAmount: 2500,
 
     teamSize: 1,
 
@@ -171,23 +174,96 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     teamSizeMax: 1,
 
-    teamSizeLabel: 'SOLO EVENTS',
+    teamSizeLabel: 'SOLO',
 
-    image: '/assets/images/cyber.jpg',
+    image: efootballPoster,
 
     featured: true,
 
     colorAccent: 'pink',
 
     tags: [
-      'BGMI — ₹2,500',
-      'E-FOOTBALL — ₹2,500',
-      '₹5,000 TOTAL PRIZE POOL',
-      'SOLO EVENTS'
+      '₹2,500 PRIZE POOL',
+      'SOLO COMPETITION',
+      'TECHNOVA 4.0',
+      'TIMINGS TBA'
     ],
 
     registrationUrl:
       'https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header',
+
+    registrationType: 'google-form',
+
+    showRules: true,
+
+    showJudgingCriteria: false,
+
+    showSchedule: true
+  },
+
+  /* ==========================================================
+     CARD 2 — BGMI
+     ========================================================== */
+
+  {
+    id: 'bgmi',
+
+    title: 'BGMI',
+
+    subtitle: "THE STREETS AREN'T SAFE. • MODE: CLASSIC",
+
+    track: 'Gaming',
+
+    category: 'BGMI',
+
+    description:
+      'The gaming arena of TECHNOVA 4.0 featuring BGMI Classic Squad Showdown. Pick your battlefield and fight your way to the top.',
+
+    rules: [
+      'Participants must register for the BGMI Squad event (Team of 4).',
+      'Mode: Classic.',
+      'Entry Fees: ₹200 per team.',
+      'Participants must follow the event-specific rules announced by the organisers.',
+      'Any form of cheating or unfair play will result in disqualification.'
+    ],
+
+    judgingCriteria: [],
+
+    schedule: {
+      date: '26 September 2026',
+      time: 'Event timings will be announced',
+      location: 'TECHNOVA 4.0',
+      stage: 'BGMI'
+    },
+
+    prize: '₹2,500',
+
+    prizeAmount: 2500,
+
+    teamSize: 4,
+
+    teamSizeMin: 4,
+
+    teamSizeMax: 4,
+
+    teamSizeLabel: 'TEAM OF 4 (SQUAD)',
+
+    image: bgmiPoster,
+
+    featured: true,
+
+    colorAccent: 'cyan',
+
+    tags: [
+      '₹2,500 PRIZE POOL',
+      'TEAM OF 4 (SQUAD)',
+      'MODE: CLASSIC',
+      '₹200 / TEAM',
+      'TECHNOVA 4.0'
+    ],
+
+    registrationUrl:
+      'https://forms.gle/tcBTQ3WBHXXAhjPQA',
 
     registrationType: 'google-form',
 
@@ -224,7 +300,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     statusLabel: 'STANDBY',
 
-    image: '/assets/images/IT-Lab.jpg',
+    image: itLabImg,
 
     track: 'TECHNOVA 4.0',
 
@@ -253,7 +329,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     statusLabel: 'IN PROGRESS',
 
-    image: '/assets/images/coder.jpg',
+    image: coderImg,
 
     track: 'Hackathon',
 
@@ -263,7 +339,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
   },
 
   {
-    id: 'timeline-battlezone',
+    id: 'timeline-gaming',
 
     time: 'THROUGHOUT THE DAY',
 
@@ -271,22 +347,22 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     day: 'Day 1',
 
-    title: 'BATTLEZONE',
+    title: 'E-FOOTBALL & BGMI GAMING ARENA',
 
     location: 'TECHNOVA 4.0',
 
     description:
-      'BGMI and FIFA Mobile / E-Football competitions take place during the event.',
+      'BGMI and E-Football solo competitions take place throughout the event.',
 
     status: 'upcoming',
 
     statusLabel: 'STANDBY',
 
-    image: '/assets/images/cyber.jpg',
+    image: efootballPoster,
 
     track: 'Gaming',
 
-    category: 'Battlezone',
+    category: 'Gaming',
 
     badgeColor: 'pink'
   },
@@ -311,7 +387,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     statusLabel: 'FINAL DIRECTIVE',
 
-    image: '/assets/images/Event.jpg',
+    image: eventImg,
 
     track: 'Hackathon',
 
@@ -375,12 +451,12 @@ export const INITIAL_FAQS: FAQItem[] = [
   },
 
   {
-    id: 'faq-battlezone',
+    id: 'faq-gaming-events',
 
-    question: 'What events are included in Battlezone?',
+    question: 'What gaming events are featured in TECHNOVA 4.0?',
 
     answer:
-      'Battlezone includes BGMI and FIFA Mobile / E-Football.',
+      'TECHNOVA 4.0 features two individual gaming tournaments: E-Football (₹2,500 prize pool) and BGMI (₹2,500 prize pool).',
 
     category: 'Registration',
 
@@ -393,7 +469,7 @@ export const INITIAL_FAQS: FAQItem[] = [
     question: 'Are BGMI and E-Football team events?',
 
     answer:
-      'No. BGMI and FIFA Mobile / E-Football are individual competitions.',
+      'E-Football is a solo competition (₹30 per person), while BGMI is a 4-player Squad competition (₹200 per team, TDM mode).',
 
     category: 'Rules & Loadout'
   },
@@ -404,7 +480,7 @@ export const INITIAL_FAQS: FAQItem[] = [
     question: 'What are the prizes?',
 
     answer:
-      'The Hackathon has a ₹30,000 prize pool. Battlezone has ₹2,500 each for BGMI and FIFA Mobile / E-Football, making the total Battlezone prize pool ₹5,000.',
+      'The Hackathon has a ₹30,000 prize pool. E-Football has ₹2,500 and BGMI has ₹2,500, making the total prize pool ₹35,000+.',
 
     category: 'Prizes & Crypto',
 
@@ -441,20 +517,20 @@ export const INITIAL_PRIZES: PrizeCategory[] = [
   },
 
   {
-    id: 'bgmi-prize',
+    id: 'efootball-prize',
 
-    title: 'BGMI',
+    title: 'E-FOOTBALL',
 
-    subtitle: 'BATTLEZONE • SOLO',
+    subtitle: 'GAMING ARENA • SOLO',
 
     amount: '₹2,500',
 
     numericalAmount: 2500,
 
-    icon: '🎮',
+    icon: '⚽',
 
     description:
-      '₹2,500 prize pool for the individual BGMI competition.',
+      '₹2,500 prize pool for the individual E-Football competition.',
 
     badgeBg: '#FF6FB5',
 
@@ -464,20 +540,20 @@ export const INITIAL_PRIZES: PrizeCategory[] = [
   },
 
   {
-    id: 'efootball-prize',
+    id: 'bgmi-prize',
 
-    title: 'FIFA MOBILE / E-FOOTBALL',
+    title: 'BGMI',
 
-    subtitle: 'BATTLEZONE • SOLO',
+    subtitle: 'GAMING ARENA • SOLO',
 
     amount: '₹2,500',
 
     numericalAmount: 2500,
 
-    icon: '⚽',
+    icon: '🎮',
 
     description:
-      '₹2,500 prize pool for the individual FIFA Mobile / E-Football competition.',
+      '₹2,500 prize pool for the individual BGMI competition.',
 
     badgeBg: '#00E5FF',
 

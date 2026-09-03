@@ -161,7 +161,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
 
-    <header className="sticky top-0 z-50 bg-[#FFF5F0] border-b-4 border-black select-none">
+    <header
+      className="sticky top-0 z-50 border-b-4 border-black select-none transition-colors duration-200"
+      style={{ backgroundColor: 'var(--bg-primary)' }}
+    >
 
       {/* ======================================================
           DESKTOP / MAIN NAVBAR
@@ -204,11 +207,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* BRAND TEXT */}
             <div>
 
-              <div className="font-marker text-[10px] sm:text-xs tracking-widest text-zinc-700 uppercase">
+              <div
+                className="font-marker text-[10px] sm:text-xs tracking-widest uppercase font-bold"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 ITSA Presents
               </div>
 
-              <div className="font-headline text-2xl sm:text-3xl leading-none tracking-wide text-black">
+              <div
+                className="font-headline text-2xl sm:text-3xl leading-none tracking-wide"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 TECHNOVA <span className="text-[#FF6FB5]">4.0</span>
               </div>
 
@@ -241,7 +250,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                     px-3
                     py-2
                     border-2
-                    border-black
                     flex
                     items-center
                     gap-1.5
@@ -250,10 +258,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                     ${
                       isActive
-                        ? 'bg-[#FF6FB5] text-white shadow-[3px_3px_0px_0px_#000] -translate-y-0.5'
+                        ? 'nav-item-active -translate-y-0.5'
                         : item.adminOnly
-                        ? 'bg-red-600 text-white hover:bg-black'
-                        : 'bg-white text-black hover:bg-[#FFD54F] hover:shadow-[3px_3px_0px_0px_#000]'
+                        ? 'bg-red-600 text-white border-black hover:bg-black shadow-[3px_3px_0px_0px_#000]'
+                        : 'nav-item-inactive'
                     }
                   `}
                 >
@@ -343,9 +351,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             >
               {theme === 'dark' ? (
-                <Sun className="w-5 h-5" strokeWidth={2.5} />
+                <Sun className="w-5 h-5 text-black" strokeWidth={2.5} />
               ) : (
-                <Moon className="w-5 h-5" strokeWidth={2.5} />
+                <Moon className="w-5 h-5 text-[#FFD54F]" strokeWidth={2.5} />
               )}
             </button>
 
@@ -446,17 +454,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="
+              className={`
                 lg:hidden
-                bg-white
-                text-black
                 p-2
                 border-2
-                border-black
-                shadow-[2px_2px_0px_0px_#000]
-                hover:bg-[#FFD54F]
                 cursor-pointer
-              "
+                transition-colors
+                ${
+                  theme === 'dark'
+                    ? 'bg-[#140e26] text-white border-slate-700 hover:bg-[#FFD54F] hover:text-black hover:border-black'
+                    : 'bg-white text-black border-black hover:bg-[#FFD54F]'
+                }
+              `}
               aria-label="Toggle navigation menu"
             >
 
@@ -484,13 +493,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div
           className="
             lg:hidden
-            bg-[#FFF5F0]
             border-t-4
             border-black
             px-4
             py-4
             space-y-2
+            transition-colors
           "
+          style={{ backgroundColor: 'var(--bg-primary)' }}
         >
 
           {/* NAV LINKS */}
@@ -514,18 +524,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                   px-4
                   py-3
                   border-2
-                  border-black
                   flex
                   items-center
                   justify-between
                   cursor-pointer
+                  transition-all
 
                   ${
                     isActive
-                      ? 'bg-[#FF6FB5] text-white shadow-[4px_4px_0px_0px_#000]'
+                      ? 'nav-item-active shadow-[4px_4px_0px_0px_#000]'
                       : item.adminOnly
-                      ? 'bg-red-600 text-white shadow-[3px_3px_0px_#000]'
-                      : 'bg-white text-black hover:bg-[#FFD54F]'
+                      ? 'bg-red-600 text-white border-black shadow-[3px_3px_0px_#000]'
+                      : 'nav-item-inactive'
                   }
                 `}
 

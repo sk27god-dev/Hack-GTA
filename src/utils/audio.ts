@@ -1,6 +1,5 @@
-import gtaTheme from '../assets/GTA Theme.mp3';
+import { getOrCreateAudio } from '../components/GlobalMusic';
 
-let bgAudio: HTMLAudioElement | null = null;
 let audioCtx: AudioContext | null = null;
 
 const getAudioContext = () => {
@@ -14,12 +13,13 @@ const getAudioContext = () => {
 };
 
 export const getSoundEnabled = (): boolean => {
-  const saved = localStorage.getItem('vice_sound_enabled');
-  return saved === null ? true : saved === 'true';
+  const saved = localStorage.getItem('technova-sound');
+  return saved === null ? true : saved === 'on';
 };
 
 export const setSoundEnabled = (enabled: boolean) => {
-  localStorage.setItem('vice_sound_enabled', String(enabled));
+  localStorage.setItem('technova-sound', enabled ? 'on' : 'off');
+  const bgAudio = getOrCreateAudio();
   if (bgAudio) {
     bgAudio.muted = !enabled;
     if (enabled) {
@@ -31,11 +31,11 @@ export const setSoundEnabled = (enabled: boolean) => {
 };
 
 export const initAudio = () => {
-  if (bgAudio) return; // Already initialized
+  const bgAudio = getOrCreateAudio();
+  if (!bgAudio) return;
   
-  bgAudio = new Audio(gtaTheme);
   bgAudio.loop = true;
-  bgAudio.volume = 0.35; // Moderate volume for background music
+  bgAudio.volume = 0.35;
   bgAudio.muted = !getSoundEnabled();
   
   if (getSoundEnabled()) {

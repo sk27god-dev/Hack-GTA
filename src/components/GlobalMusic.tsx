@@ -1,7 +1,8 @@
 import React, {
   useEffect,
   useRef,
-  useState
+  useState,
+  useCallback
 } from 'react';
 
 import {
@@ -9,261 +10,141 @@ import {
   VolumeX
 } from 'lucide-react';
 
-import bgMusic from '../assets/audio/gta-theme.mp3.mp3';
+import bgMusic from '../assets/GTA Theme.mp3';
 
+let globalAudioInstance: HTMLAudioElement | null = null;
 
-const GlobalMusic: React.FC = () => {
+export const getOrCreateAudio = (): HTMLAudioElement | null => {
+  if (typeof window === 'undefined') return null;
+  if (!globalAudioInstance) {
+    globalAudioInstance = new Audio();
+    globalAudioInstance.src = bgMusic;
+    globalAudioInstance.loop = true;
+    globalAudioInstance.volume = 0.35;
+    globalAudioInstance.preload = 'auto';
+    try {
+      globalAudioInstance.load();
+    } catch {
+      // Ignore
+    }
+  }
+  return globalAudioInstance;
+};
 
-  const audioRef =
-    useRef<HTMLAudioElement | null>(null);
+// Immediate pre-buffer on bundle load
+if (typeof window !== 'undefined') {
+  getOrCreateAudio();
+}
 
+export const GlobalMusic: React.FC = () => {
+  const [isSoundOn, setIsSoundOn] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem('technova-sound');
+      if (saved === null) return true;
+      return saved === 'on';
+    } catch {
+      return true;
+    }
+  });
 
-  /* ============================================================
-     SOUND STATE
-     ============================================================ */
+  const isSoundOnRef = useRef(isSoundOn);
+  isSoundOnRef.current = isSoundOn;
 
-  const [isSoundOn, setIsSoundOn] =
-    useState<boolean>(() => {
-
-      try {
-
-        const saved =
-          localStorage.getItem(
-            'technova-sound'
-          );
-
-        if (saved === null) {
-          return true;
-        }
-
-        return saved === 'on';
-
-      } catch {
-
-        return true;
-
-      }
-
-    });
-
-
-  const [hasInteracted, setHasInteracted] =
-    useState(false);
-
-
-  /* ============================================================
-     CREATE AUDIO
-     ============================================================ */
-
-  useEffect(() => {
-
-    const audio =
-      new Audio(bgMusic);
-
-    audio.loop = true;
-
+  const tryPlayAudio = useCallback(() => {
+    if (!isSoundOnRef.current) return;
+    const audio = getOrCreateAudio();
+    if (!audio) return;
+    
     audio.volume = 0.35;
-
-    audio.preload = 'auto';
-
-    audioRef.current = audio;
-
-
-    return () => {
-
-      audio.pause();
-
-      audio.currentTime = 0;
-
-      audioRef.current = null;
-
-    };
-
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay restrictions will be unlocked on first interaction
+      });
+    }
   }, []);
 
-
-  /* ============================================================
-     SAVE SOUND PREFERENCE
-     ============================================================ */
-
+  /* Save preference */
   useEffect(() => {
-
     try {
-
-      localStorage.setItem(
-        'technova-sound',
-        isSoundOn ? 'on' : 'off'
-      );
-
+      localStorage.setItem('technova-sound', isSoundOn ? 'on' : 'off');
     } catch {
-
-      // Ignore localStorage errors.
-
+      // Ignore
     }
-
   }, [isSoundOn]);
 
-
-  /* ============================================================
-     AUTOPLAY
-     ============================================================ */
-
+  /* Main Autoplay & User Interaction Unlocker */
   useEffect(() => {
+    const audio = getOrCreateAudio();
+    if (!audio) return;
 
-    const audio =
-      audioRef.current;
-
-    if (!audio || !isSoundOn) {
-      return;
+    if (isSoundOn) {
+      tryPlayAudio();
+    } else {
+      audio.pause();
     }
 
+    const unlockAndPlay = () => {
+      if (!isSoundOnRef.current) return;
+      if (!audio.paused) return;
 
-    audio.play().catch(() => {
+      audio.volume = 0.35;
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // Audio unlocked and playing smoothly
+            cleanupListeners();
+          })
+          .catch(() => {
+            // Still waiting for next valid interaction
+          });
+      }
+    };
 
-      /*
-       Browser blocked autoplay.
+    const events = ['pointerdown', 'mousedown', 'touchstart', 'click', 'keydown', 'scroll', 'wheel'];
+    
+    const cleanupListeners = () => {
+      events.forEach(evt => {
+        window.removeEventListener(evt, unlockAndPlay);
+      });
+    };
 
-       The interaction listener below will
-       start the music after the user clicks.
-      */
-
+    events.forEach(evt => {
+      window.addEventListener(evt, unlockAndPlay, { passive: true });
     });
 
-  }, [isSoundOn]);
+    // Handle tab visibility change
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        audio.pause();
+      } else if (isSoundOnRef.current) {
+        tryPlayAudio();
+      }
+    };
 
-
-  /* ============================================================
-     START AFTER USER INTERACTION
-     ============================================================ */
-
-  useEffect(() => {
-
-    if (!isSoundOn || hasInteracted) {
-      return;
-    }
-
-
-    const startMusic =
-      async () => {
-
-        const audio =
-          audioRef.current;
-
-        if (!audio) {
-          return;
-        }
-
-
-        try {
-
-          await audio.play();
-
-          setHasInteracted(true);
-
-        } catch {
-
-          // Browser may still block playback.
-
-        }
-
-      };
-
-
-    const handleInteraction =
-      () => {
-
-        startMusic();
-
-      };
-
-
-    document.addEventListener(
-      'click',
-      handleInteraction,
-      { once: true }
-    );
-
-    document.addEventListener(
-      'keydown',
-      handleInteraction,
-      { once: true }
-    );
-
-    document.addEventListener(
-      'touchstart',
-      handleInteraction,
-      { once: true }
-    );
-
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-
-      document.removeEventListener(
-        'click',
-        handleInteraction
-      );
-
-      document.removeEventListener(
-        'keydown',
-        handleInteraction
-      );
-
-      document.removeEventListener(
-        'touchstart',
-        handleInteraction
-      );
-
+      cleanupListeners();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
+  }, [isSoundOn, tryPlayAudio]);
 
-  }, [
-    isSoundOn,
-    hasInteracted
-  ]);
+  /* TOGGLE SOUND */
+  const toggleSound = () => {
+    const audio = getOrCreateAudio();
+    if (!audio) return;
 
-
-  /* ============================================================
-     TOGGLE SOUND
-     ============================================================ */
-
-  const toggleSound =
-    async () => {
-
-      const audio =
-        audioRef.current;
-
-      if (!audio) {
-        return;
-      }
-
-
-      if (isSoundOn) {
-
-        audio.pause();
-
-        setIsSoundOn(false);
-
-      } else {
-
-        setIsSoundOn(true);
-
-        setHasInteracted(true);
-
-        audio.volume = 0.35;
-
-
-        try {
-
-          await audio.play();
-
-        } catch {
-
-          // Playback may be blocked.
-
-        }
-
-      }
-
-    };
+    if (isSoundOn) {
+      audio.pause();
+      setIsSoundOn(false);
+    } else {
+      setIsSoundOn(true);
+      audio.volume = 0.35;
+      audio.play().catch(() => {});
+    }
+  };
 
 
   /* ============================================================
@@ -271,94 +152,74 @@ const GlobalMusic: React.FC = () => {
      ============================================================ */
 
   return (
-
     <button
-
+      id="global-sound-toggle-btn"
       onClick={toggleSound}
-
       aria-label={
         isSoundOn
           ? 'Turn background music off'
           : 'Turn background music on'
       }
-
       title={
         isSoundOn
           ? 'Turn music off'
           : 'Turn music on'
       }
-
       className="
         fixed
         right-4
         bottom-4
         sm:right-6
         sm:bottom-6
-
         z-[99999]
-
         w-12
         h-12
         sm:w-14
         sm:h-14
-
-        bg-black
-        text-white
-
+        bg-[#FF6FB5]
+        hover:bg-[#00E5FF]
+        text-black
         border-2
-        border-white
-
+        border-black
         comic-border-sm
-
         flex
         items-center
         justify-center
-
-        shadow-[4px_4px_0px_#FF6FB5]
-
-        hover:bg-[#FF6FB5]
-        hover:text-black
-        hover:border-black
-
+        shadow-[4px_4px_0px_#000]
+        hover:shadow-[5px_5px_0px_#000]
         active:translate-x-1
         active:translate-y-1
-
         transition-all
         duration-200
-
         cursor-pointer
       "
     >
-
       {isSoundOn ? (
-
         <Volume2
           className="
             w-6
             h-6
             sm:w-7
             sm:h-7
+            text-black
+            stroke-[2.5px]
           "
         />
-
       ) : (
-
         <VolumeX
           className="
             w-6
             h-6
             sm:w-7
             sm:h-7
+            text-black
+            stroke-[2.5px]
+            opacity-70
           "
         />
-
       )}
-
     </button>
-
   );
-
 };
-
 
 export default GlobalMusic;

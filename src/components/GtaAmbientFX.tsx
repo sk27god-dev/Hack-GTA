@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 
 const particles = [
@@ -17,20 +17,28 @@ const particles = [
 ];
 
 export const GtaAmbientFX: React.FC = () => {
-  const [mouse, setMouse] = useState({ x: 50, y: 50 });
+  const lightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let rafId: number | null = null;
     const handleMouseMove = (event: MouseEvent) => {
-      setMouse({
-        x: (event.clientX / window.innerWidth) * 100,
-        y: (event.clientY / window.innerHeight) * 100,
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        if (lightRef.current) {
+          const x = (event.clientX / window.innerWidth) * 100;
+          const y = (event.clientY / window.innerHeight) * 100;
+          lightRef.current.style.left = `${x}%`;
+          lightRef.current.style.top = `${y}%`;
+        }
+        rafId = null;
       });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, []);
 
@@ -38,10 +46,11 @@ export const GtaAmbientFX: React.FC = () => {
     <>
       {/* Cursor-following neon spotlight */}
       <div
+        ref={lightRef}
         className="gta-cursor-light"
         style={{
-          left: `${mouse.x}%`,
-          top: `${mouse.y}%`,
+          left: '50%',
+          top: '50%',
         }}
       />
 

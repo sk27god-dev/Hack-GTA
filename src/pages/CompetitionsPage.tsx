@@ -60,15 +60,18 @@ export const CompetitionsPage: React.FC<CompetitionsPageProps> = ({
 
   const tracks = [
     'All',
-    'Cybersecurity',
-    'Algorithms',
-    'Artificial Intelligence',
-    'Game Dev',
-    'Open Innovation'
+    'Hackathon',
+    'Gaming',
+    'E-Football',
+    'BGMI'
   ];
 
   const filteredCompetitions = competitions.filter(comp => {
-    const matchesTrack = selectedTrack === 'All' || comp.track === selectedTrack;
+    const matchesTrack =
+      selectedTrack === 'All' ||
+      comp.track.toLowerCase() === selectedTrack.toLowerCase() ||
+      comp.category.toLowerCase() === selectedTrack.toLowerCase() ||
+      comp.title.toLowerCase().includes(selectedTrack.toLowerCase());
     const matchesSearch =
       comp.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       comp.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -86,14 +89,13 @@ export const CompetitionsPage: React.FC<CompetitionsPageProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="max-w-3xl space-y-2">
             <div className="inline-block bg-[#00f5ff]/20 text-[#00f5ff] px-2.5 py-0.5 border border-[#00f5ff]/35 font-headline text-sm sm:text-lg tracking-wider rounded">
-              BOUNTY BOARD • 6 ACTIVE MISSIONS
+              BOUNTY BOARD • 3 OFFICIAL MISSIONS
             </div>
             <h1 className="font-headline text-3xl xs:text-4xl sm:text-6xl lg:text-7xl text-white drop-shadow-[0_0_12px_rgba(255,0,127,0.6)] leading-none">
-              COMPETITION TRACKS & OPERATIONAL GAUNTLETS
+              COMPETITION TRACKS & GAUNTLETS
             </h1>
             <p className="text-xs xs:text-sm sm:text-base text-zinc-350 font-bold max-w-2xl leading-relaxed">
-              Choose your specialization. From decentralized vault breaches to autonomous AI racers
-              and chaos engineering, each track features independent bounties and industry judges.
+              Choose your battlefield. From the 12-hour TECHNOVA Hackathon to high-octane E-Football and BGMI showdowns, each mission features independent prize pools and dedicated brackets.
             </p>
           </div>
 
@@ -169,20 +171,24 @@ export const CompetitionsPage: React.FC<CompetitionsPageProps> = ({
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {filteredCompetitions.map(comp => (
-            <div
-              key={comp.id}
-              id={`comp-card-${comp.id}`}
-              className="bg-[#110925]/75 border border-[#ff007f]/30 flex flex-col justify-between group hover:-translate-y-1.5 transition-all relative overflow-hidden rounded-lg shadow-[0_0_12px_rgba(255,0,127,0.15)] hover:border-[#00f5ff] hover:shadow-[0_0_15px_rgba(0,245,255,0.25)] text-white"
-            >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+          {filteredCompetitions.map((comp, idx) => {
+            const isThirdCard = idx === 2 && filteredCompetitions.length === 3;
+            return (
+              <div
+                key={comp.id}
+                id={`comp-card-${comp.id}`}
+                className={`bg-[#110925]/75 border border-[#ff007f]/30 flex flex-col justify-between group hover:-translate-y-1.5 transition-all relative overflow-hidden rounded-lg shadow-[0_0_12px_rgba(255,0,127,0.15)] hover:border-[#00f5ff] hover:shadow-[0_0_15px_rgba(0,245,255,0.25)] text-white ${
+                  isThirdCard ? 'md:col-span-2 md:w-[calc(50%-0.75rem)] md:mx-auto w-full' : 'w-full'
+                }`}
+              >
               {/* Top Image */}
               <div>
                 <div className="relative border-b border-slate-700/60 overflow-hidden">
                   <img
                     src={comp.image}
                     alt={comp.title}
-                    className="w-full h-44 sm:h-52 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-48 sm:h-56 object-cover object-top group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-2 left-2 bg-black/85 text-[#00f5ff] text-[10px] sm:text-xs font-bold px-2 py-0.5 border border-[#00f5ff]/40 uppercase font-headline rounded">
                     {comp.track}
@@ -256,7 +262,8 @@ export const CompetitionsPage: React.FC<CompetitionsPageProps> = ({
                 </div>
               </div>
             </div>
-          ))}
+          );
+        })}
         </div>
       )}
     </div>

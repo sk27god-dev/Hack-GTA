@@ -113,7 +113,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved) as Competition[];
+        const hasOldBattlezone = parsed.some(c => c.id === 'battlezone' || c.title?.toUpperCase() === 'BATTLEZONE');
+        const hasEfootball = parsed.some(c => c.id === 'efootball' || c.title?.toUpperCase().includes('FOOTBALL'));
+        const bgmiComp = parsed.find(c => c.id === 'bgmi' || c.title?.toUpperCase().includes('BGMI'));
+        const hasLatestBgmi = bgmiComp && bgmiComp.registrationUrl === 'https://forms.gle/tcBTQ3WBHXXAhjPQA';
+
+        if (hasOldBattlezone || !hasEfootball || !hasBgmi || !hasLatestBgmi) {
+          localStorage.setItem('vice_competitions', JSON.stringify(INITIAL_COMPETITIONS));
+          return INITIAL_COMPETITIONS;
+        }
+
+        return parsed;
       } catch {
         return INITIAL_COMPETITIONS;
       }
@@ -131,7 +142,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved) as TimelineEvent[];
+        const hasOldBattlezone = parsed.some(t => t.id === 'timeline-battlezone' || t.title?.toUpperCase() === 'BATTLEZONE');
+        if (hasOldBattlezone) {
+          localStorage.setItem('vice_timeline', JSON.stringify(INITIAL_TIMELINE));
+          return INITIAL_TIMELINE;
+        }
+        return parsed;
       } catch {
         return INITIAL_TIMELINE;
       }
@@ -149,7 +166,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved) as FAQItem[];
+        const hasOldFaq = parsed.some(f => f.id === 'faq-battlezone');
+        if (hasOldFaq) {
+          localStorage.setItem('vice_faqs', JSON.stringify(INITIAL_FAQS));
+          return INITIAL_FAQS;
+        }
+        return parsed;
       } catch {
         return INITIAL_FAQS;
       }

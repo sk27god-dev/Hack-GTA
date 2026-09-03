@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { useApp } from '../context/AppContext';
 import { useAuth } from '../context/AuthContext';
@@ -13,6 +13,7 @@ import {
 } from 'motion/react';
 
 import technovaBg from '../assets/videos/technova-bg-gta.mp4';
+import heroPoster from '../assets/images/hero_poster_optimized.jpg';
 
 
 import {
@@ -76,6 +77,20 @@ export const HomePage: React.FC<HomePageProps> = ({
   } = useApp();
 
   const { currentUser } = useAuth();
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    }
+  }, []);
 
 
   /* ============================================================
@@ -160,21 +175,21 @@ export const HomePage: React.FC<HomePageProps> = ({
       number: 'MISSION 02',
       tag: 'BATTLE',
       title: 'BGMI SHOWDOWN',
-      subtitle: "THE STREETS AREN'T SAFE.",
+      subtitle: "THE STREETS AREN'T SAFE. • MODE: CLASSIC",
       description:
-        'Assemble your squad, enter the battleground, and fight your way to the top. Your squad. Your strategy. Your game.',
+        'Assemble your squad, enter the battleground, and fight your way to the top in Classic mode. Your squad. Your strategy. Your game.',
       icon: Crosshair,
       accent: '#FF6FB5',
       details: [
-        '4 MEMBERS',
+        '4 MEMBERS (SQUAD)',
         '₹200 / TEAM',
-        'SQUAD BATTLE',
-        'SURVIVE',
-        'STRATEGIZE',
+        'MODE: CLASSIC',
+        'SURVIVE & STRATEGIZE',
+        '₹2,500 PRIZE POOL',
         'DOMINATE'
       ],
       missionText:
-        'YOUR SQUAD. YOUR STRATEGY. YOUR GAME.'
+        'YOUR SQUAD. YOUR STRATEGY. YOUR GAME. • MODE: CLASSIC'
     },
 
 
@@ -189,11 +204,11 @@ export const HomePage: React.FC<HomePageProps> = ({
       icon: Gamepad2,
       accent: '#FFD54F',
       details: [
-        'SOLO',
-        '₹50 / PERSON',
+        'SOLO COMPETITION',
+        '₹30 / PERSON',
         'VIRTUAL PITCH',
+        '₹2,500 PRIZE POOL',
         'EVERY GOAL COUNTS',
-        'EVERY MATCH',
         'NEW MISSION'
       ],
       missionText:
@@ -317,16 +332,27 @@ export const HomePage: React.FC<HomePageProps> = ({
             NO BLACK OVERLAY
         ==================================================== */}
 
-        <div className="absolute inset-0 z-0">
+        <div
+          className="absolute inset-0 z-0 bg-black"
+          style={{
+            backgroundImage: `url(${heroPoster})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
 
           <video
+            ref={videoRef}
             src={technovaBg}
+            poster={heroPoster}
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            className="
+            onCanPlay={() => setVideoLoaded(true)}
+            onLoadedData={() => setVideoLoaded(true)}
+            className={`
               absolute
               inset-0
               w-full
@@ -335,10 +361,12 @@ export const HomePage: React.FC<HomePageProps> = ({
               object-cover
               object-center
 
-              opacity-100
+              transition-opacity
+              duration-500
+              ${videoLoaded ? 'opacity-100' : 'opacity-95'}
 
               select-none
-            "
+            `}
           />
 
         </div>
@@ -394,9 +422,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div
             className="
               w-fit
-              max-w-[92vw]
-              px-5
-              py-6
+              max-w-[95vw]
+              sm:max-w-[92vw]
+              px-4
+              py-5
               sm:px-8
               sm:py-7
               bg-black/25
@@ -413,7 +442,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <motion.div
             variants={heroItemVariants}
             className="
-              mb-3
+              mb-2
               sm:mb-4
             "
           >
@@ -425,21 +454,26 @@ export const HomePage: React.FC<HomePageProps> = ({
                 bg-[#FF6FB5]
                 text-white
 
-                border-[3px]
+                border-2
+                sm:border-[3px]
                 border-black
 
-                px-5
+                px-4
                 sm:px-7
-                py-2
+                py-1.5
+                sm:py-2
 
                 font-headline
 
-                text-sm
+                text-xs
+                xs:text-sm
                 sm:text-lg
 
-                tracking-[0.25em]
+                tracking-[0.2em]
+                sm:tracking-[0.25em]
 
-                shadow-[5px_5px_0px_#000]
+                shadow-[3px_3px_0px_#000]
+                sm:shadow-[5px_5px_0px_#000]
 
                 transform
                 -rotate-1
@@ -463,13 +497,14 @@ export const HomePage: React.FC<HomePageProps> = ({
               className="
                 font-headline
 
-                text-[3.5rem]
-                xs:text-[4rem]
+                text-[2.75rem]
+                xs:text-[3.5rem]
                 sm:text-[5rem]
                 md:text-[6rem]
                 lg:text-[7rem]
 
-                leading-[0.75]
+                leading-[0.8]
+                sm:leading-[0.75]
 
                 tracking-[-0.03em]
 
@@ -494,12 +529,13 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             <div
               className="
-                mt-3
+                mt-2
                 sm:mt-4
 
                 font-headline
 
-                text-4xl
+                text-3xl
+                xs:text-4xl
                 sm:text-5xl
                 md:text-6xl
 
@@ -527,7 +563,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <motion.div
             variants={heroItemVariants}
             className="
-              mt-4
+              mt-3
               sm:mt-5
               max-w-3xl
             "
@@ -537,13 +573,15 @@ export const HomePage: React.FC<HomePageProps> = ({
               className="
                 text-white
 
-                text-sm
+                text-xs
+                xs:text-sm
                 sm:text-base
                 md:text-lg
 
                 font-black
 
-                tracking-[0.12em]
+                tracking-[0.1em]
+                sm:tracking-[0.12em]
 
                 uppercase
 
@@ -560,7 +598,8 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 text-[#FFD54F]
 
-                text-xs
+                text-[10px]
+                xs:text-xs
                 sm:text-sm
 
                 font-bold
@@ -582,37 +621,42 @@ export const HomePage: React.FC<HomePageProps> = ({
 
           <motion.div
             variants={heroItemVariants}
-            className="mt-6"
+            className="mt-4 sm:mt-6"
           >
 
             <div
               className="
                 inline-flex
                 items-center
-                gap-2
+                gap-1.5
+                sm:gap-2
 
                 bg-white
                 text-black
 
-                border-[3px]
+                border-2
+                sm:border-[3px]
                 border-black
 
-                px-5
+                px-4
                 sm:px-7
-                py-2
+                py-1.5
+                sm:py-2
 
                 font-headline
 
-                text-sm
+                text-xs
+                xs:text-sm
                 sm:text-lg
 
                 tracking-wider
 
-                shadow-[5px_5px_0px_#FF6FB5]
+                shadow-[4px_4px_0px_#FF6FB5]
+                sm:shadow-[5px_5px_0px_#FF6FB5]
               "
             >
 
-              <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+              <Calendar className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
 
               26 SEPTEMBER 2026
 
@@ -627,18 +671,21 @@ export const HomePage: React.FC<HomePageProps> = ({
           <motion.div
             variants={heroItemVariants}
             className="
-              mt-4
+              mt-3
+              sm:mt-4
 
               flex
               items-center
               justify-center
-              gap-2
+              gap-1.5
+              sm:gap-2
 
               text-white
 
               font-bold
 
-              text-xs
+              text-[10px]
+              xs:text-xs
               sm:text-sm
 
               tracking-wider
@@ -649,7 +696,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             "
           >
 
-            <MapPin className="w-4 h-4 text-[#00E5FF]" />
+            <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00E5FF]" />
 
             ST. JOHN COLLEGE, PALGHAR
 
@@ -662,8 +709,8 @@ export const HomePage: React.FC<HomePageProps> = ({
             variants={heroItemVariants}
             className="
               absolute
-              bottom-7
-              sm:bottom-9
+              bottom-4
+              sm:bottom-8
               left-1/2
               -translate-x-1/2
 
@@ -677,18 +724,21 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             <span
               className="
-                text-[9px]
+                text-[8px]
+                xs:text-[9px]
                 sm:text-xs
 
                 font-black
 
-                tracking-[0.3em]
+                tracking-[0.25em]
+                sm:tracking-[0.3em]
 
                 uppercase
 
                 gta-shadow-black
 
-                mb-2
+                mb-1
+                sm:mb-2
               "
             >
               SELECT YOUR MISSION
@@ -697,8 +747,10 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             <ChevronDown
               className="
-                w-6
-                h-6
+                w-5
+                h-5
+                sm:w-6
+                sm:h-6
 
                 text-[#FF6FB5]
 
@@ -791,13 +843,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 leading-none
 
-                text-black
-
                 tracking-wide
               "
               style={{
                 fontFamily:
-                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif'
+                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
+                color: 'var(--text-primary)'
               }}
             >
               CHOOSE YOUR BATTLEFIELD
@@ -811,12 +862,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                 text-sm
                 sm:text-base
 
-                text-zinc-600
-
                 font-bold
 
                 max-w-2xl
               "
+              style={{ color: 'var(--text-secondary)' }}
             >
               Vice City is calling. Pick your mission, assemble your crew
               and make your move.
@@ -1299,44 +1349,45 @@ export const HomePage: React.FC<HomePageProps> = ({
                 >
 
                   <button
-                    onClick={handleMissionRegister}
+                    id="mission-register-btn"
+                    onClick={() => {
+                      if (activeMission === 1) {
+                        window.open('https://forms.gle/tcBTQ3WBHXXAhjPQA', '_blank', 'noopener,noreferrer');
+                      } else if (activeMission === 2) {
+                        window.open('https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header', '_blank', 'noopener,noreferrer');
+                      } else {
+                        handleMissionRegister();
+                      }
+                    }}
                     className="
                       bg-[#FF6FB5]
-
                       hover:bg-[#00E5FF]
                       hover:text-black
-
                       text-white
-
+                      btn-pink
                       border-[3px]
                       border-black
-
                       px-6
                       py-3
-
                       font-headline
-
                       text-lg
-
                       flex
                       items-center
                       justify-center
                       gap-2
-
                       shadow-[4px_4px_0px_#000]
-
                       transition-all
-
                       cursor-pointer
                     "
                   >
-
                     <Zap className="w-5 h-5" />
-
-                    {currentUser
+                    {activeMission === 1
+                      ? 'REGISTER FOR BGMI (CLASSIC)'
+                      : activeMission === 2
+                      ? 'REGISTER FOR E-FOOTBALL'
+                      : currentUser
                       ? 'MANAGE YOUR CREW'
                       : 'REGISTER NOW'}
-
                   </button>
 
 
@@ -1739,13 +1790,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                   text-4xl
                   sm:text-6xl
 
-                  text-black
-
                   leading-none
                 "
                 style={{
                   fontFamily:
-                    'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif'
+                    'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
+                  color: 'var(--text-primary)'
                 }}
               >
                 MAIN EVENTS
@@ -1761,26 +1811,19 @@ export const HomePage: React.FC<HomePageProps> = ({
                 setActiveTab('competitions')
               }
               className="
-                bg-white
-
-                hover:bg-[#00E5FF]
-
+                bg-[#00E5FF]
+                hover:bg-[#FFD54F]
                 text-black
-
                 font-headline
-
                 text-lg
-
                 px-4
                 py-2
-
                 border-2
                 border-black
-
                 shadow-[3px_3px_0px_#000]
-
                 flex
                 items-center
+                justify-center
                 gap-2
 
                 cursor-pointer
@@ -1809,32 +1852,27 @@ export const HomePage: React.FC<HomePageProps> = ({
             "
           >
 
-            {featuredComps.map(comp => (
+            {featuredComps.map((comp, idx) => {
+              const isThirdCard = idx === 2 && featuredComps.length === 3;
 
-              <div
-                key={comp.id}
-
-                className="
-                  bg-white
-
-                  border-[3px]
-                  border-black
-
-                  p-4
-
-                  flex
-                  flex-col
-                  justify-between
-
-                  shadow-[5px_5px_0px_#000]
-
-                  group
-
-                  hover:-translate-y-1
-
-                  transition-all
-                "
-              >
+              return (
+                <div
+                  key={comp.id}
+                  className={`
+                    bg-white
+                    border-[3px]
+                    border-black
+                    p-4
+                    flex
+                    flex-col
+                    justify-between
+                    shadow-[5px_5px_0px_#000]
+                    group
+                    hover:-translate-y-1
+                    transition-all
+                    ${isThirdCard ? 'md:col-span-2 md:w-[calc(50%-0.75rem)] md:mx-auto w-full' : 'w-full'}
+                  `}
+                >
 
                 <div>
 
@@ -1860,6 +1898,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                         sm:h-56
 
                         object-cover
+                        object-top
 
                         group-hover:scale-105
 
@@ -2060,8 +2099,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
 
               </div>
-
-            ))}
+            );
+          })}
 
           </div>
 
@@ -2157,6 +2196,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   leading-none
                 "
+                style={{
+                  fontFamily:
+                    'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
+                  color: 'var(--text-primary)'
+                }}
               >
                 TECHNOVA TIMELINE
               </h2>
@@ -2528,17 +2572,18 @@ export const HomePage: React.FC<HomePageProps> = ({
 
         <div
           className="
-            bg-[#FFF5F0]
-
             border-[3px]
             border-black
-
             shadow-[6px_6px_0px_#000]
-
             p-5
             sm:p-8
             md:p-10
+            transition-colors
           "
+          style={{
+            backgroundColor: 'var(--card-bg-solid)',
+            color: 'var(--text-primary)'
+          }}
         >
 
           <div
@@ -2595,10 +2640,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                   text-4xl
                   sm:text-6xl
 
-                  text-black
-
                   leading-none
                 "
+                style={{ color: 'var(--text-primary)' }}
               >
                 ₹{totalPrize.toLocaleString()}+
 
@@ -2609,12 +2653,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                 className="
                   text-xs
 
-                  text-zinc-600
-
                   font-bold
 
                   mt-2
                 "
+                style={{ color: 'var(--text-secondary)' }}
               >
                 Total prize value across TECHNOVA 4.0 competitions.
               </p>
@@ -2687,8 +2730,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 key={prize.id}
 
                 className="
-                  bg-white
-
                   border-2
                   border-black
 
@@ -2700,6 +2741,10 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   transition-all
                 "
+                style={{
+                  backgroundColor: 'var(--card-bg)',
+                  color: 'var(--text-primary)'
+                }}
               >
 
                 <div
@@ -2756,10 +2801,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                     text-3xl
                     sm:text-4xl
 
-                    text-black
-
                     leading-none
                   "
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   {prize.amount}
                 </div>
@@ -2771,8 +2815,6 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                     font-bold
 
-                    text-zinc-500
-
                     uppercase
 
                     block
@@ -2780,6 +2822,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     mt-1
                     mb-3
                   "
+                  style={{ color: 'var(--text-muted)' }}
                 >
                   {prize.subtitle}
                 </span>
@@ -2789,12 +2832,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                   className="
                     text-xs
 
-                    text-zinc-700
-
                     font-medium
 
                     leading-relaxed
                   "
+                  style={{ color: 'var(--text-secondary)' }}
                 >
                   {prize.description}
                 </p>
@@ -2935,17 +2977,18 @@ export const HomePage: React.FC<HomePageProps> = ({
 
         <div
           className="
-            bg-white
-
             border-[3px]
             border-black
-
             shadow-[6px_6px_0px_#000]
-
             p-5
             sm:p-8
             md:p-10
+            transition-colors
           "
+          style={{
+            backgroundColor: 'var(--card-bg-solid)',
+            color: 'var(--text-primary)'
+          }}
         >
 
           <div
@@ -3002,10 +3045,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                   text-3xl
                   sm:text-5xl
 
-                  text-black
-
                   leading-none
                 "
+                style={{ color: 'var(--text-primary)' }}
               >
                 FREQUENTLY ASKED QUESTIONS
 
@@ -3069,18 +3111,18 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div
                   key={faq.id}
 
-
                   className="
                     border-2
                     border-black
-
-                    bg-[#FFF5F0]
 
                     overflow-hidden
 
                     shadow-[2px_2px_0px_#000]
                   "
-
+                  style={{
+                    backgroundColor: 'var(--card-bg)',
+                    color: 'var(--text-primary)'
+                  }}
                 >
 
                   <button
@@ -3103,7 +3145,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                       cursor-pointer
 
-                      hover:bg-[#FFD54F]/50
+                      hover:bg-[#FFD54F]/30
 
                       transition-colors
                     "
@@ -3137,9 +3179,8 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                           text-lg
                           sm:text-xl
-
-                          text-black
                         "
+                        style={{ color: 'var(--text-primary)' }}
                       >
 
                         {faq.question}
@@ -3155,8 +3196,10 @@ export const HomePage: React.FC<HomePageProps> = ({
                         h-7
 
                         bg-black
-
                         text-white
+
+                        border
+                        border-black
 
                         flex
                         items-center
@@ -3178,7 +3221,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </button>
 
 
-                  <AnimatePresence initial={false}>
+                  <AnimatePresence>
 
                     {isOpen && (
 
@@ -3201,51 +3244,34 @@ export const HomePage: React.FC<HomePageProps> = ({
                         transition={{
                           duration: 0.2
                         }}
+                        className="overflow-hidden"
                       >
 
 
                         <div
                           className="
                             p-4
+
                             pt-0
 
-                            text-xs
-                            sm:text-sm
-
-                            text-zinc-700
-
-                            leading-relaxed
-
-                            font-medium
-
                             border-t
-                            border-black/20
-
-                            bg-white
+                            border-zinc-800/40
                           "
                         >
 
-                          <div className="pt-3">
-                            {faq.answer}
-
-                          </div>
-
-
-                          <div
+                          <p
                             className="
-                              mt-2
+                              text-xs
+                              sm:text-sm
 
-                              text-[10px]
+                              font-medium
 
-                              font-bold
-
-                              text-zinc-500
-
-                              uppercase
+                              leading-relaxed
                             "
+                            style={{ color: 'var(--text-secondary)' }}
                           >
-                            Category: {faq.category}
-                          </div>
+                            {faq.answer}
+                          </p>
 
                         </div>
 
