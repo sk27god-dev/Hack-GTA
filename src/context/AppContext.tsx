@@ -32,6 +32,237 @@ import {
 } from '../utils/audio';
 
 
+/* ============================================================
+   FORCE CURRENT EVENT DETAILS
+   ============================================================ */
+
+const CURRENT_COMPETITIONS: Competition[] =
+  INITIAL_COMPETITIONS.map(
+    competition => {
+
+      if (
+        competition.id ===
+        'technova-hackathon'
+      ) {
+
+        return {
+          ...competition,
+
+          schedule: {
+            ...competition.schedule,
+            date: '28 September 2026',
+            time: '8:00 AM – 8:00 PM'
+          },
+
+          tags: [
+            '₹30,000 PRIZE POOL',
+            '12 HOURS',
+            '28 SEPTEMBER 2026',
+            '8:00 AM – 8:00 PM',
+            'IT LABS',
+            'MEALS PROVIDED',
+            'TEAM 2–4'
+          ]
+        };
+
+      }
+
+
+      if (
+        competition.id ===
+        'efootball'
+      ) {
+
+        return {
+          ...competition,
+
+          schedule: {
+            ...competition.schedule,
+            date: '25 September 2026',
+            time: '2:00 PM – 5:00 PM'
+          },
+
+          tags: [
+            '₹2,500 PRIZE POOL',
+            '25 SEPTEMBER 2026',
+            '2:00 PM – 5:00 PM',
+            'SOLO COMPETITION',
+            'TECHNOVA 4.0'
+          ]
+        };
+
+      }
+
+
+      if (
+        competition.id ===
+        'bgmi'
+      ) {
+
+        return {
+          ...competition,
+
+          schedule: {
+            ...competition.schedule,
+            date: '25 September 2026',
+            time: '2:00 PM – 5:00 PM'
+          },
+
+          tags: [
+            '₹2,500 PRIZE POOL',
+            '25 SEPTEMBER 2026',
+            '2:00 PM – 5:00 PM',
+            'TEAM OF 4 (SQUAD)',
+            'MODE: CLASSIC',
+            '₹200 / TEAM',
+            'TECHNOVA 4.0'
+          ]
+        };
+
+      }
+
+
+      return competition;
+
+    }
+  );
+
+
+const CURRENT_TIMELINE: TimelineEvent[] =
+  INITIAL_TIMELINE.map(
+    event => {
+
+      if (
+        event.id ===
+        'timeline-efootball'
+      ) {
+
+        return {
+          ...event,
+
+          time: '02:00 PM – 05:00 PM',
+
+          date:
+            '25 September 2026'
+        };
+
+      }
+
+
+      if (
+        event.id ===
+        'timeline-bgmi'
+      ) {
+
+        return {
+          ...event,
+
+          time: '02:00 PM – 05:00 PM',
+
+          date:
+            '25 September 2026'
+        };
+
+      }
+
+
+      if (
+        event.id ===
+        'timeline-hackathon-start'
+      ) {
+
+        return {
+          ...event,
+
+          time:
+            '08:00 AM',
+
+          date:
+            '28 September 2026'
+        };
+
+      }
+
+
+      if (
+        event.id ===
+        'timeline-hackathon-end'
+      ) {
+
+        return {
+          ...event,
+
+          time:
+            '08:00 PM',
+
+          date:
+            '28 September 2026'
+        };
+
+      }
+
+
+      return event;
+
+    }
+  );
+
+
+const CURRENT_FAQS: FAQItem[] =
+  INITIAL_FAQS.map(
+    faq => {
+
+      if (
+        faq.id ===
+        'faq-hackathon-date'
+      ) {
+
+        return {
+          ...faq,
+
+          answer:
+            'The TECHNOVA Hackathon will take place on 28 September 2026 from 8:00 AM to 8:00 PM.'
+        };
+
+      }
+
+
+      if (
+        faq.id ===
+        'faq-hackathon-duration'
+      ) {
+
+        return {
+          ...faq,
+
+          answer:
+            'TECHNOVA Hackathon is a 12-hour event running from 8:00 AM to 8:00 PM on 28 September 2026.'
+        };
+
+      }
+
+
+      if (
+        faq.id ===
+        'faq-gaming-date'
+      ) {
+
+        return {
+          ...faq,
+
+          answer:
+            'The E-Football and BGMI gaming events will take place on 25 September 2026 from 2:00 PM to 5:00 PM.'
+        };
+
+      }
+
+
+      return faq;
+
+    }
+  );
+
+
 interface MissionPassedBanner {
   show: boolean;
   title: string;
@@ -192,6 +423,7 @@ export const AppProvider: React.FC<{
           'vice_competitions'
         );
 
+
       if (saved) {
 
         try {
@@ -200,36 +432,68 @@ export const AppProvider: React.FC<{
             JSON.parse(saved) as Competition[];
 
 
-          const hasHackathon =
-            parsed.some(
+          const hackathon =
+            parsed.find(
               c =>
-                c.id === 'technova-hackathon'
+                c.id ===
+                'technova-hackathon'
             );
+
+
+          const efootball =
+            parsed.find(
+              c =>
+                c.id ===
+                'efootball'
+            );
+
+
+          const bgmi =
+            parsed.find(
+              c =>
+                c.id ===
+                'bgmi'
+            );
+
+
+          const hasHackathon =
+            !!hackathon;
 
 
           const hasEfootball =
-            parsed.some(
-              c =>
-                c.id === 'efootball'
-            );
+            !!efootball;
 
 
           const hasBgmi =
-            parsed.some(
-              c =>
-                c.id === 'bgmi'
-            );
+            !!bgmi;
 
 
-          const bgmiComp =
-            parsed.find(
-              c =>
-                c.id === 'bgmi'
-            );
+          const hasCorrectHackathonDetails =
+            hackathon?.schedule?.date ===
+              '28 September 2026' &&
+
+            hackathon?.schedule?.time ===
+              '8:00 AM – 8:00 PM';
+
+
+          const hasCorrectEfootballDetails =
+            efootball?.schedule?.date ===
+              '25 September 2026' &&
+
+            efootball?.schedule?.time ===
+              '2:00 PM – 5:00 PM';
+
+
+          const hasCorrectBgmiDetails =
+            bgmi?.schedule?.date ===
+              '25 September 2026' &&
+
+            bgmi?.schedule?.time ===
+              '2:00 PM – 5:00 PM';
 
 
           const hasCorrectBgmiLink =
-            bgmiComp?.registrationUrl ===
+            bgmi?.registrationUrl ===
             'https://forms.gle/tcBTQ3WBHXXAhjPQA';
 
 
@@ -237,6 +501,9 @@ export const AppProvider: React.FC<{
             !hasHackathon ||
             !hasEfootball ||
             !hasBgmi ||
+            !hasCorrectHackathonDetails ||
+            !hasCorrectEfootballDetails ||
+            !hasCorrectBgmiDetails ||
             !hasCorrectBgmiLink ||
             parsed.length !== 3
           ) {
@@ -244,11 +511,11 @@ export const AppProvider: React.FC<{
             localStorage.setItem(
               'vice_competitions',
               JSON.stringify(
-                INITIAL_COMPETITIONS
+                CURRENT_COMPETITIONS
               )
             );
 
-            return INITIAL_COMPETITIONS;
+            return CURRENT_COMPETITIONS;
 
           }
 
@@ -257,14 +524,14 @@ export const AppProvider: React.FC<{
 
         } catch {
 
-          return INITIAL_COMPETITIONS;
+          return CURRENT_COMPETITIONS;
 
         }
 
       }
 
 
-      return INITIAL_COMPETITIONS;
+      return CURRENT_COMPETITIONS;
 
     });
 
@@ -335,15 +602,17 @@ export const AppProvider: React.FC<{
             ) as TimelineEvent[];
 
 
-          /*
-           * Required current timeline events
-           */
-
           const hasEfootballTimeline =
             parsed.some(
               t =>
                 t.id ===
-                'timeline-efootball'
+                  'timeline-efootball' &&
+
+                t.date ===
+                  '25 September 2026' &&
+
+                t.time ===
+                  '02:00 PM – 05:00 PM'
             );
 
 
@@ -351,7 +620,13 @@ export const AppProvider: React.FC<{
             parsed.some(
               t =>
                 t.id ===
-                'timeline-bgmi'
+                  'timeline-bgmi' &&
+
+                t.date ===
+                  '25 September 2026' &&
+
+                t.time ===
+                  '02:00 PM – 05:00 PM'
             );
 
 
@@ -383,10 +658,6 @@ export const AppProvider: React.FC<{
             );
 
 
-          /*
-           * Detect old incorrect dates
-           */
-
           const hasOldDate =
             parsed.some(
               t =>
@@ -397,11 +668,6 @@ export const AppProvider: React.FC<{
                   '28 September 2026'
             );
 
-
-          /*
-           * Timeline must contain exactly
-           * 4 current events
-           */
 
           const isLatestTimeline =
             hasEfootballTimeline &&
@@ -416,7 +682,7 @@ export const AppProvider: React.FC<{
 
             const fixedTimeline =
               fixHackathonEndImage(
-                INITIAL_TIMELINE
+                CURRENT_TIMELINE
               );
 
 
@@ -432,12 +698,6 @@ export const AppProvider: React.FC<{
 
           }
 
-
-          /*
-           * IMPORTANT:
-           * Replace old stored Hackathon End image
-           * with the same image as Hackathon Start
-           */
 
           const fixedTimeline =
             fixHackathonEndImage(
@@ -459,7 +719,7 @@ export const AppProvider: React.FC<{
 
           const fixedTimeline =
             fixHackathonEndImage(
-              INITIAL_TIMELINE
+              CURRENT_TIMELINE
             );
 
 
@@ -471,7 +731,7 @@ export const AppProvider: React.FC<{
 
 
       return fixHackathonEndImage(
-        INITIAL_TIMELINE
+        CURRENT_TIMELINE
       );
 
     });
@@ -508,16 +768,48 @@ export const AppProvider: React.FC<{
             );
 
 
-          if (hasOldFaq) {
+          const hasCorrectGamingFaq =
+            parsed.some(
+              f =>
+                f.id ===
+                  'faq-gaming-date' &&
+
+                f.answer.includes(
+                  '2:00 PM to 5:00 PM'
+                )
+            );
+
+
+          const hasCorrectHackathonFaq =
+            parsed.some(
+              f =>
+                f.id ===
+                  'faq-hackathon-date' &&
+
+                f.answer.includes(
+                  '28 September 2026'
+                ) &&
+
+                f.answer.includes(
+                  '8:00 AM to 8:00 PM'
+                )
+            );
+
+
+          if (
+            hasOldFaq ||
+            !hasCorrectGamingFaq ||
+            !hasCorrectHackathonFaq
+          ) {
 
             localStorage.setItem(
               'vice_faqs',
               JSON.stringify(
-                INITIAL_FAQS
+                CURRENT_FAQS
               )
             );
 
-            return INITIAL_FAQS;
+            return CURRENT_FAQS;
 
           }
 
@@ -526,14 +818,14 @@ export const AppProvider: React.FC<{
 
         } catch {
 
-          return INITIAL_FAQS;
+          return CURRENT_FAQS;
 
         }
 
       }
 
 
-      return INITIAL_FAQS;
+      return CURRENT_FAQS;
 
     });
 
@@ -1944,17 +2236,12 @@ export const AppProvider: React.FC<{
 
 
       setCompetitions(
-        INITIAL_COMPETITIONS
-      );
-
-
-      setTimeline(
-        INITIAL_TIMELINE
+        CURRENT_COMPETITIONS
       );
 
 
       setFaqs(
-        INITIAL_FAQS
+        CURRENT_FAQS
       );
 
 
@@ -1971,7 +2258,7 @@ export const AppProvider: React.FC<{
       localStorage.setItem(
         'vice_competitions',
         JSON.stringify(
-          INITIAL_COMPETITIONS
+          CURRENT_COMPETITIONS
         )
       );
 
@@ -1983,7 +2270,7 @@ export const AppProvider: React.FC<{
        */
 
       const hackathonStart =
-        INITIAL_TIMELINE.find(
+        CURRENT_TIMELINE.find(
           event =>
             event.id ===
             'timeline-hackathon-start'
@@ -1991,7 +2278,7 @@ export const AppProvider: React.FC<{
 
 
       const fixedTimeline =
-        INITIAL_TIMELINE.map(
+        CURRENT_TIMELINE.map(
           event =>
 
             event.id ===
@@ -2024,7 +2311,7 @@ export const AppProvider: React.FC<{
       localStorage.setItem(
         'vice_faqs',
         JSON.stringify(
-          INITIAL_FAQS
+          CURRENT_FAQS
         )
       );
 
