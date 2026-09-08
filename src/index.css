@@ -899,3 +899,8 @@
     opacity: 0.08;
   }
 }
+.prize-pool-highlight {
+  color: #FFD700 !important;
+  -webkit-text-fill-color: #FFD700 !important;
+  font-weight: 900 !important;
+}

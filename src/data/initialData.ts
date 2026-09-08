@@ -110,11 +110,11 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     tags: [
       '₹30,000 PRIZE POOL',
+      'OPEN FOR ALL',
       '12 HOURS',
       '28 SEPTEMBER 2026',
       '8:00 AM – 8:00 PM',
       'IT LABS',
-      'MEALS PROVIDED',
       'TEAM 2–4'
     ],
 

@@ -65,7 +65,7 @@ export const CompetitionDetailModal: React.FC<CompetitionDetailModalProps> = ({
               alt={competition.title}
               className="w-full h-36 xs:h-44 sm:h-64 object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-3 sm:p-4 text-white">
+            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-3 sm:p-4 text-white">
               <span className="font-marker text-[#FFD54F] text-[10px] sm:text-sm tracking-wider">
                 {competition.subtitle}
               </span>
@@ -129,7 +129,9 @@ export const CompetitionDetailModal: React.FC<CompetitionDetailModalProps> = ({
               {competition.tags.map(tag => (
                 <span
                   key={tag}
-                  className="bg-[#FFF5F0] border border-black px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-xs font-bold text-zinc-800"
+                  className={`bg-[#FFF5F0] border border-black px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-xs font-bold ${
+                    tag.includes('PRIZE POOL') ? 'text-[#FFD700] font-black' : 'text-zinc-800'
+                  }`}
                 >
                   #{tag}
                 </span>

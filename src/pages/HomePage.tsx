@@ -1,20 +1,13 @@
+import React, { useState, useEffect, useRef } from "react";
 
+import { useApp } from "../context/AppContext";
+import { useAuth } from "../context/AuthContext";
+import { Competition } from "../types";
 
-import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, type Variants } from "motion/react";
 
-import { useApp } from '../context/AppContext';
-import { useAuth } from '../context/AuthContext';
-import { Competition } from '../types';
-
-import {
-  motion,
-  AnimatePresence,
-  type Variants
-} from 'motion/react';
-
-import technovaBg from '../assets/videos/technova-bg-gta.mp4';
-import heroPoster from '../assets/images/hero_poster_optimized.jpg';
-
+import technovaBg from "../assets/videos/technova-bg-gta.mp4";
+import heroPoster from "../assets/images/hero_poster_optimized.jpg";
 
 import {
   ArrowRight,
@@ -34,14 +27,10 @@ import {
   Crosshair,
   Target,
   Shield,
-  Swords
-} from 'lucide-react';
+  Swords,
+} from "lucide-react";
 
-import {
-  playClickSound,
-  playMissionPassedSound
-} from '../utils/audio';
-
+import { playClickSound, playMissionPassedSound } from "../utils/audio";
 
 /* ============================================================
    TYPES
@@ -55,7 +44,6 @@ interface HomePageProps {
   openCityMapModal?: () => void;
 }
 
-
 /* ============================================================
    COMPONENT
    ============================================================ */
@@ -65,16 +53,10 @@ export const HomePage: React.FC<HomePageProps> = ({
   openCompetitionModal,
   openAuthModal,
   openCrewModal,
-  openCityMapModal
+  openCityMapModal,
 }) => {
-
-  const {
-    competitions,
-    timeline,
-    faqs,
-    prizes,
-    triggerMissionPassed
-  } = useApp();
+  const { competitions, timeline, faqs, prizes, triggerMissionPassed } =
+    useApp();
 
   const { currentUser } = useAuth();
 
@@ -92,14 +74,13 @@ export const HomePage: React.FC<HomePageProps> = ({
     }
   }, []);
 
-
   /* ============================================================
      MOTION
      ============================================================ */
 
   const heroContainerVariants: Variants = {
     hidden: {
-      opacity: 0
+      opacity: 0,
     },
 
     visible: {
@@ -107,16 +88,15 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       transition: {
         staggerChildren: 0.12,
-        delayChildren: 0.15
-      }
-    }
+        delayChildren: 0.15,
+      },
+    },
   };
-
 
   const heroItemVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 25
+      y: 25,
     },
 
     visible: {
@@ -125,185 +105,153 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       transition: {
         duration: 0.65,
-        ease: 'easeOut'
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
-
 
   /* ============================================================
      FEATURED COMPETITIONS
      ============================================================ */
 
   const featuredComps = competitions.filter(
-    competition => competition.featured
+    (competition) => competition.featured,
   );
-
 
   /* ============================================================
      MISSION DATA
      ============================================================ */
 
   const missions = [
-
     {
-      id: 'hackathon',
-      number: 'MISSION 01',
-      tag: 'BUILD',
-      title: 'TECHNOVA HACKATHON',
-      subtitle: 'WELCOME TO YOUR NEXT MISSION.',
+      id: "hackathon",
+      number: "MISSION 01",
+      tag: "BUILD",
+      title: "TECHNOVA HACKATHON",
+      subtitle: "WELCOME TO YOUR NEXT MISSION.",
       description:
-        'A 12-hour hackathon built for those who are ready to think fast, build smart and compete till the final hour. The problem statement is classified and revealed on the spot.',
+        "A 12-hour hackathon built for those who are ready to think fast, build smart and compete till the final hour. The problem statement is classified and revealed on the spot.",
       icon: Code2,
-      accent: '#00E5FF',
+      accent: "#00E5FF",
       details: [
-        '28 SEPTEMBER 2026',
-        '8:00 AM – 8:00 PM',
-        'ST. JOHN COLLEGE, PALGHAR',
-        'MAX 4 MEMBERS',
-        '₹300 / TEAM',
-        '₹30,000 PRIZE POOL',
-        'SNACKS PROVIDED'
+        "₹30,000 PRIZE POOL",
+        "28 SEPTEMBER 2026",
+        "8:00 AM – 8:00 PM",
+        "ST. JOHN COLLEGE, PALGHAR",
+        "MAX 4 MEMBERS",
+        "₹300 / TEAM",
+        "OPEN FOR ALL",
       ],
       missionText:
-        'MISSION CLASSIFIED — PROBLEM STATEMENT REVEALED ON THE SPOT'
+        "MISSION CLASSIFIED — PROBLEM STATEMENT REVEALED ON THE SPOT",
     },
 
-
     {
-      id: 'bgmi',
-      number: 'MISSION 02',
-      tag: 'BATTLE',
-      title: 'BGMI SHOWDOWN',
+      id: "bgmi",
+      number: "MISSION 02",
+      tag: "BATTLE",
+      title: "BGMI SHOWDOWN",
       subtitle: "THE STREETS AREN'T SAFE. • MODE: CLASSIC",
       description:
-        'Assemble your squad, enter the battleground, and fight your way to the top in Classic mode. Your squad. Your strategy. Your game.',
+        "Assemble your squad, enter the battleground, and fight your way to the top in Classic mode. Your squad. Your strategy. Your game.",
       icon: Crosshair,
-      accent: '#FF6FB5',
+      accent: "#FF6FB5",
       details: [
-        '25 SEPTEMBER 2026',
-        'FULL DAY',
-        '4 MEMBERS (SQUAD)',
-        '₹200 / TEAM',
-        'MODE: CLASSIC',
-        'SURVIVE & STRATEGIZE',
-        '₹2,500 PRIZE POOL',
-        'DOMINATE'
+        "₹2,500 PRIZE POOL",
+        "25 SEPTEMBER 2026",
+        "FULL DAY",
+        "4 MEMBERS (SQUAD)",
+        "₹200 / TEAM",
+        "MODE: CLASSIC",
+        "SURVIVE & STRATEGIZE",
+        "DOMINATE",
       ],
-      missionText:
-        'YOUR SQUAD. YOUR STRATEGY. YOUR GAME. • MODE: CLASSIC'
+      missionText: "YOUR SQUAD. YOUR STRATEGY. YOUR GAME. • MODE: CLASSIC",
     },
 
-
     {
-      id: 'efootball',
-      number: 'MISSION 03',
-      tag: 'SPORT',
-      title: 'E-FOOTBALL CHALLENGE',
-      subtitle: 'FROM THE STREETS TO THE STADIUM.',
+      id: "efootball",
+      number: "MISSION 03",
+      tag: "SPORT",
+      title: "E-FOOTBALL CHALLENGE",
+      subtitle: "FROM THE STREETS TO THE STADIUM.",
       description:
-        'Pick your side, step onto the virtual pitch, and take on the competition. Every goal counts. Every match is a new mission.',
+        "Pick your side, step onto the virtual pitch, and take on the competition. Every goal counts. Every match is a new mission.",
       icon: Gamepad2,
-      accent: '#FFD54F',
+      accent: "#FFD54F",
       details: [
-        '25 SEPTEMBER 2026',
-        'FULL DAY',
-        'SOLO COMPETITION',
-        '₹30 / PERSON',
-        'VIRTUAL PITCH',
-        '₹2,500 PRIZE POOL',
-        'EVERY GOAL COUNTS',
-        'NEW MISSION'
+        "₹2,500 PRIZE POOL",
+        "25 SEPTEMBER 2026",
+        "FULL DAY",
+        "SOLO COMPETITION",
+        "₹30 / PERSON",
+        "VIRTUAL PITCH",
+        "EVERY GOAL COUNTS",
+        "NEW MISSION",
       ],
-      missionText:
-        'PICK YOUR SIDE. STEP ONTO THE VIRTUAL PITCH.'
-    }
+      missionText: "PICK YOUR SIDE. STEP ONTO THE VIRTUAL PITCH.",
+    },
   ];
 
-
-  const [activeMission, setActiveMission] =
-    useState(0);
-
+  const [activeMission, setActiveMission] = useState(0);
 
   /* ============================================================
      TIMELINE
      ============================================================ */
 
-  const [selectedTimelineDay, setSelectedTimelineDay] =
-    useState<'Day 1' | 'Day 2'>('Day 1');
+  const [selectedTimelineDay, setSelectedTimelineDay] = useState<
+    "Day 1" | "Day 2"
+  >("Day 1");
 
   const previewTimelineEvents = timeline
-    .filter(event => event.day === selectedTimelineDay)
+    .filter((event) => event.day === selectedTimelineDay)
     .slice(0, 4);
-
 
   /* ============================================================
      FAQ
      ============================================================ */
 
-  const [openFaqIds, setOpenFaqIds] =
-    useState<Record<string, boolean>>({
-      'faq-hackathon-team': true,
-      'faq-hackathon-duration': false
-    });
+  const [openFaqIds, setOpenFaqIds] = useState<Record<string, boolean>>({
+    "faq-hackathon-team": true,
+    "faq-hackathon-duration": false,
+  });
 
   const previewFaqs = faqs.slice(0, 4);
 
-
   const toggleHomeFaq = (id: string) => {
-
     playClickSound();
 
-    setOpenFaqIds(prev => ({
+    setOpenFaqIds((prev) => ({
       ...prev,
-      [id]: !prev[id]
+      [id]: !prev[id],
     }));
-
   };
-
-
 
   /* ============================================================
      TOTAL PRIZE
      ============================================================ */
 
   const totalPrize =
-    prizes?.reduce(
-      (total, prize) =>
-        total + (prize.numericalAmount || 0),
-      0
-    ) || 35000;
-
+    prizes?.reduce((total, prize) => total + (prize.numericalAmount || 0), 0) ||
+    35000;
 
   /* ============================================================
      REGISTER MISSION
      ============================================================ */
 
   const handleMissionRegister = () => {
-
-    if (currentUser) {
-
-      openCrewModal();
-
-    } else {
-
-      openAuthModal();
-
-    }
-
+    window.open(
+      "https://forms.gle/SQRtC6HsuhjVvyhG7",
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
-
-
   /* ============================================================
      RENDER
      ============================================================ */
 
-
   return (
-
     <div className="space-y-16 sm:space-y-20 pb-16 overflow-x-hidden">
-
-
       {/* ========================================================
           1. HERO
           ======================================================== */}
@@ -328,8 +276,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           bg-black
         "
       >
-
-
         {/* ====================================================
             VIDEO
             IMPORTANT:
@@ -341,11 +287,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           className="absolute inset-0 z-0 bg-black"
           style={{
             backgroundImage: `url(${heroPoster})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         >
-
           <video
             ref={videoRef}
             src={technovaBg}
@@ -368,14 +313,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               transition-opacity
               duration-500
-              ${videoLoaded ? 'opacity-100' : 'opacity-95'}
+              ${videoLoaded ? "opacity-100" : "opacity-95"}
 
               select-none
             `}
           />
-
         </div>
-
 
         {/* ====================================================
             VERY LIGHT EDGE VIGNETTE
@@ -387,12 +330,11 @@ export const HomePage: React.FC<HomePageProps> = ({
             absolute
             inset-0
             pointer-events-none
-            z-[1]
+            z-1
 
             bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.35)_100%)]
           "
         />
-
 
         {/* ====================================================
             HERO CONTENT
@@ -402,7 +344,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           variants={heroContainerVariants}
           initial="hidden"
           animate="visible"
-
           className="
             relative
             z-10
@@ -440,20 +381,17 @@ export const HomePage: React.FC<HomePageProps> = ({
               shadow-[0_10px_40px_rgba(0,0,0,0.18)]
             "
           >
+            {/* ITSA */}
 
-
-          {/* ITSA */}
-
-          <motion.div
-            variants={heroItemVariants}
-            className="
+            <motion.div
+              variants={heroItemVariants}
+              className="
               mb-2
               sm:mb-4
             "
-          >
-
-            <div
-              className="
+            >
+              <div
+                className="
                 inline-block
 
                 bg-[#FF6FB5]
@@ -483,23 +421,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                 transform
                 -rotate-1
               "
-            >
-              ITSA PRESENTS
-            </div>
+              >
+                ITSA PRESENTS
+              </div>
+            </motion.div>
 
-          </motion.div>
+            {/* TECHNOVA */}
 
-
-
-          {/* TECHNOVA */}
-
-          <motion.div
-            variants={heroItemVariants}
-            className="relative"
-          >
-
-            <h1
-              className="
+            <motion.div variants={heroItemVariants} className="relative">
+              <h1
+                className="
                 font-headline
                 hero-technova-title
 
@@ -522,20 +453,19 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 select-none
               "
-              style={{
-                fontFamily:
-                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
-                color: '#ffffff'
-              }}
-            >
-              TECHNOVA
-            </h1>
+                style={{
+                  fontFamily:
+                    'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
+                  color: "#ffffff",
+                }}
+              >
+                TECHNOVA
+              </h1>
 
+              {/* 4.0 */}
 
-            {/* 4.0 */}
-
-            <div
-              className="
+              <div
+                className="
                 mt-2
                 sm:mt-4
 
@@ -555,31 +485,28 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 tracking-wider
               "
-              style={{
-                fontFamily:
-                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
-                color: '#FFD54F'
-              }}
-            >
-              4.0
-            </div>
+                style={{
+                  fontFamily:
+                    'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
+                  color: "#FFD54F",
+                }}
+              >
+                4.0
+              </div>
+            </motion.div>
 
-          </motion.div>
+            {/* TAGLINE */}
 
-
-          {/* TAGLINE */}
-
-          <motion.div
-            variants={heroItemVariants}
-            className="
+            <motion.div
+              variants={heroItemVariants}
+              className="
               mt-3
               sm:mt-5
               max-w-3xl
             "
-          >
-
-            <p
-              className="
+            >
+              <p
+                className="
                 text-white
                 hero-tagline
 
@@ -590,23 +517,22 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 font-black
 
-                tracking-[0.1em]
+                tracking-widest
                 sm:tracking-[0.12em]
 
                 uppercase
 
                 gta-shadow-black
               "
-              style={{
-                color: '#ffffff'
-              }}
-            >
-              ENTER THE CITY. CHOOSE YOUR MISSION.
-            </p>
+                style={{
+                  color: "#ffffff",
+                }}
+              >
+                ENTER THE CITY. CHOOSE YOUR MISSION.
+              </p>
 
-
-            <p
-              className="
+              <p
+                className="
                 mt-1
 
                 text-[#FFD54F]
@@ -624,25 +550,19 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 gta-shadow-black
               "
-              style={{
-                color: '#FFD54F'
-              }}
-            >
-              MAKE YOUR MOVE.
-            </p>
+                style={{
+                  color: "#FFD54F",
+                }}
+              >
+                MAKE YOUR MOVE.
+              </p>
+            </motion.div>
 
-          </motion.div>
+            {/* DATE */}
 
-
-          {/* DATE */}
-
-          <motion.div
-            variants={heroItemVariants}
-            className="mt-4 sm:mt-6"
-          >
-
-            <div
-              className="
+            <motion.div variants={heroItemVariants} className="mt-4 sm:mt-6">
+              <div
+                className="
                 inline-flex
                 items-center
                 gap-1.5
@@ -671,23 +591,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                 shadow-[4px_4px_0px_#FF6FB5]
                 sm:shadow-[5px_5px_0px_#FF6FB5]
               "
-            >
+              >
+                <Calendar className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                25 & 28 SEPTEMBER 2026
+              </div>
+            </motion.div>
 
-              <Calendar className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+            {/* LOCATION */}
 
-              25 & 28 SEPTEMBER 2026
-
-
-            </div>
-
-          </motion.div>
-
-
-          {/* LOCATION */}
-
-          <motion.div
-            variants={heroItemVariants}
-            className="
+            <motion.div
+              variants={heroItemVariants}
+              className="
               mt-3
               sm:mt-4
 
@@ -711,20 +625,16 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               gta-shadow-black
             "
-          >
+            >
+              <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00E5FF]" />
+              ST. JOHN COLLEGE, PALGHAR
+            </motion.div>
 
-            <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00E5FF]" />
+            {/* SCROLL INDICATOR */}
 
-            ST. JOHN COLLEGE, PALGHAR
-
-          </motion.div>
-
-
-          {/* SCROLL INDICATOR */}
-
-          <motion.div
-            variants={heroItemVariants}
-            className="
+            <motion.div
+              variants={heroItemVariants}
+              className="
               absolute
               bottom-4
               sm:bottom-8
@@ -737,10 +647,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               text-white
             "
-          >
-
-            <span
-              className="
+            >
+              <span
+                className="
                 text-[8px]
                 xs:text-[9px]
                 sm:text-xs
@@ -757,13 +666,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                 mb-1
                 sm:mb-2
               "
-            >
-              SELECT YOUR MISSION
-            </span>
+              >
+                SELECT YOUR MISSION
+              </span>
 
-
-            <ChevronDown
-              className="
+              <ChevronDown
+                className="
                 w-5
                 h-5
                 sm:w-6
@@ -775,17 +683,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 drop-shadow-[2px_2px_0px_#000]
               "
-            />
-
-          </motion.div>
-
+              />
+            </motion.div>
           </div>
-
-
         </motion.div>
-
       </section>
-
 
       {/* ========================================================
           2. MISSION SELECT
@@ -800,7 +702,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           sm:px-6
         "
       >
-
         {/* HEADER */}
 
         <div
@@ -818,9 +719,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             sm:mb-10
           "
         >
-
           <div>
-
             <div
               className="
                 inline-block
@@ -847,7 +746,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               MISSION SELECT
             </div>
 
-
             <h2
               className="
                 mt-3
@@ -865,12 +763,11 @@ export const HomePage: React.FC<HomePageProps> = ({
               style={{
                 fontFamily:
                   'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
-                color: 'var(--text-primary)'
+                color: "var(--text-primary)",
               }}
             >
               CHOOSE YOUR BATTLEFIELD
             </h2>
-
 
             <p
               className="
@@ -883,14 +780,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 max-w-2xl
               "
-              style={{ color: 'var(--text-secondary)' }}
+              style={{ color: "var(--text-secondary)" }}
             >
-              Vice City is calling. Pick your mission, assemble your crew
-              and make your move.
+              Vice City is calling. Pick your mission, assemble your crew and
+              make your move.
             </p>
-
           </div>
-
 
           {/* DATE BOX */}
 
@@ -910,7 +805,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               shrink-0
             "
           >
-
             <span
               className="
                 block
@@ -938,11 +832,8 @@ export const HomePage: React.FC<HomePageProps> = ({
             >
               TWO DAYS. THREE MISSIONS.
             </span>
-
           </div>
-
         </div>
-
 
         {/* MISSION SELECTOR */}
 
@@ -958,24 +849,18 @@ export const HomePage: React.FC<HomePageProps> = ({
             mb-7
           "
         >
-
           {missions.map((mission, index) => {
-
             const Icon = mission.icon;
 
-            const selected =
-              activeMission === index;
+            const selected = activeMission === index;
 
             return (
-
               <button
                 key={mission.id}
                 onClick={() => {
-
                   playClickSound();
 
                   setActiveMission(index);
-
                 }}
                 className={`
                   group
@@ -993,12 +878,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   ${
                     selected
-                      ? 'bg-black text-white shadow-[5px_5px_0px_#FF6FB5] -translate-y-1'
-                      : 'bg-white text-black shadow-[3px_3px_0px_#000] hover:-translate-y-1 hover:bg-[#FFD54F]'
+                      ? "bg-black text-white shadow-[5px_5px_0px_#FF6FB5] -translate-y-1"
+                      : "bg-white text-black shadow-[3px_3px_0px_#000] hover:-translate-y-1 hover:bg-[#FFD54F]"
                   }
                 `}
               >
-
                 <div
                   className="
                     flex
@@ -1007,7 +891,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                     gap-3
                   "
                 >
-
                   <div
                     className="
                       flex
@@ -1015,7 +898,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                       gap-3
                     "
                   >
-
                     <div
                       className={`
                         w-11
@@ -1032,19 +914,15 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                         ${
                           selected
-                            ? 'bg-[#FF6FB5] text-white'
-                            : 'bg-[#FFF5F0] text-black'
+                            ? "bg-[#FF6FB5] text-white"
+                            : "bg-[#FFF5F0] text-black"
                         }
                       `}
                     >
-
                       <Icon className="w-6 h-6" />
-
                     </div>
 
-
                     <div>
-
                       <span
                         className={`
                           block
@@ -1055,16 +933,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                           tracking-widest
 
-                          ${
-                            selected
-                              ? 'text-[#00E5FF]'
-                              : 'text-zinc-500'
-                          }
+                          ${selected ? "text-[#00E5FF]" : "text-zinc-500"}
                         `}
                       >
                         {mission.number}
                       </span>
-
 
                       <span
                         className="
@@ -1081,12 +954,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                       >
                         {mission.title}
                       </span>
-
                     </div>
-
-
                   </div>
-
 
                   <ArrowRight
                     className={`
@@ -1099,54 +968,42 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                       ${
                         selected
-                          ? 'text-[#FF6FB5] translate-x-1'
-                          : 'text-zinc-400'
+                          ? "text-[#FF6FB5] translate-x-1"
+                          : "text-zinc-400"
                       }
                     `}
                   />
-
                 </div>
-
               </button>
-
             );
-
           })}
-
         </div>
-
 
         {/* ACTIVE MISSION */}
 
         <AnimatePresence mode="wait">
-
           <motion.div
             key={missions[activeMission].id}
-
             initial={{
               opacity: 0,
-              y: 15
+              y: 15,
             }}
-
             animate={{
               opacity: 1,
-              y: 0
+              y: 0,
             }}
-
             exit={{
               opacity: 0,
-              y: -15
+              y: -15,
             }}
-
             transition={{
-              duration: 0.25
+              duration: 0.25,
             }}
-
             className="
               bg-[#141419]
               text-white
 
-              border-[4px]
+              border-4
               border-black
 
               shadow-[7px_7px_0px_#000]
@@ -1154,7 +1011,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               overflow-hidden
             "
           >
-
             <div
               className="
                 grid
@@ -1163,8 +1019,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 lg:grid-cols-12
               "
             >
-
-
               {/* LEFT */}
 
               <div
@@ -1176,7 +1030,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                   md:p-10
                 "
               >
-
                 <div
                   className="
                     flex
@@ -1193,7 +1046,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                     mb-5
                   "
                 >
-
                   <span
                     className="
                       bg-[#FF6FB5]
@@ -1216,7 +1068,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                     {missions[activeMission].number}
                   </span>
 
-
                   <span
                     className="
                       text-[#00E5FF]
@@ -1231,9 +1082,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   >
                     {missions[activeMission].tag}
                   </span>
-
                 </div>
-
 
                 <h3
                   className="
@@ -1253,12 +1102,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                   style={{
                     fontFamily:
                       'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
-                    color: '#ffffff'
+                    color: "#ffffff",
                   }}
                 >
                   {missions[activeMission].title}
                 </h3>
-
 
                 <div
                   className="
@@ -1274,12 +1122,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                     tracking-wider
                   "
                   style={{
-                    color: '#FFD54F'
+                    color: "#FFD54F",
                   }}
                 >
                   {missions[activeMission].subtitle}
                 </div>
-
 
                 <p
                   className="
@@ -1295,12 +1142,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                     max-w-3xl
                   "
                   style={{
-                    color: '#e4e4e7'
+                    color: "#e4e4e7",
                   }}
                 >
                   {missions[activeMission].description}
                 </p>
-
 
                 {/* MISSION CLASSIFIED */}
 
@@ -1316,7 +1162,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                     p-4
                   "
                 >
-
                   <div
                     className="
                       flex
@@ -1334,13 +1179,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                       mb-1
                     "
                   >
-
                     <Target className="w-4 h-4" />
-
                     MISSION BRIEF
-
                   </div>
-
 
                   <p
                     className="
@@ -1354,10 +1195,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   >
                     {missions[activeMission].missionText}
                   </p>
-
-
                 </div>
-
 
                 {/* BUTTONS */}
 
@@ -1372,14 +1210,21 @@ export const HomePage: React.FC<HomePageProps> = ({
                     gap-3
                   "
                 >
-
                   <button
                     id="mission-register-btn"
                     onClick={() => {
                       if (activeMission === 1) {
-                        window.open('https://forms.gle/tcBTQ3WBHXXAhjPQA', '_blank', 'noopener,noreferrer');
+                        window.open(
+                          "https://forms.gle/tcBTQ3WBHXXAhjPQA",
+                          "_blank",
+                          "noopener,noreferrer",
+                        );
                       } else if (activeMission === 2) {
-                        window.open('https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header', '_blank', 'noopener,noreferrer');
+                        window.open(
+                          "https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header",
+                          "_blank",
+                          "noopener,noreferrer",
+                        );
                       } else {
                         handleMissionRegister();
                       }
@@ -1407,21 +1252,15 @@ export const HomePage: React.FC<HomePageProps> = ({
                   >
                     <Zap className="w-5 h-5" />
                     {activeMission === 1
-                      ? 'REGISTER FOR BGMI (CLASSIC)'
+                      ? "REGISTER FOR BGMI (CLASSIC)"
                       : activeMission === 2
-                      ? 'REGISTER FOR E-FOOTBALL'
-                      : currentUser
-                      ? 'MANAGE YOUR CREW'
-                      : 'REGISTER NOW'}
+                        ? "REGISTER FOR E-FOOTBALL"
+                        : "REGISTER NOW"}
                   </button>
-
 
                   {activeMission === 0 && (
                     <button
-
-                      onClick={() =>
-                        setActiveTab('competitions')
-                      }
+                      onClick={() => setActiveTab("competitions")}
                       className="
                         bg-white
 
@@ -1450,21 +1289,13 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                         cursor-pointer
                       "
-
                     >
-
                       <Terminal className="w-5 h-5" />
-
                       VIEW DETAILS
-
                     </button>
-
                   )}
-
                 </div>
-
               </div>
-
 
               {/* RIGHT INFO */}
 
@@ -1485,7 +1316,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                   sm:p-7
                 "
               >
-
                 <div
                   className="
                     flex
@@ -1494,9 +1324,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                     mb-5
                   "
-
                 >
-
                   <Shield
                     className="
                       w-5
@@ -1514,23 +1342,18 @@ export const HomePage: React.FC<HomePageProps> = ({
                       text-white
                     "
                     style={{
-                      color: '#ffffff'
+                      color: "#ffffff",
                     }}
                   >
                     MISSION DATA
                   </span>
-
                 </div>
 
-
                 <div className="space-y-2">
-
-                  {missions[activeMission].details.map(
-                    (detail, index) => (
-
-                      <div
-                        key={detail}
-                        className="
+                  {missions[activeMission].details.map((detail, index) => (
+                    <div
+                      key={detail}
+                      className="
                           flex
                           items-center
                           gap-3
@@ -1543,10 +1366,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                           px-3
                           py-3
                         "
-                      >
-
-                        <span
-                          className="
+                    >
+                      <span
+                        className="
                             text-[#FF6FB5]
 
                             font-mono
@@ -1557,93 +1379,34 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                             w-5
                           "
-                        >
-                          {String(index + 1).padStart(2, '0')}
-                        </span>
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
 
-
-                        <span
-                          className="
-                            text-zinc-200
-
-                            text-xs
-                            sm:text-sm
-
-                            font-bold
-
-                            tracking-wide
-                          "
-                          style={{
-                            color: '#f4f4f5'
-                          }}
-                        >
-                          {detail}
-                        </span>
-
-                      </div>
-
-                    )
-                  )}
-
-                </div>
-
-
-                {/* HACKATHON EXTRA */}
-
-                {activeMission === 0 && (
-
-                  <div
-                    className="
-                      mt-5
-
-                      bg-[#FF6FB5]
-
-                      text-black
-
-                      border-2
-                      border-black
-
-                      p-4
-                    "
-                  >
-
-                    <div
-                      className="
-                        font-headline
-
-                        text-xl
-
-                        leading-none
-
-                        mb-1
-                      "
-                    >
-                      FUEL YOUR CREW
+<span
+  className="text-xs sm:text-sm tracking-wide"
+  style={
+    detail.includes("PRIZE POOL")
+      ? {
+          color: "#FFD700",
+          WebkitTextFillColor: "#FFD700",
+          fontWeight: 900,
+        }
+      : {
+          color: "#E4E4E7",
+          fontWeight: 700,
+        }
+  }
+>
+  {detail}
+</span>
                     </div>
-
-                    <p
-                      className="
-                        text-xs
-
-                        font-bold
-
-                        leading-relaxed
-                      "
-                    >
-                      Snacks will be provided throughout
-                      the 12-hour hackathon to keep your
-                      crew running.
-                    </p>
-
-                  </div>
-
-                )}
-
+                  ))}
+                </div>
 
                 {/* OTHER MISSIONS */}
 
                 {activeMission === 1 && (
-
                   <div
                     className="
                       mt-5
@@ -1658,7 +1421,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                       p-4
                     "
                   >
-
                     <div
                       className="
                         font-headline
@@ -1682,18 +1444,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                         leading-relaxed
                       "
                     >
-                      Your squad. Your strategy.
-                      Your game. Survive, strategize
+                      Your squad. Your strategy. Your game. Survive, strategize
                       and dominate.
                     </p>
-
                   </div>
-
                 )}
 
-
                 {activeMission === 2 && (
-
                   <div
                     className="
                       mt-5
@@ -1708,7 +1465,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                       p-4
                     "
                   >
-
                     <div
                       className="
                         font-headline
@@ -1732,32 +1488,21 @@ export const HomePage: React.FC<HomePageProps> = ({
                         leading-relaxed
                       "
                     >
-                      Step onto the virtual pitch
-                      and make every match count.
+                      Step onto the virtual pitch and make every match count.
                     </p>
-
                   </div>
-
                 )}
-
               </div>
-
             </div>
-
           </motion.div>
-
         </AnimatePresence>
-
       </section>
-
-
 
       {/* ========================================================
           3. FEATURED EVENTS
           ======================================================== */}
 
       {featuredComps.length > 0 && (
-
         <section
           className="
             max-w-7xl
@@ -1767,7 +1512,6 @@ export const HomePage: React.FC<HomePageProps> = ({
             sm:px-6
           "
         >
-
           <div
             className="
               flex
@@ -1782,9 +1526,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               mb-7
             "
           >
-
             <div>
-
               <div
                 className="
                   inline-block
@@ -1810,7 +1552,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 TECHNOVA EVENTS
               </div>
 
-
               <h2
                 className="
                   mt-2
@@ -1825,21 +1566,15 @@ export const HomePage: React.FC<HomePageProps> = ({
                 style={{
                   fontFamily:
                     'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
-                  color: 'var(--text-primary)'
+                  color: "var(--text-primary)",
                 }}
               >
                 MAIN EVENTS
-
               </h2>
-
             </div>
 
-
-
             <button
-              onClick={() =>
-                setActiveTab('competitions')
-              }
+              onClick={() => setActiveTab("competitions")}
               className="
                 bg-[#00E5FF]
                 hover:bg-[#FFD54F]
@@ -1859,16 +1594,10 @@ export const HomePage: React.FC<HomePageProps> = ({
                 cursor-pointer
               "
             >
-
               VIEW ALL EVENTS
-
               <ArrowRight className="w-4 h-4" />
-
             </button>
-
-
           </div>
-
 
           <div
             className="
@@ -1881,7 +1610,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               sm:gap-6
             "
           >
-
             {featuredComps.map((comp, idx) => {
               const isThirdCard = idx === 2 && featuredComps.length === 3;
 
@@ -1900,14 +1628,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                     group
                     hover:-translate-y-1
                     transition-all
-                    ${isThirdCard ? 'md:col-span-2 md:w-[calc(50%-0.75rem)] md:mx-auto w-full' : 'w-full'}
+                    ${isThirdCard ? "md:col-span-2 md:w-[calc(50%-0.75rem)] md:mx-auto w-full" : "w-full"}
                   `}
                 >
-
-                <div>
-
-                  <div
-                    className="
+                  <div>
+                    <div
+                      className="
                       relative
 
                       border-2
@@ -1917,15 +1643,14 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                       mb-4
                     "
-                  >
-
-                    <img
-                      src={comp.image}
-                      alt={comp.title}
-                      className="
+                    >
+                      <img
+                        src={comp.image}
+                        alt={comp.title}
+                        className="
                         w-full
                         h-auto
-                        max-h-[32rem]
+                        max-h-128
 
                         object-contain
                         object-center
@@ -1934,11 +1659,10 @@ export const HomePage: React.FC<HomePageProps> = ({
                         transition-transform
                         duration-300
                       "
-                    />
+                      />
 
-
-                    <div
-                      className="
+                      <div
+                        className="
                         absolute
                         top-2
                         left-2
@@ -1961,13 +1685,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                         font-headline
                       "
-                    >
-                      {comp.track}
-                    </div>
+                      >
+                        {comp.track}
+                      </div>
 
-
-                    <div
-                      className="
+                      <div
+                        className="
                         absolute
                         bottom-2
                         right-2
@@ -1988,15 +1711,13 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                         font-headline
                       "
-                    >
-                      {comp.prize}
+                      >
+                        {comp.prize}
+                      </div>
                     </div>
 
-                  </div>
-
-
-                  <span
-                    className="
+                    <span
+                      className="
                       font-bold
 
                       text-xs
@@ -2007,13 +1728,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                       mb-1
                     "
-                  >
-                    {comp.subtitle}
-                  </span>
+                    >
+                      {comp.subtitle}
+                    </span>
 
-
-                  <h3
-                    className="
+                    <h3
+                      className="
                       font-headline
 
                       text-3xl
@@ -2024,13 +1744,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                       mb-2
                     "
-                  >
-                    {comp.title}
-                  </h3>
+                    >
+                      {comp.title}
+                    </h3>
 
-
-                  <p
-                    className="
+                    <p
+                      className="
                       text-xs
 
                       text-zinc-600
@@ -2041,15 +1760,13 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                       leading-relaxed
                     "
-                  >
-                    {comp.description}
-                  </p>
+                    >
+                      {comp.description}
+                    </p>
+                  </div>
 
-                </div>
-
-
-                <div
-                  className="
+                  <div
+                    className="
                     pt-3
 
                     border-t-2
@@ -2060,10 +1777,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                     justify-between
                     gap-3
                   "
-                >
-
-                  <div
-                    className="
+                  >
+                    <div
+                      className="
                       text-xs
 
                       text-zinc-700
@@ -2074,24 +1790,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                       items-center
                       gap-1
                     "
-                  >
+                    >
+                      <Users className="w-3.5 h-3.5" />
 
-                    <Users className="w-3.5 h-3.5" />
+                      {comp.teamSizeMin === comp.teamSizeMax
+                        ? "Solo"
+                        : `${comp.teamSizeMin}–${comp.teamSizeMax} Members`}
+                    </div>
 
-                    {comp.teamSizeMin ===
-                    comp.teamSizeMax
-                      ? 'Solo'
-                      : `${comp.teamSizeMin}–${comp.teamSizeMax} Members`
-                    }
-
-                  </div>
-
-
-                  <button
-                    onClick={() =>
-                      openCompetitionModal(comp)
-                    }
-                    className="
+                    <button
+                      onClick={() => openCompetitionModal(comp)}
+                      className="
                       bg-[#00E5FF]
 
                       hover:bg-black
@@ -2117,26 +1826,17 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                       cursor-pointer
                     "
-                  >
-
-                    INSPECT
-
-                    <ArrowRight className="w-3.5 h-3.5" />
-
-                  </button>
-
+                    >
+                      INSPECT
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
-
-              </div>
-            );
-          })}
-
+              );
+            })}
           </div>
-
         </section>
-
       )}
-
 
       {/* ========================================================
           4. TIMELINE
@@ -2151,7 +1851,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           sm:px-6
         "
       >
-
         <div
           className="
             bg-[#18181F]
@@ -2168,7 +1867,6 @@ export const HomePage: React.FC<HomePageProps> = ({
             md:p-10
           "
         >
-
           <div
             className="
               flex
@@ -2186,9 +1884,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               border-zinc-800
             "
           >
-
             <div>
-
               <div
                 className="
                   inline-block
@@ -2213,7 +1909,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 EVENT SCHEDULE
               </div>
 
-
               <h2
                 className="
                   mt-2
@@ -2228,14 +1923,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                 style={{
                   fontFamily:
                     'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
-                  color: 'var(--text-primary)'
+                  color: "var(--text-primary)",
                 }}
               >
                 TECHNOVA TIMELINE
               </h2>
-
             </div>
-
 
             <div
               className="
@@ -2248,7 +1941,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 py-2
               "
             >
-
               <span
                 className="
                   block
@@ -2276,11 +1968,8 @@ export const HomePage: React.FC<HomePageProps> = ({
               >
                 2026
               </span>
-
             </div>
-
           </div>
-
 
           <div
             className="
@@ -2294,13 +1983,9 @@ export const HomePage: React.FC<HomePageProps> = ({
               gap-4
             "
           >
-
-            {previewTimelineEvents.map(event => (
-
+            {previewTimelineEvents.map((event) => (
               <div
                 key={event.id}
-
-
                 className="
                   bg-black/70
 
@@ -2313,9 +1998,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   transition-colors
                 "
-
               >
-
                 <div
                   className="
                     flex
@@ -2325,10 +2008,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     gap-2
                   "
                 >
-
                   <div>
-
-
                     <div
                       className="
                         flex
@@ -2344,14 +2024,10 @@ export const HomePage: React.FC<HomePageProps> = ({
                         font-bold
                       "
                     >
-
-
                       <Clock className="w-3.5 h-3.5" />
 
                       {event.time}
-
                     </div>
-
 
                     <h3
                       className="
@@ -2367,9 +2043,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     >
                       {event.title}
                     </h3>
-
                   </div>
-
 
                   <span
                     className={`
@@ -2385,27 +2059,22 @@ export const HomePage: React.FC<HomePageProps> = ({
                       shrink-0
 
                       ${
-                        event.status === 'past'
-                          ? 'stamp-passed'
-                          : event.status === 'ongoing'
-                          ? 'stamp-progress animate-pulse'
-                          : 'stamp-upcoming'
+                        event.status === "past"
+                          ? "stamp-passed"
+                          : event.status === "ongoing"
+                            ? "stamp-progress animate-pulse"
+                            : "stamp-upcoming"
                       }
                     `}
                   >
                     {event.statusLabel ||
-                      (
-                        event.status === 'past'
-                          ? 'PASSED'
-                          : event.status === 'ongoing'
-                          ? 'ACTIVE'
-                          : 'UPCOMING'
-                      )
-                    }
+                      (event.status === "past"
+                        ? "PASSED"
+                        : event.status === "ongoing"
+                          ? "ACTIVE"
+                          : "UPCOMING")}
                   </span>
-
                 </div>
-
 
                 <p
                   className="
@@ -2420,8 +2089,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 >
                   {event.description}
                 </p>
-
-
 
                 <div
                   className="
@@ -2440,7 +2107,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                     border-zinc-800
                   "
                 >
-
                   <div
                     className="
                       flex
@@ -2450,7 +2116,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                       font-bold
                     "
                   >
-
                     <MapPin
                       className="
                         w-3
@@ -2461,9 +2126,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     />
 
                     {event.location}
-
                   </div>
-
 
                   <span
                     className="
@@ -2483,19 +2146,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                       text-[10px]
                     "
                   >
-                    {event.track || 'GENERAL'}
-
+                    {event.track || "GENERAL"}
                   </span>
-
                 </div>
-
               </div>
-
             ))}
-
           </div>
-
-
 
           <div
             className="
@@ -2515,7 +2171,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               gap-3
             "
           >
-
             <span
               className="
                 text-xs
@@ -2528,16 +2183,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                 sm:text-left
               "
             >
-              TECHNOVA 4.0 takes place across two days: 25 September for BGMI and E-Football, and 28 September for the Hackathon.
-
+              TECHNOVA 4.0 takes place across two days: 25 September for BGMI
+              and E-Football, and 28 September for the Hackathon.
             </span>
 
-
             <button
-
-              onClick={() =>
-                setActiveTab('timeline')
-              }
+              onClick={() => setActiveTab("timeline")}
               className="
                 w-full
                 sm:w-auto
@@ -2565,24 +2216,14 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 cursor-pointer
               "
-
             >
-
               <Calendar className="w-4 h-4" />
-
               FULL TIMELINE
-
               <ArrowRight className="w-4 h-4" />
-
             </button>
-
           </div>
-
         </div>
-
       </section>
-
-
 
       {/* ========================================================
           5. PRIZE POOL
@@ -2597,7 +2238,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           sm:px-6
         "
       >
-
         <div
           className="
             border-[3px]
@@ -2609,11 +2249,10 @@ export const HomePage: React.FC<HomePageProps> = ({
             transition-colors
           "
           style={{
-            backgroundColor: 'var(--card-bg-solid)',
-            color: 'var(--text-primary)'
+            backgroundColor: "var(--card-bg-solid)",
+            color: "var(--text-primary)",
           }}
         >
-
           <div
             className="
               flex
@@ -2631,9 +2270,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               border-black
             "
           >
-
             <div>
-
               <div
                 className="
                   inline-block
@@ -2658,7 +2295,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 PRIZE VAULT
               </div>
 
-
               <h2
                 className="
                   mt-2
@@ -2670,12 +2306,10 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   leading-none
                 "
-                style={{ color: 'var(--text-primary)' }}
+                style={{ color: "var(--text-primary)" }}
               >
                 ₹{totalPrize.toLocaleString()}+
-
               </h2>
-
 
               <p
                 className="
@@ -2685,19 +2319,15 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   mt-2
                 "
-                style={{ color: 'var(--text-secondary)' }}
+                style={{ color: "var(--text-secondary)" }}
               >
                 Total prize value across TECHNOVA 4.0 competitions.
               </p>
-
             </div>
-
 
             <button
               id="prize-breakdown-btn"
-              onClick={() =>
-                setActiveTab('prizes')
-              }
+              onClick={() => setActiveTab("prizes")}
               className="
                 bg-black
                 hover:bg-[#00E5FF]
@@ -2722,10 +2352,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               PRIZE BREAKDOWN
               <ArrowRight className="w-4 h-4" />
             </button>
-
           </div>
-
-
 
           <div
             className="
@@ -2740,12 +2367,9 @@ export const HomePage: React.FC<HomePageProps> = ({
               mt-6
             "
           >
-
             {prizes.map((prize, index) => (
-
               <div
                 key={prize.id}
-
                 className="
                   border-2
                   border-black
@@ -2759,11 +2383,10 @@ export const HomePage: React.FC<HomePageProps> = ({
                   transition-all
                 "
                 style={{
-                  backgroundColor: 'var(--card-bg)',
-                  color: 'var(--text-primary)'
+                  backgroundColor: "var(--card-bg)",
+                  color: "var(--text-primary)",
                 }}
               >
-
                 <div
                   className="
                     flex
@@ -2777,7 +2400,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                     mb-3
                   "
                 >
-
                   <span
                     className="
                       font-headline
@@ -2793,23 +2415,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                       uppercase
                     "
                     style={{
-                      backgroundColor:
-                        prize.badgeBg,
+                      backgroundColor: prize.badgeBg,
 
-                      color:
-                        prize.badgeText
+                      color: prize.badgeText,
                     }}
                   >
                     {prize.title}
                   </span>
 
-
-                  <span className="text-xl">
-                    {prize.icon}
-                  </span>
-
+                  <span className="text-xl">{prize.icon}</span>
                 </div>
-
 
                 <div
                   className="
@@ -2820,11 +2435,10 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                     leading-none
                   "
-                  style={{ color: 'var(--text-primary)' }}
+                  style={{ color: "var(--text-primary)" }}
                 >
                   {prize.amount}
                 </div>
-
 
                 <span
                   className="
@@ -2839,11 +2453,10 @@ export const HomePage: React.FC<HomePageProps> = ({
                     mt-1
                     mb-3
                   "
-                  style={{ color: 'var(--text-muted)' }}
+                  style={{ color: "var(--text-muted)" }}
                 >
                   {prize.subtitle}
                 </span>
-
 
                 <p
                   className="
@@ -2853,17 +2466,13 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                     leading-relaxed
                   "
-                  style={{ color: 'var(--text-secondary)' }}
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   {prize.description}
                 </p>
-
               </div>
-
             ))}
-
           </div>
-
 
           <div
             className="
@@ -2887,16 +2496,13 @@ export const HomePage: React.FC<HomePageProps> = ({
               gap-3
             "
           >
-
             <div
               className="
                 flex
                 items-center
                 gap-3
               "
-
             >
-
               <Sparkles
                 className="
                   w-6
@@ -2908,9 +2514,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 "
               />
 
-
               <div>
-
                 <span
                   className="
                     font-headline
@@ -2925,7 +2529,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                   ₹{totalPrize.toLocaleString()} TOTAL PRIZE VALUE
                 </span>
 
-
                 <span
                   className="
                     text-[11px]
@@ -2935,16 +2538,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                 >
                   Hackathon ₹30,000 • BGMI • E-Football
                 </span>
-
               </div>
-
             </div>
 
-
             <button
-              onClick={() =>
-                setActiveTab('prizes')
-              }
+              onClick={() => setActiveTab("prizes")}
               className="
                 bg-[#FFD54F]
 
@@ -2969,14 +2567,9 @@ export const HomePage: React.FC<HomePageProps> = ({
             >
               INSPECT PRIZES
             </button>
-
           </div>
-
         </div>
-
       </section>
-
-
 
       {/* ========================================================
           6. FAQ
@@ -2991,7 +2584,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           sm:px-6
         "
       >
-
         <div
           className="
             border-[3px]
@@ -3003,11 +2595,10 @@ export const HomePage: React.FC<HomePageProps> = ({
             transition-colors
           "
           style={{
-            backgroundColor: 'var(--card-bg-solid)',
-            color: 'var(--text-primary)'
+            backgroundColor: "var(--card-bg-solid)",
+            color: "var(--text-primary)",
           }}
         >
-
           <div
             className="
               flex
@@ -3025,9 +2616,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               border-black
             "
           >
-
             <div>
-
               <div
                 className="
                   inline-block
@@ -3052,7 +2641,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 EVENT INTEL
               </div>
 
-
               <h2
                 className="
                   mt-2
@@ -3064,20 +2652,14 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   leading-none
                 "
-                style={{ color: 'var(--text-primary)' }}
+                style={{ color: "var(--text-primary)" }}
               >
                 FREQUENTLY ASKED QUESTIONS
-
               </h2>
-
             </div>
 
-
             <button
-
-              onClick={() =>
-                setActiveTab('faq')
-              }
+              onClick={() => setActiveTab("faq")}
               className="
                 bg-[#FF6FB5]
 
@@ -3102,32 +2684,20 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 cursor-pointer
               "
-
             >
-
               <HelpCircle className="w-4 h-4" />
-
               VIEW ALL FAQS
-
               <ArrowRight className="w-4 h-4" />
-
             </button>
-
           </div>
 
-
           <div className="space-y-3 mt-6">
-
-            {previewFaqs.map(faq => {
-
-              const isOpen =
-                !!openFaqIds[faq.id];
+            {previewFaqs.map((faq) => {
+              const isOpen = !!openFaqIds[faq.id];
 
               return (
-
                 <div
                   key={faq.id}
-
                   className="
                     border-2
                     border-black
@@ -3137,16 +2707,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                     shadow-[2px_2px_0px_#000]
                   "
                   style={{
-                    backgroundColor: 'var(--card-bg)',
-                    color: 'var(--text-primary)'
+                    backgroundColor: "var(--card-bg)",
+                    color: "var(--text-primary)",
                   }}
                 >
-
                   <button
-
-                    onClick={() =>
-                      toggleHomeFaq(faq.id)
-                    }
+                    onClick={() => toggleHomeFaq(faq.id)}
                     className="
                       w-full
 
@@ -3167,7 +2733,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                       transition-colors
                     "
                   >
-
                     <div
                       className="
                         flex
@@ -3177,7 +2742,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                         min-w-0
                       "
                     >
-
                       <HelpCircle
                         className="
                           w-5
@@ -3189,7 +2753,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                         "
                       />
 
-
                       <span
                         className="
                           font-headline
@@ -3197,15 +2760,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                           text-lg
                           sm:text-xl
                         "
-                        style={{ color: 'var(--text-primary)' }}
+                        style={{ color: "var(--text-primary)" }}
                       >
-
                         {faq.question}
                       </span>
-
                     </div>
-
-
 
                     <div
                       className="
@@ -3225,46 +2784,34 @@ export const HomePage: React.FC<HomePageProps> = ({
                         shrink-0
                       "
                     >
-
                       {isOpen ? (
                         <ChevronUp className="w-4 h-4" />
                       ) : (
                         <ChevronDown className="w-4 h-4" />
                       )}
-
-
                     </div>
-
                   </button>
 
-
                   <AnimatePresence>
-
                     {isOpen && (
-
                       <motion.div
                         initial={{
                           height: 0,
-                          opacity: 0
+                          opacity: 0,
                         }}
-
                         animate={{
-                          height: 'auto',
-                          opacity: 1
+                          height: "auto",
+                          opacity: 1,
                         }}
-
                         exit={{
                           height: 0,
-                          opacity: 0
+                          opacity: 0,
                         }}
-
                         transition={{
-                          duration: 0.2
+                          duration: 0.2,
                         }}
                         className="overflow-hidden"
                       >
-
-
                         <div
                           className="
                             p-4
@@ -3275,7 +2822,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                             border-zinc-800/40
                           "
                         >
-
                           <p
                             className="
                               text-xs
@@ -3285,32 +2831,20 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                               leading-relaxed
                             "
-                            style={{ color: 'var(--text-secondary)' }}
+                            style={{ color: "var(--text-secondary)" }}
                           >
                             {faq.answer}
                           </p>
-
                         </div>
-
                       </motion.div>
-
                     )}
-
                   </AnimatePresence>
-
                 </div>
-
               );
-
             })}
-
           </div>
-
         </div>
-
       </section>
-
-
 
       {/* ========================================================
           7. FINAL CTA
@@ -3325,12 +2859,11 @@ export const HomePage: React.FC<HomePageProps> = ({
           sm:px-6
         "
       >
-
         <div
           className="
             bg-[#FF6FB5]
 
-            border-[4px]
+            border-4
             border-black
 
             shadow-[7px_7px_0px_#000]
@@ -3348,7 +2881,6 @@ export const HomePage: React.FC<HomePageProps> = ({
             overflow-hidden
           "
         >
-
           <div
             className="
               absolute
@@ -3364,7 +2896,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           >
             ★
           </div>
-
 
           <div
             className="
@@ -3384,7 +2915,6 @@ export const HomePage: React.FC<HomePageProps> = ({
             ★
           </div>
 
-
           <div
             className="
               max-w-4xl
@@ -3393,7 +2923,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               space-y-4
             "
           >
-
             <div
               className="
                 inline-block
@@ -3418,7 +2947,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               25 & 28 SEPTEMBER 2026
             </div>
 
-
             <h2
               className="
                 font-headline
@@ -3435,12 +2963,11 @@ export const HomePage: React.FC<HomePageProps> = ({
               "
               style={{
                 fontFamily:
-                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif'
+                  'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif',
               }}
             >
               READY FOR THE CITY?
             </h2>
-
 
             <p
               className="
@@ -3456,11 +2983,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                 mx-auto
               "
             >
-              Your crew is assembled.
-              The mission is locked.
-              The clock is about to start.
+              Your crew is assembled. The mission is locked. The clock is about
+              to start.
             </p>
-
 
             <p
               className="
@@ -3481,7 +3006,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               ENTER THE CITY. TAKE THE MISSION. OWN THE CODE.
             </p>
 
-
             <div
               className="
                 pt-3
@@ -3495,7 +3019,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 gap-3
               "
             >
-
               <button
                 onClick={handleMissionRegister}
                 className="
@@ -3528,28 +3051,20 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   transition-all
                 "
-
               >
-
                 <Users className="w-5 h-5" />
 
-                {currentUser
-                  ? 'MANAGE YOUR CREW'
-                  : 'START YOUR MISSION'}
-
+                {currentUser ? "MANAGE YOUR CREW" : "START YOUR MISSION"}
               </button>
-
 
               <button
                 onClick={() => {
-
                   playMissionPassedSound();
 
                   triggerMissionPassed(
-                    'TECHNOVA 4.0 ACTIVATED!',
-                    'ALL SYSTEMS ARMED'
+                    "TECHNOVA 4.0 ACTIVATED!",
+                    "ALL SYSTEMS ARMED",
                   );
-
                 }}
                 className="
                   bg-[#FFD54F]
@@ -3581,25 +3096,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                   transition-all
                 "
               >
-
                 <Sparkles className="w-5 h-5" />
-
                 ACTIVATE TECHNOVA
-
               </button>
-
             </div>
-
           </div>
-
         </div>
-
       </section>
-
     </div>
-
   );
-
 };
-
-
