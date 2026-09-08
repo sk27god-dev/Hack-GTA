@@ -157,13 +157,14 @@ export const HomePage: React.FC<HomePageProps> = ({
       icon: Code2,
       accent: '#00E5FF',
       details: [
+        '₹30,000 PRIZE POOL',
         '28 SEPTEMBER 2026',
         '8:00 AM – 8:00 PM',
-        'ST. JOHN COLLEGE, PALGHAR',
+        'ST. JOHN COLLEGE OF ENGINEERING & MANAGEMENT, PALGHAR',
         'MAX 4 MEMBERS',
-        '₹300 / TEAM',
-        '₹30,000 PRIZE POOL',
-        'SNACKS PROVIDED'
+        '₹400 / TEAM',
+       
+        
       ],
       missionText:
         'MISSION CLASSIFIED — PROBLEM STATEMENT REVEALED ON THE SPOT'
@@ -176,22 +177,23 @@ export const HomePage: React.FC<HomePageProps> = ({
       tag: 'BATTLE',
       title: 'BGMI SHOWDOWN',
       subtitle: "THE STREETS AREN'T SAFE. • MODE: CLASSIC",
+      eligibility: ' Only for students of St. John College of Engineering & Management, Palghar.',
       description:
         'Assemble your squad, enter the battleground, and fight your way to the top in Classic mode. Your squad. Your strategy. Your game.',
       icon: Crosshair,
       accent: '#FF6FB5',
       details: [
+        '₹2,500 PRIZE POOL',
         '25 SEPTEMBER 2026',
-        'FULL DAY',
+        '2:00 PM – 5:00 PM',
         '4 MEMBERS (SQUAD)',
         '₹200 / TEAM',
         'MODE: CLASSIC',
         'SURVIVE & STRATEGIZE',
-        '₹2,500 PRIZE POOL',
         'DOMINATE'
       ],
       missionText:
-        'YOUR SQUAD. YOUR STRATEGY. YOUR GAME. • MODE: CLASSIC'
+        'Only for students of St. John College of Engineering & Management, Palghar.'
     },
 
 
@@ -201,22 +203,23 @@ export const HomePage: React.FC<HomePageProps> = ({
       tag: 'SPORT',
       title: 'E-FOOTBALL CHALLENGE',
       subtitle: 'FROM THE STREETS TO THE STADIUM.',
+      eligibility: ' Only for students of St. John College of Engineering & Management, Palghar.',
       description:
         'Pick your side, step onto the virtual pitch, and take on the competition. Every goal counts. Every match is a new mission.',
       icon: Gamepad2,
       accent: '#FFD54F',
       details: [
+        '₹2,500 PRIZE POOL',
         '25 SEPTEMBER 2026',
-        'FULL DAY',
+        '2:00 PM – 5:00 PM',
         'SOLO COMPETITION',
         '₹30 / PERSON',
         'VIRTUAL PITCH',
-        '₹2,500 PRIZE POOL',
         'EVERY GOAL COUNTS',
         'NEW MISSION'
       ],
       missionText:
-        'PICK YOUR SIDE. STEP ONTO THE VIRTUAL PITCH.'
+        'Only for students of St. John College of Engineering & Management, Palghar.'
     }
   ];
 
@@ -715,7 +718,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00E5FF]" />
 
-            ST. JOHN COLLEGE, PALGHAR
+            ST. JOHN COLLEGE OF ENGINEERING & MANAGEMENT, PALGHAR
 
           </motion.div>
 
@@ -936,7 +939,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 tracking-wider
               "
             >
-              TWO DAYS. THREE MISSIONS.
+              THREE MISSIONS. ONE BATTLEGROUND.
             </span>
 
           </div>
@@ -1411,7 +1414,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       : activeMission === 2
                       ? 'REGISTER FOR E-FOOTBALL'
                       : currentUser
-                      ? 'MANAGE YOUR CREW'
+                      ? 'REGISTER NOW'
                       : 'REGISTER NOW'}
                   </button>
 
@@ -1618,7 +1621,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                         mb-1
                       "
                     >
-                      FUEL YOUR CREW
+                     
                     </div>
 
                     <p
@@ -1630,9 +1633,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                         leading-relaxed
                       "
                     >
-                      Snacks will be provided throughout
-                      the 12-hour hackathon to keep your
-                      crew running.
+                      THE CITY IS YOURS. CODE YOUR WAY TO VICTORY.
                     </p>
 
                   </div>
@@ -3534,7 +3535,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <Users className="w-5 h-5" />
 
                 {currentUser
-                  ? 'MANAGE YOUR CREW'
+                  ? 'REGISTER NOW'
                   : 'START YOUR MISSION'}
 
               </button>
