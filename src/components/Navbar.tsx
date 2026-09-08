@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useApp } from '../context/AppContext';
+import itsaLogo from '../assets/images/ITSA_logo.jpg';
 import {
   Menu,
   X,
@@ -185,25 +186,31 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="ITSA Presents TECHNOVA 4.0"
           >
 
-            {/* ITSA BOX */}
-            <div
-              className="
-                w-11 h-11
-                sm:w-12 sm:h-12
-                bg-[#FF6FB5]
-                border-2 border-black
-                shadow-[3px_3px_0px_0px_#000]
-                flex items-center justify-center
-                font-headline
-                text-xl
-                sm:text-2xl
-                text-white
-                -rotate-3
-              "
-            >
-              IT
-            </div>
-
+            {/* ITSA LOGO */}
+<div
+  className="
+    w-11 h-11
+    sm:w-12 sm:h-12
+    border-2 border-black
+    shadow-[3px_3px_0px_0px_#000]
+    overflow-hidden
+    -rotate-3
+    flex
+    items-center
+    justify-center
+    bg-white
+  "
+>
+  <img
+    src={itsaLogo}
+    alt="ITSA Logo"
+    className="
+      w-full
+      h-full
+      object-cover
+    "
+  />
+</div>
             {/* BRAND TEXT */}
             <div>
 
