@@ -1,3 +1,4 @@
+/*
 import React, { useState, useRef, useEffect } from 'react';
 import { Competition } from '../types';
 import {
@@ -1003,3 +1004,5 @@ export const CityMapModal: React.FC<CityMapModalProps> = ({
     </div>
   );
 };
+
+*/

@@ -68,8 +68,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
               {mode === 'signin'
                 ? 'SYNDICATE CLEARANCE'
                 : mode === 'signup'
-                ? 'ENLIST NEW RUNNER'
-                : 'SELECT RUNNER'}
+                  ? ' NEW RUNNER'
+                  : 'SELECT RUNNER'}
             </h3>
           </div>
           <button
@@ -93,11 +93,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
               playClickSound();
               setMode('signin');
             }}
-            className={`flex-1 py-2 sm:py-2.5 font-headline text-sm sm:text-lg text-center cursor-pointer ${
-              mode === 'signin'
+            className={`flex-1 py-2 sm:py-2.5 font-headline text-sm sm:text-lg text-center cursor-pointer ${mode === 'signin'
                 ? 'bg-[#FF6FB5] text-white border-r-2 border-black font-black'
                 : 'text-black hover:bg-zinc-100 border-r-2 border-black'
-            }`}
+              }`}
           >
             SIGN IN
           </button>
@@ -107,11 +106,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
               playClickSound();
               setMode('signup');
             }}
-            className={`flex-1 py-2 sm:py-2.5 font-headline text-sm sm:text-lg text-center cursor-pointer ${
-              mode === 'signup'
+            className={`flex-1 py-2 sm:py-2.5 font-headline text-sm sm:text-lg text-center cursor-pointer ${mode === 'signup'
                 ? 'bg-[#FF6FB5] text-white border-r-2 border-black font-black'
                 : 'text-black hover:bg-zinc-100 border-r-2 border-black'
-            }`}
+              }`}
           >
             REGISTER ID
           </button>
@@ -121,11 +119,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
               playClickSound();
               setMode('quick');
             }}
-            className={`flex-1 py-2 sm:py-2.5 font-headline text-sm sm:text-lg text-center cursor-pointer ${
-              mode === 'quick'
+            className={`flex-1 py-2 sm:py-2.5 font-headline text-sm sm:text-lg text-center cursor-pointer ${mode === 'quick'
                 ? 'bg-[#FF6FB5] text-white font-black'
                 : 'text-black hover:bg-zinc-100'
-            }`}
+              }`}
           >
             RUNNERS
           </button>
@@ -263,7 +260,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
               </div>
 
               <div className="bg-zinc-100 p-2 border border-zinc-300 text-[11px] text-zinc-600">
-                <span className="font-bold text-black uppercase">Standard Participant Persona:</span> All enlistments receive full participant privileges to deploy squads and submit project builds.
+                <span className="font-bold text-black uppercase">Standard Participant Persona:</span> All enslistment receive full participant privileges to deploy squads and submit project builds.
               </div>
 
               <button

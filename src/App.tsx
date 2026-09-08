@@ -37,9 +37,11 @@ import {
   FixerContactModal
 } from './components/FixerContactModal';
 
+/*
 import {
   CityMapModal
 } from './components/CityMapModal';
+*/
 
 import { GtaAmbientFX } from './components/GtaAmbientFX';
 
@@ -111,7 +113,7 @@ const MainApp: React.FC = () => {
   const [crewModalCompId, setCrewModalCompId] = useState<string | undefined>(undefined);
   const [selectedCompForDetail, setSelectedCompForDetail] = useState<Competition | null>(null);
   const [contactModalOpen, setContactModalOpen] = useState(false);
-  const [cityMapModalOpen, setCityMapModalOpen] = useState(false);
+  // const [cityMapModalOpen, setCityMapModalOpen] = useState(false);
 
 
   /*
@@ -241,7 +243,7 @@ const MainApp: React.FC = () => {
         openAuthModal={() => setAuthModalOpen(true)}
         openAdminLoginModal={() => setAdminLoginModalOpen(true)}
         openCrewModal={() => handleOpenCrewModal()}
-        openCityMapModal={() => setCityMapModalOpen(true)}
+        // openCityMapModal={() => setCityMapModalOpen(true)}
         theme={theme}
         toggleTheme={toggleTheme}
       />
@@ -260,7 +262,7 @@ const MainApp: React.FC = () => {
             openCompetitionModal={comp => setSelectedCompForDetail(comp)}
             openAuthModal={() => setAuthModalOpen(true)}
             openCrewModal={() => handleOpenCrewModal()}
-            openCityMapModal={() => setCityMapModalOpen(true)}
+          // openCityMapModal={() => setCityMapModalOpen(true)}
           />
         )}
 
@@ -269,7 +271,7 @@ const MainApp: React.FC = () => {
           <CompetitionsPage
             openCompetitionModal={comp => setSelectedCompForDetail(comp)}
             openCrewModal={compId => handleOpenCrewModal(compId)}
-            openCityMapModal={() => setCityMapModalOpen(true)}
+          // openCityMapModal={() => setCityMapModalOpen(true)}
           />
         )}
 
@@ -369,13 +371,13 @@ const MainApp: React.FC = () => {
         isOpen={contactModalOpen}
         onClose={() => setContactModalOpen(false)}
       />
-      <CityMapModal
+      {/* <CityMapModal
         isOpen={cityMapModalOpen}
         onClose={() => setCityMapModalOpen(false)}
         onSelectCompetition={comp => setSelectedCompForDetail(comp)}
         onDeployCrew={compId => handleOpenCrewModal(compId)}
         competitions={competitions}
-      />
+      /> */}
 
 
       {/* ======================================================
@@ -385,7 +387,7 @@ const MainApp: React.FC = () => {
       <Footer
         setActiveTab={handleTabChange}
         openContactModal={() => setContactModalOpen(true)}
-        openCityMapModal={() => setCityMapModalOpen(true)}
+      // openCityMapModal={() => setCityMapModalOpen(true)}
       />
 
     </div>

@@ -64,7 +64,7 @@ export const CompetitionsPage: React.FC<CompetitionsPageProps> = ({
     const matchesTrack =
       selectedTrack === 'All' ||
       comp.track.toLowerCase() === selectedTrack.toLowerCase() ||
-     (comp.category?.toLowerCase() ?? '') === selectedTrack.toLowerCase() ||
+      (comp.category?.toLowerCase() ?? '') === selectedTrack.toLowerCase() ||
       comp.title.toLowerCase().includes(selectedTrack.toLowerCase());
 
     const matchesSearch =
@@ -129,11 +129,10 @@ export const CompetitionsPage: React.FC<CompetitionsPageProps> = ({
                 .toLowerCase()
                 .replace(/\s+/g, '-')}`}
               onClick={() => setSelectedTrack(track)}
-              className={`font-headline text-sm sm:text-base md:text-lg px-2.5 sm:px-3 py-1 border transition-all cursor-pointer rounded ${
-                selectedTrack === track
+              className={`font-headline text-sm sm:text-base md:text-lg px-2.5 sm:px-3 py-1 border transition-all cursor-pointer rounded ${selectedTrack === track
                   ? 'bg-[#00f5ff]/20 text-[#00f5ff] border-[#00f5ff] shadow-[0_0_8px_rgba(0,245,255,0.35)]'
                   : 'bg-black/35 text-slate-300 border-slate-750 hover:text-[#ffe600] hover:border-[#ffe600]'
-              }`}
+                }`}
             >
               {track}
             </button>
@@ -194,11 +193,10 @@ export const CompetitionsPage: React.FC<CompetitionsPageProps> = ({
               <div
                 key={comp.id}
                 id={`comp-card-${comp.id}`}
-                className={`bg-[#110925]/75 border border-[#ff007f]/30 flex flex-col justify-between group hover:-translate-y-1.5 transition-all relative overflow-hidden rounded-lg shadow-[0_0_12px_rgba(255,0,127,0.15)] hover:border-[#00f5ff] hover:shadow-[0_0_15px_rgba(0,245,255,0.25)] text-white ${
-                  isThirdCard
+                className={`bg-[#110925]/75 border border-[#ff007f]/30 flex flex-col justify-between group hover:-translate-y-1.5 transition-all relative overflow-hidden rounded-lg shadow-[0_0_12px_rgba(255,0,127,0.15)] hover:border-[#00f5ff] hover:shadow-[0_0_15px_rgba(0,245,255,0.25)] text-white ${isThirdCard
                     ? 'md:col-span-2 md:w-[calc(50%-0.75rem)] md:mx-auto w-full'
                     : 'w-full'
-                }`}
+                  }`}
               >
 
                 {/* Top Image - Full poster visible without cropping */}
@@ -287,7 +285,7 @@ export const CompetitionsPage: React.FC<CompetitionsPageProps> = ({
                       }}
                       className="bg-[#00f5ff] hover:bg-[#ffe600] text-black font-headline text-sm sm:text-base px-2.5 sm:px-3 py-1 border border-black transition-all flex items-center gap-1 cursor-pointer rounded shadow-[0_0_8px_rgba(0,245,255,0.25)]"
                     >
-                      <span>ENLIST</span>
+                      <span>REGISTER</span>
 
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>

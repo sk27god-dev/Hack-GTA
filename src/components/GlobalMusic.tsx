@@ -54,7 +54,7 @@ export const GlobalMusic: React.FC = () => {
     if (!isSoundOnRef.current) return;
     const audio = getOrCreateAudio();
     if (!audio) return;
-    
+
     audio.volume = 0.35;
     const playPromise = audio.play();
     if (playPromise !== undefined) {
@@ -103,7 +103,7 @@ export const GlobalMusic: React.FC = () => {
     };
 
     const events = ['pointerdown', 'mousedown', 'touchstart', 'click', 'keydown', 'scroll', 'wheel'];
-    
+
     const cleanupListeners = () => {
       events.forEach(evt => {
         window.removeEventListener(evt, unlockAndPlay);
@@ -142,7 +142,7 @@ export const GlobalMusic: React.FC = () => {
     } else {
       setIsSoundOn(true);
       audio.volume = 0.35;
-      audio.play().catch(() => {});
+      audio.play().catch(() => { });
     }
   };
 

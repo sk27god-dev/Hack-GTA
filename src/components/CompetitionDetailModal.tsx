@@ -180,7 +180,7 @@ export const CompetitionDetailModal: React.FC<CompetitionDetailModalProps> = ({
           </div>
 
           {/* Judging Rubric Breakdown */}
-          <div className="bg-white border-2 border-black p-3.5 sm:p-4 shadow-[2px_2px_0px_#000] sm:shadow-[3px_3px_0px_#000]">
+          {/* <div className="bg-white border-2 border-black p-3.5 sm:p-4 shadow-[2px_2px_0px_#000] sm:shadow-[3px_3px_0px_#000]">
             <h4 className="font-headline text-xl sm:text-2xl text-black mb-2 flex items-center gap-2">
               <Award className="w-4 h-4 sm:w-5 sm:h-5 text-[#FFD54F]" />
               EVALUATION & JUDGING RUBRIC
@@ -204,7 +204,7 @@ export const CompetitionDetailModal: React.FC<CompetitionDetailModalProps> = ({
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Footer CTA Strip */}
@@ -215,19 +215,19 @@ export const CompetitionDetailModal: React.FC<CompetitionDetailModalProps> = ({
           </div>
 
           <button
-  id={`register-modal-btn-${competition.id}`}
-  onClick={() => {
-    playClickSound();
+            id={`register-modal-btn-${competition.id}`}
+            onClick={() => {
+              playClickSound();
 
-    if (competition.registrationUrl) {
-      window.open(competition.registrationUrl, '_blank', 'noopener,noreferrer');
-    }
+              if (competition.registrationUrl) {
+                window.open(competition.registrationUrl, '_blank', 'noopener,noreferrer');
+              }
 
-    onClose();
-  }}
-  className="w-full sm:w-auto bg-[#FF6FB5] hover:bg-[#00E5FF] hover:text-black text-white font-headline text-xl sm:text-2xl px-5 sm:px-6 py-2 sm:py-2.5 comic-border-sm comic-interactive flex items-center justify-center gap-2 cursor-pointer text-center"
->
-            <span>ASSEMBLE CREW / REGISTER</span>
+              onClose();
+            }}
+            className="w-full sm:w-auto bg-[#FF6FB5] hover:bg-[#00E5FF] hover:text-black text-white font-headline text-xl sm:text-2xl px-5 sm:px-6 py-2 sm:py-2.5 comic-border-sm comic-interactive flex items-center justify-center gap-2 cursor-pointer text-center"
+          >
+            <span>ASSEMBLE TEAM / REGISTER</span>
             <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
         </div>
