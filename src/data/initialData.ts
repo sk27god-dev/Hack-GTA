@@ -10,21 +10,20 @@ import {
 import hackathonPoster from '../assets/images/Hackathon.png';
 import efootballPoster from '../assets/images/efootball_poster.jpg';
 import bgmiPoster from '../assets/images/bgmi (1).png';
-import itLabImg from '../assets/images/IT-Lab.jpg';
-import coderImg from '../assets/images/coder.jpg';
-import eventImg from '../assets/images/Event.jpg';
 
 /**
  * ============================================================
  * ITSA PRESENTS — TECHNOVA 4.0
  * ============================================================
  *
- * Date: 26 September 2026
+ * Day 1: 25 September 2026
+ * Events: E-Football & BGMI
  *
- * Main Events:
- * 1. TECHNOVA HACKATHON
- * 2. E-FOOTBALL
- * 3. BGMI
+ * Day 2: 28 September 2026
+ * Event: 12-Hour Hackathon
+ *
+ * Hackathon Timing:
+ * 8:00 AM – 8:00 PM
  *
  * ============================================================
  */
@@ -50,7 +49,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     rules: [
       'Team size must be between 2 and 4 members.',
-      'The hackathon will run for 12 hours.',
+      'The hackathon will run for 12 hours from 8:00 AM to 8:00 PM.',
       'Participants must report before the hackathon begins.',
       'Participants must carry their own laptops and required equipment.',
       'Meals will be provided to registered participants.',
@@ -112,6 +111,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     tags: [
       '₹30,000 PRIZE POOL',
       '12 HOURS',
+      '28 SEPTEMBER 2026',
       '8:00 AM – 8:00 PM',
       'IT LABS',
       'MEALS PROVIDED',
@@ -119,7 +119,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     ],
 
     registrationUrl:
-      '[https://docs.google.com/forms/d/e/1FAIpQLScuLzspcZJyN1zZBb4AkzqX9gQ9gVKYyihieiLAk0v5WyaH3g/viewform?usp=header](https://docs.google.com/forms/d/e/1FAIpQLScuLzspcZJyN1zZBb4AkzqX9gQ9gVKYyihieiLAk0v5WyaH3g/viewform?usp=header)',
+      'https://docs.google.com/forms/d/e/1FAIpQLScuLzspcZJyN1zZBb4AkzqX9gQ9gVKYyihieiLAk0v5WyaH3g/viewform?usp=header',
 
     registrationType: 'google-form',
 
@@ -131,7 +131,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
   },
 
   /* ==========================================================
-     CARD 1 — E-FOOTBALL
+     E-FOOTBALL
      ========================================================== */
 
   {
@@ -146,7 +146,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     category: 'E-Football',
 
     description:
-      'The gaming arena of TECHNOVA 4.0 featuring E-Football. Pick your battlefield and fight your way to the top.',
+      'The gaming arena of TECHNOVA 4.0 featuring E-Football. Compete, dominate and fight your way to the top.',
 
     rules: [
       'Participants must register for the E-Football event.',
@@ -159,7 +159,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     schedule: {
       date: '25 September 2026',
-      time: 'Event timings will be announced',
+      time: 'Throughout the day',
       location: 'TECHNOVA 4.0',
       stage: 'E-FOOTBALL'
     },
@@ -184,13 +184,14 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     tags: [
       '₹2,500 PRIZE POOL',
+      '25 SEPTEMBER 2026',
       'SOLO COMPETITION',
-      'TECHNOVA 4.0',
-      'TIMINGS TBA'
+      'FULL DAY EVENT',
+      'TECHNOVA 4.0'
     ],
 
     registrationUrl:
-      '[https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header](https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header)',
+      'https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header',
 
     registrationType: 'google-form',
 
@@ -202,7 +203,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
   },
 
   /* ==========================================================
-     CARD 2 — BGMI
+     BGMI
      ========================================================== */
 
   {
@@ -217,10 +218,11 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     category: 'BGMI',
 
     description:
-      'The gaming arena of TECHNOVA 4.0 featuring BGMI Classic Squad Showdown. Pick your battlefield and fight your way to the top.',
+      'The gaming arena of TECHNOVA 4.0 featuring the BGMI Classic Squad Showdown. Form your squad and fight your way to the top.',
 
     rules: [
-      'Participants must register for the BGMI Squad event (Team of 4).',
+      'Participants must register for the BGMI Squad event.',
+      'Each team must consist of exactly 4 players.',
       'Mode: Classic.',
       'Entry Fees: ₹200 per team.',
       'Participants must follow the event-specific rules announced by the organisers.',
@@ -231,7 +233,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     schedule: {
       date: '25 September 2026',
-      time: 'Event timings will be announced',
+      time: 'Throughout the day',
       location: 'TECHNOVA 4.0',
       stage: 'BGMI'
     },
@@ -256,14 +258,16 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     tags: [
       '₹2,500 PRIZE POOL',
+      '25 SEPTEMBER 2026',
       'TEAM OF 4 (SQUAD)',
       'MODE: CLASSIC',
+      'FULL DAY EVENT',
       '₹200 / TEAM',
       'TECHNOVA 4.0'
     ],
 
     registrationUrl:
-      '[https://forms.gle/tcBTQ3WBHXXAhjPQA](https://forms.gle/tcBTQ3WBHXXAhjPQA)',
+      'https://forms.gle/tcBTQ3WBHXXAhjPQA',
 
     registrationType: 'google-form',
 
@@ -275,39 +279,75 @@ export const INITIAL_COMPETITIONS: Competition[] = [
   }
 ];
 
+
 /* ============================================================
    TIMELINE
    ============================================================ */
 
 export const INITIAL_TIMELINE: TimelineEvent[] = [
+
+  /* ===================== DAY 1 ===================== */
+
   {
-    id: 'timeline-reporting',
+    id: 'timeline-efootball',
 
-    time: '08:00 AM',
+    time: 'THROUGHOUT THE DAY',
 
-    date: '28 September 2026',
+    date: '25 September 2026',
 
     day: 'Day 1',
 
-    title: 'REPORTING & REGISTRATION',
+    title: 'E-FOOTBALL GAMING ARENA',
 
-    location: 'IT Labs',
+    location: 'TECHNOVA 4.0',
 
     description:
-      'Participants report at the venue, complete registration and prepare for TECHNOVA 4.0.',
+      'The E-Football tournament takes place throughout Day 1. Compete in the solo gaming competition and fight your way to the top.',
 
     status: 'upcoming',
 
     statusLabel: 'STANDBY',
 
-    image: itLabImg,
+    image: efootballPoster,
 
-    track: 'TECHNOVA 4.0',
+    track: 'Gaming',
 
-    category: 'TECHNOVA',
+    category: 'E-Football',
+
+    badgeColor: 'pink'
+  },
+
+  {
+    id: 'timeline-bgmi',
+
+    time: 'THROUGHOUT THE DAY',
+
+    date: '25 September 2026',
+
+    day: 'Day 1',
+
+    title: 'BGMI SQUAD SHOWDOWN',
+
+    location: 'TECHNOVA 4.0',
+
+    description:
+      'BGMI Classic Squad teams battle throughout Day 1 of TECHNOVA 4.0. Form your squad of four and compete for the prize pool.',
+
+    status: 'upcoming',
+
+    statusLabel: 'STANDBY',
+
+    image: bgmiPoster,
+
+    track: 'Gaming',
+
+    category: 'BGMI',
 
     badgeColor: 'cyan'
   },
+
+
+  /* ===================== DAY 2 ===================== */
 
   {
     id: 'timeline-hackathon-start',
@@ -323,48 +363,19 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
     location: 'IT Labs',
 
     description:
-      'The 12-hour TECHNOVA Hackathon begins. Teams start building their solutions.',
+      'The 12-hour TECHNOVA Hackathon officially begins at 8:00 AM. Teams start building and developing their technology solutions.',
 
     status: 'upcoming',
 
-    statusLabel: 'IN PROGRESS',
+    statusLabel: 'STANDBY',
 
-    image: coderImg,
+    image: hackathonPoster,
 
     track: 'Hackathon',
 
     category: 'Hackathon',
 
     badgeColor: 'cyan'
-  },
-
-  {
-    id: 'timeline-gaming',
-
-    time: 'THROUGHOUT THE DAY',
-
-    date: '25 September 2026',
-
-    day: 'Day 1',
-
-    title: 'E-FOOTBALL & BGMI GAMING ARENA',
-
-    location: 'TECHNOVA 4.0',
-
-    description:
-      'BGMI and E-Football solo competitions take place throughout the event.',
-
-    status: 'upcoming',
-
-    statusLabel: 'STANDBY',
-
-    image: efootballPoster,
-
-    track: 'Gaming',
-
-    category: 'Gaming',
-
-    badgeColor: 'pink'
   },
 
   {
@@ -376,18 +387,18 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     day: 'Day 2',
 
-    title: 'HACKATHON ENDS',
+    title: 'HACKATHON ENDS & FINAL SUBMISSION',
 
     location: 'IT Labs',
 
     description:
-      'The 12-hour hackathon concludes and teams submit their final solutions.',
+      'The 12-hour TECHNOVA Hackathon concludes at 8:00 PM. Teams complete and submit their final technology solutions.',
 
     status: 'upcoming',
 
     statusLabel: 'FINAL DIRECTIVE',
 
-    image: eventImg,
+    image: hackathonPoster,
 
     track: 'Hackathon',
 
@@ -396,6 +407,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
     badgeColor: 'yellow'
   }
 ];
+
 
 /* ============================================================
    FAQ
@@ -416,12 +428,25 @@ export const INITIAL_FAQS: FAQItem[] = [
   },
 
   {
+    id: 'faq-hackathon-date',
+
+    question: 'When is the TECHNOVA Hackathon?',
+
+    answer:
+      'The TECHNOVA Hackathon will take place on 28 September 2026 from 8:00 AM to 8:00 PM.',
+
+    category: 'Registration',
+
+    featured: true
+  },
+
+  {
     id: 'faq-hackathon-duration',
 
     question: 'How long is the hackathon?',
 
     answer:
-      'TECHNOVA Hackathon is a 12-hour event running from 7:30 AM to 7:30 PM on 26 September 2026.',
+      'TECHNOVA Hackathon is a 12-hour event running from 8:00 AM to 8:00 PM on 28 September 2026.',
 
     category: 'Rules & Loadout',
 
@@ -451,12 +476,25 @@ export const INITIAL_FAQS: FAQItem[] = [
   },
 
   {
+    id: 'faq-gaming-date',
+
+    question: 'When are the gaming events?',
+
+    answer:
+      'The E-Football and BGMI gaming events will take place throughout the day on 25 September 2026.',
+
+    category: 'Registration',
+
+    featured: true
+  },
+
+  {
     id: 'faq-gaming-events',
 
     question: 'What gaming events are featured in TECHNOVA 4.0?',
 
     answer:
-      'TECHNOVA 4.0 features two individual gaming tournaments: E-Football (₹2,500 prize pool) and BGMI (₹2,500 prize pool).',
+      'TECHNOVA 4.0 features two gaming tournaments: E-Football with a ₹2,500 prize pool and BGMI with a ₹2,500 prize pool.',
 
     category: 'Registration',
 
@@ -469,7 +507,7 @@ export const INITIAL_FAQS: FAQItem[] = [
     question: 'Are BGMI and E-Football team events?',
 
     answer:
-      'E-Football is a solo competition (₹30 per person), while BGMI is a 4-player Squad competition (₹200 per team, TDM mode).',
+      'E-Football is a solo competition, while BGMI is a 4-player Squad competition with an entry fee of ₹200 per team.',
 
     category: 'Rules & Loadout'
   },
@@ -480,13 +518,14 @@ export const INITIAL_FAQS: FAQItem[] = [
     question: 'What are the prizes?',
 
     answer:
-      'The Hackathon has a ₹30,000 prize pool. E-Football has ₹2,500 and BGMI has ₹2,500, making the total prize pool ₹35,000+.',
+      'The Hackathon has a ₹30,000 prize pool. E-Football has ₹2,500 and BGMI has ₹2,500, making the total prize pool ₹35,000.',
 
     category: 'Prizes & Crypto',
 
     featured: true
   }
 ];
+
 
 /* ============================================================
    PRIZES
@@ -544,7 +583,7 @@ export const INITIAL_PRIZES: PrizeCategory[] = [
 
     title: 'BGMI',
 
-    subtitle: 'GAMING ARENA • SOLO',
+    subtitle: 'GAMING ARENA • TEAM OF 4',
 
     amount: '₹2,500',
 
@@ -553,7 +592,7 @@ export const INITIAL_PRIZES: PrizeCategory[] = [
     icon: '🎮',
 
     description:
-      '₹2,500 prize pool for the individual BGMI competition.',
+      '₹2,500 prize pool for the BGMI Squad competition.',
 
     badgeBg: '#00E5FF',
 
@@ -563,11 +602,13 @@ export const INITIAL_PRIZES: PrizeCategory[] = [
   }
 ];
 
+
 /* ============================================================
    SAMPLE TEAMS
    ============================================================ */
 
 export const SAMPLE_TEAMS: Team[] = [];
+
 
 /* ============================================================
    SAMPLE USERS

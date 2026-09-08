@@ -157,7 +157,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       icon: Code2,
       accent: '#00E5FF',
       details: [
-        '26 SEPTEMBER 2026',
+        '28 SEPTEMBER 2026',
         '8:00 AM – 8:00 PM',
         'ST. JOHN COLLEGE, PALGHAR',
         'MAX 4 MEMBERS',
@@ -181,6 +181,8 @@ export const HomePage: React.FC<HomePageProps> = ({
       icon: Crosshair,
       accent: '#FF6FB5',
       details: [
+        '25 SEPTEMBER 2026',
+        'FULL DAY',
         '4 MEMBERS (SQUAD)',
         '₹200 / TEAM',
         'MODE: CLASSIC',
@@ -204,6 +206,8 @@ export const HomePage: React.FC<HomePageProps> = ({
       icon: Gamepad2,
       accent: '#FFD54F',
       details: [
+        '25 SEPTEMBER 2026',
+        'FULL DAY',
         'SOLO COMPETITION',
         '₹30 / PERSON',
         'VIRTUAL PITCH',
@@ -226,7 +230,7 @@ export const HomePage: React.FC<HomePageProps> = ({
      ============================================================ */
 
   const [selectedTimelineDay, setSelectedTimelineDay] =
-    useState<'Day 1'>('Day 1');
+    useState<'Day 1' | 'Day 2'>('Day 1');
 
   const previewTimelineEvents = timeline
     .filter(event => event.day === selectedTimelineDay)
@@ -671,7 +675,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <Calendar className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
 
-              26 SEPTEMBER 2026
+              25 & 28 SEPTEMBER 2026
 
 
             </div>
@@ -918,7 +922,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 text-xl
               "
             >
-              26 SEP 2026
+              25 & 28 SEP 2026
             </span>
 
             <span
@@ -932,7 +936,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 tracking-wider
               "
             >
-              ONE DAY. THREE MISSIONS.
+              TWO DAYS. THREE MISSIONS.
             </span>
 
           </div>
@@ -2256,7 +2260,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   text-xl
                 "
               >
-                26 SEP
+                25 & 28 SEP
               </span>
 
               <span
@@ -2524,8 +2528,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 sm:text-left
               "
             >
-              All major TECHNOVA 4.0 activities take place on
-              26 September 2026.
+              TECHNOVA 4.0 takes place across two days: 25 September for BGMI and E-Football, and 28 September for the Hackathon.
 
             </span>
 
@@ -3412,7 +3415,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 tracking-widest
               "
             >
-              26 SEPTEMBER 2026
+              25 & 28 SEPTEMBER 2026
             </div>
 
 
@@ -3598,3 +3601,5 @@ export const HomePage: React.FC<HomePageProps> = ({
   );
 
 };
+
+
