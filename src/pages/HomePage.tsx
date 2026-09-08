@@ -1920,13 +1920,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                       alt={comp.title}
                       className="
                         w-full
-                        h-48
-                        sm:h-56
+                        h-auto
+                        max-h-[32rem]
 
-                        object-cover
-                        object-top
-
-                        group-hover:scale-105
+                        object-contain
+                        object-center
+                        bg-black
 
                         transition-transform
                         duration-300

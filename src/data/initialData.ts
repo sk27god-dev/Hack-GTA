@@ -7,9 +7,9 @@ import {
   User
 } from '../types';
 
-import hackersImg from '../assets/images/Hackers.jpg';
+import hackathonPoster from '../assets/images/Hackathon.png';
 import efootballPoster from '../assets/images/efootball_poster.jpg';
-import bgmiPoster from '../assets/images/bgmi_poster.jpg';
+import bgmiPoster from '../assets/images/bgmi (1).png';
 import itLabImg from '../assets/images/IT-Lab.jpg';
 import coderImg from '../assets/images/coder.jpg';
 import eventImg from '../assets/images/Event.jpg';
@@ -54,7 +54,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
       'Participants must report before the hackathon begins.',
       'Participants must carry their own laptops and required equipment.',
       'Meals will be provided to registered participants.',
-      'Final submissions must be completed before 7:30 PM.'
+      'Final submissions must be completed before 8:00 PM.'
     ],
 
     judgingCriteria: [
@@ -85,8 +85,8 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     ],
 
     schedule: {
-      date: '26 September 2026',
-      time: '7:30 AM – 7:30 PM',
+      date: '28 September 2026',
+      time: '8:00 AM – 8:00 PM',
       location: 'IT Labs',
       stage: '12-HOUR HACKATHON'
     },
@@ -103,7 +103,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
 
     teamSizeLabel: '2–4 MEMBERS',
 
-    image: hackersImg,
+    image: hackathonPoster,
 
     featured: true,
 
@@ -112,14 +112,14 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     tags: [
       '₹30,000 PRIZE POOL',
       '12 HOURS',
-      '7:30 AM – 7:30 PM',
+      '8:00 AM – 8:00 PM',
       'IT LABS',
       'MEALS PROVIDED',
       'TEAM 2–4'
     ],
 
     registrationUrl:
-      'https://docs.google.com/forms/d/e/1FAIpQLScuLzspcZJyN1zZBb4AkzqX9gQ9gVKYyihieiLAk0v5WyaH3g/viewform?usp=header',
+      '[https://docs.google.com/forms/d/e/1FAIpQLScuLzspcZJyN1zZBb4AkzqX9gQ9gVKYyihieiLAk0v5WyaH3g/viewform?usp=header](https://docs.google.com/forms/d/e/1FAIpQLScuLzspcZJyN1zZBb4AkzqX9gQ9gVKYyihieiLAk0v5WyaH3g/viewform?usp=header)',
 
     registrationType: 'google-form',
 
@@ -158,7 +158,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     judgingCriteria: [],
 
     schedule: {
-      date: '26 September 2026',
+      date: '25 September 2026',
       time: 'Event timings will be announced',
       location: 'TECHNOVA 4.0',
       stage: 'E-FOOTBALL'
@@ -190,7 +190,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     ],
 
     registrationUrl:
-      'https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header',
+      '[https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header](https://docs.google.com/forms/d/e/1FAIpQLSczdPFgRyUKOi2dKMadTet-S6lVHwOcX85lOnfSKoMa0eu3Sg/viewform?usp=header)',
 
     registrationType: 'google-form',
 
@@ -230,7 +230,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     judgingCriteria: [],
 
     schedule: {
-      date: '26 September 2026',
+      date: '25 September 2026',
       time: 'Event timings will be announced',
       location: 'TECHNOVA 4.0',
       stage: 'BGMI'
@@ -263,7 +263,7 @@ export const INITIAL_COMPETITIONS: Competition[] = [
     ],
 
     registrationUrl:
-      'https://forms.gle/tcBTQ3WBHXXAhjPQA',
+      '[https://forms.gle/tcBTQ3WBHXXAhjPQA](https://forms.gle/tcBTQ3WBHXXAhjPQA)',
 
     registrationType: 'google-form',
 
@@ -283,9 +283,9 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
   {
     id: 'timeline-reporting',
 
-    time: '07:00 AM',
+    time: '08:00 AM',
 
-    date: '26 September 2026',
+    date: '28 September 2026',
 
     day: 'Day 1',
 
@@ -312,11 +312,11 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
   {
     id: 'timeline-hackathon-start',
 
-    time: '07:30 AM',
+    time: '08:00 AM',
 
-    date: '26 September 2026',
+    date: '28 September 2026',
 
-    day: 'Day 1',
+    day: 'Day 2',
 
     title: 'HACKATHON BEGINS',
 
@@ -343,7 +343,7 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
 
     time: 'THROUGHOUT THE DAY',
 
-    date: '26 September 2026',
+    date: '25 September 2026',
 
     day: 'Day 1',
 
@@ -370,11 +370,11 @@ export const INITIAL_TIMELINE: TimelineEvent[] = [
   {
     id: 'timeline-hackathon-end',
 
-    time: '07:30 PM',
+    time: '08:00 PM',
 
-    date: '26 September 2026',
+    date: '28 September 2026',
 
-    day: 'Day 1',
+    day: 'Day 2',
 
     title: 'HACKATHON ENDS',
 
